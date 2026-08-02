@@ -30,6 +30,11 @@ struct AppHeaderView: View {
         }
         .padding()
         .background(Color.background.opacity(0.85))
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(.stroke.opacity(80))
+                .frame(height: 1)
+        }
     }
 }
 
