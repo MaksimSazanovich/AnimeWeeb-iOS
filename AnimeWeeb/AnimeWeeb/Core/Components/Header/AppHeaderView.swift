@@ -37,17 +37,29 @@ struct AppHeaderView: View {
             }
         }
         .padding()
-        .background(Color.background.opacity(0.85))
+        .background {
+            ZStack {
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .preferredColorScheme(.dark)
+                Color.background.opacity(0.85)
+            }
+            .ignoresSafeArea(edges: .top)
+        }
         .overlay(alignment: .bottom) {
             Rectangle()
-                .fill(.stroke.opacity(80))
+                .fill(.stroke.opacity(0.8))
                 .frame(height: 1)
         }
     }
 }
 
 #Preview {
-    AppHeaderView()
+    VStack {
+        AppHeaderView()
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(Color.background)
 }
 
 
