@@ -9,13 +9,21 @@ struct AppHeaderView: View {
     var body: some View {
         ZStack {
             HStack {
-                // MARK: Icon
-                Image(.icon)
+                // MARK: Home Button
+                Button {
+                    print("Go home")
+                } label: {
+                    HStack {
+                        // MARK: Icon
+                        Image(.icon)
+                        
+                        // MARK: Title
+                        Text("AnimeWeeb")
+                            .font(.callout.weight(.bold))
+                            .foregroundStyle(Color(.mainTitile))
+                    }
+                }
                 
-                // MARK: Title
-                Text("AnimeWeeb")
-                    .font(.callout.weight(.bold))
-                    .foregroundStyle(Color(.mainTitile))
                 
                 Spacer()
                 
