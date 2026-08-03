@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5DD7CFD3020DF09001A007C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CFC3020DF09001A007C /* Nuke */; };
-		B5DD7CFF3020DF09001A007C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CFE3020DF09001A007C /* NukeUI */; };
+		B5DD7CC73020B163001A007C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC63020B163001A007C /* Nuke */; };
+		B5DD7CC93020B163001A007C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC83020B163001A007C /* NukeUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5DD7CFD3020DF09001A007C /* Nuke in Frameworks */,
-				B5DD7CFF3020DF09001A007C /* NukeUI in Frameworks */,
+				B5DD7CC73020B163001A007C /* Nuke in Frameworks */,
+				B5DD7CC93020B163001A007C /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,8 +72,8 @@
 			);
 			name = AnimeWeeb;
 			packageProductDependencies = (
-				B5DD7CFC3020DF09001A007C /* Nuke */,
-				B5DD7CFE3020DF09001A007C /* NukeUI */,
+				B5DD7CC63020B163001A007C /* Nuke */,
+				B5DD7CC83020B163001A007C /* NukeUI */,
 			);
 			productName = AnimeWeeb;
 			productReference = B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */;
@@ -104,7 +104,7 @@
 			mainGroup = B5DD7C74301F6BA8001A007C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B5DD7CFB3020DF09001A007C /* XCRemoteSwiftPackageReference "Nuke" */,
+				B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B5DD7C7E301F6BA8001A007C /* Products */;
@@ -261,6 +261,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_PREVIEW_ASSET_CATALOG_NAME = "Resources/Preview Content/Preview Assets.xcassets";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -292,6 +293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_PREVIEW_ASSET_CATALOG_NAME = "Resources/Preview Content/Preview Assets.xcassets";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -342,7 +344,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B5DD7CFB3020DF09001A007C /* XCRemoteSwiftPackageReference "Nuke" */ = {
+		B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
 			requirement = {
@@ -353,14 +355,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B5DD7CFC3020DF09001A007C /* Nuke */ = {
+		B5DD7CC63020B163001A007C /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B5DD7CFB3020DF09001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
+			package = B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		B5DD7CFE3020DF09001A007C /* NukeUI */ = {
+		B5DD7CC83020B163001A007C /* NukeUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B5DD7CFB3020DF09001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
+			package = B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */

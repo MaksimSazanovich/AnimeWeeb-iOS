@@ -20,7 +20,7 @@ struct NewReleasesAnimeCard: View {
                     if let image = state.image {
                         image
                             .resizable()
-                            .aspectRatio(2/3, contentMode: .fill)
+                            .aspectRatio(2/3, contentMode: .fit)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(alignment: .topLeading) {
                                 Text("НОВОЕ")
@@ -51,15 +51,22 @@ struct NewReleasesAnimeCard: View {
                 
                 VStack(alignment: .leading) {
                     //MARK: Title
-                    Text(model.title)
-                        .font(.system(.subheadline, weight: .medium))
-                        .lineLimit(1)
+                    ZStack(alignment: .topLeading) {
+                        Text(" \n ")
+                            .font(.system(.subheadline, weight: .medium))
+                            .hidden()
+                        
+                        Text(model.title)
+                            .font(.system(.subheadline, weight: .medium))
+                            .lineLimit(2)
+                    }
+                   
                     
-                    //MARK: Subtitle
-                    Text(model.subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.subtitle)
-                        .lineLimit(1)
+//                    //MARK: Subtitle
+//                    Text(model.subtitle)
+//                        .font(.caption)
+//                        .foregroundStyle(.subtitle)
+//                        .lineLimit(1)
                     
                     //MARK: Season Badge
                     Text("Сезон \(model.season), эпизод \(model.episode)")
