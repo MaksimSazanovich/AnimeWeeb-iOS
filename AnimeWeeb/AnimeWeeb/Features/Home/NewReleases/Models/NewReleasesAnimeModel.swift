@@ -13,4 +13,6 @@ struct NewReleasesAnimeModel: Identifiable {
     let subtitle: String
     let season: Int
     let episode: Int
+    
+    let isTV: Bool?
 }

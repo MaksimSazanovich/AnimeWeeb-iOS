@@ -9,7 +9,7 @@ import SwiftUI
 struct AnimeWeebApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeScreen(animes: previewNewReleasesAnimeModels)
         }
     }
 }

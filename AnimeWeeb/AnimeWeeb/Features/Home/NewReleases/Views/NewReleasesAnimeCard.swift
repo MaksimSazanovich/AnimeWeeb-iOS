@@ -1,0 +1,96 @@
+//
+//  NewReleasesAnimeCard.swift
+//  AnimeWeeb
+//
+
+import SwiftUI
+import NukeUI
+
+struct NewReleasesAnimeCard: View {
+    
+    let model: NewReleasesAnimeModel
+    
+    var body: some View {
+        ZStack {
+            VStack() {
+                // MARK: Image
+                LazyImage(url: model.imageURL) { state in
+                    if let image = state.image {
+                        image
+                            .resizable()
+                            .aspectRatio(2/3, contentMode: .fill)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .overlay(alignment: .topLeading) {
+                                Text("НОВОЕ")
+                                    .font(.system(.caption, weight: .bold))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 5)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(.newBadgeBackground)
+                                    )
+                                    .padding(8)
+                            }
+                            .overlay(alignment: .topTrailing) {
+                                if model.isTV == true {
+                                    Text("TV")
+                                        .font(.system(.caption, weight: .bold))
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 5)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(Color.background.opacity(0.8))
+                                        )
+                                        .padding(8)
+                                }
+                            }
+                    }
+                }
+                
+                VStack(alignment: .leading) {
+                    //MARK: Title
+                    Text(model.title)
+                        .font(.system(.subheadline, weight: .medium))
+                        .lineLimit(1)
+                    
+                    //MARK: Subtitle
+                    Text(model.subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.subtitle)
+                        .lineLimit(1)
+                    
+                    //MARK: Season Badge
+                    Text("Сезон \(model.season), эпизод \(model.episode)")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .font(.system(.caption, weight: .medium))
+                        .foregroundStyle(.seasonBadgeText)
+                        .frame(maxWidth: .infinity)
+                        .padding(7)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(.seasonBadge.opacity(0.1))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(.seasonBadge.opacity(0.2), lineWidth: 1)
+                        )
+                        
+                }
+                .padding(12)
+            }
+            
+           
+                
+        }
+        .frame(width: 150) //TODO: Hardcode width
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.animeCardBackground)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(.stroke.opacity(0.9), lineWidth: 1)
+        )
+    }
+}
