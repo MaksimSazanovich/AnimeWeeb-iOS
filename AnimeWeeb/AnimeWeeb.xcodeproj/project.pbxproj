@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B5DD7CC73020B163001A007C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC63020B163001A007C /* Nuke */; };
+		B5DD7CC93020B163001A007C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC83020B163001A007C /* NukeUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeWeeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5DD7CC73020B163001A007C /* Nuke in Frameworks */,
+				B5DD7CC93020B163001A007C /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			);
 			name = AnimeWeeb;
 			packageProductDependencies = (
+				B5DD7CC63020B163001A007C /* Nuke */,
+				B5DD7CC83020B163001A007C /* NukeUI */,
 			);
 			productName = AnimeWeeb;
 			productReference = B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */;
@@ -94,6 +103,9 @@
 			);
 			mainGroup = B5DD7C74301F6BA8001A007C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B5DD7C7E301F6BA8001A007C /* Products */;
 			projectDirPath = "";
@@ -330,6 +342,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B5DD7CC63020B163001A007C /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		B5DD7CC83020B163001A007C /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B5DD7C75301F6BA8001A007C /* Project object */;
 }
