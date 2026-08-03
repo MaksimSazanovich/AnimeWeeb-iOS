@@ -2,6 +2,8 @@
 //  NewReleasesAnimeCard.swift
 //  AnimeWeeb
 //
+//  Created by Maksim Sazanovich
+//
 
 import SwiftUI
 import NukeUI
