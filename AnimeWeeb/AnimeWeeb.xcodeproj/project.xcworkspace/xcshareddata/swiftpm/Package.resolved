@@ -1,5 +1,5 @@
 {
-  "originHash" : "8db810839d2e05d8fa43fe72481467e8e9f47bda8dad613e17d2b9a570e27109",
+  "originHash" : "527f246d722434629157768cf87f572c7060ec0e31c300abefd197d6834d8cc8",
   "pins" : [
     {
       "identity" : "nuke",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "63a8fcbd6621340a2410bc3e9575ac97058615f4",
         "version" : "13.0.6"
+      }
+    },
+    {
+      "identity" : "tagcloud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yarspirin/TagCloud.git",
+      "state" : {
+        "revision" : "81c1019541c2748cfecff4eabc05ca0bdcaa3713",
+        "version" : "1.0.4"
       }
     }
   ],
