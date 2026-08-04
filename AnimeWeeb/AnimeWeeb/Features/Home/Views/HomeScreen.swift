@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeScreen: View {
     
     var animes: [NewReleasesAnimeModel]
-    @State var searchTerm: String = ""
+    @State private var searchTerm: String = ""
+    @State private var selectedGenre: Genre = .all
     
     var body: some View {
         
@@ -48,8 +49,13 @@ struct HomeScreen: View {
                                     .foregroundColor(.subtitle)
                             }
                             
-                            // MARK: Search Bar
-                            AnimeSearchBar(searchTerm: $searchTerm)
+                            VStack(alignment: .leading, spacing: 12) {
+                                // MARK: Search Bar
+                                AnimeSearchBar(searchTerm: $searchTerm)
+                                
+                                //MARK: Genre Selector
+                                AnimeGenrePicker(selectedGenre: $selectedGenre)
+                            }
                         }
                         
                     }

@@ -16,7 +16,7 @@ struct AnimeSearchBar: View {
         HStack(spacing: 13) {
             Image(systemName: "magnifyingglass")
                 .font(.system(.body, weight: .semibold))
-                .foregroundStyle(.gray)
+                .foregroundStyle(.genreText)
             
             TextField("Поиск по RU, EN, JP или алиасам...", text: $searchTerm)
                 .focused($isFocused)

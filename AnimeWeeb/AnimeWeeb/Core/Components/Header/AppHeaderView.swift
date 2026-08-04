@@ -22,7 +22,7 @@ struct AppHeaderView: View {
                         // MARK: Title
                         Text("AnimeWeeb")
                             .font(.callout.weight(.bold))
-                            .foregroundStyle(Color(.mainTitile))
+                            .foregroundStyle(Color(.mainTitle))
                     }
                 }
                 
