@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     
     var animes: [NewReleasesAnimeModel]
+    @State var searchTerm: String = ""
     
     var body: some View {
         
@@ -25,7 +26,7 @@ struct HomeScreen: View {
                     
                     VStack(alignment: .leading, spacing: 32) {
                         
-                        VStack(spacing: 50) {
+                        VStack(spacing: 30) {
                             //MARK: New Releases ScrollView
                             NewReleasesScrollView(animes: animes)
                             
@@ -34,14 +35,21 @@ struct HomeScreen: View {
                                 .frame(height: 1)
                         }
                         
-                        VStack(alignment: .leading) {
-                            Text("Каталог")
-                                .font(.system(.largeTitle, weight: .semibold))
-                                .foregroundStyle(.largeTitle)
+                        // MARK: - Catalog
+                        VStack(alignment: .leading, spacing: 16) {
                             
-                            Text("От ценителей — для ценителей!")
-                                .font(.subheadline)
-                                .foregroundColor(.subtitle)
+                            VStack(alignment: .leading, spacing: 8){
+                                Text("Каталог")
+                                    .font(.system(.largeTitle, weight: .semibold))
+                                    .foregroundStyle(.largeTitle)
+                                
+                                Text("От ценителей — для ценителей!")
+                                    .font(.subheadline)
+                                    .foregroundColor(.subtitle)
+                            }
+                            
+                            // MARK: Search Bar
+                            AnimeSearchBar(searchTerm: $searchTerm)
                         }
                         
                     }
@@ -56,6 +64,7 @@ struct HomeScreen: View {
                 // MARK: - App Header
                 AppHeaderView()
             }
+            .scrollDismissesKeyboard(.immediately)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
@@ -65,4 +74,5 @@ struct HomeScreen: View {
 #Preview {
     HomeScreen(animes: previewNewReleasesAnimeModels)
 }
+
 

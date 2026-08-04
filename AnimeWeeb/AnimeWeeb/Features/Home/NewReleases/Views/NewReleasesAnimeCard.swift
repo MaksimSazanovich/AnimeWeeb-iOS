@@ -95,7 +95,7 @@ struct NewReleasesAnimeCard: View {
         .frame(width: 150) //TODO: Hardcode width
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(.animeCardBackground)
+                .fill(.viewBackground.opacity(0.4))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
