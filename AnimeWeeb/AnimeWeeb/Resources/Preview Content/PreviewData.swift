@@ -24,4 +24,6 @@ let previewAnimeModels: [AnimeModel] = (0..<5).flatMap { _ in [
     AnimeModel(imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/54726/main_alt-bee018ad113099c1d16dd9fc77dd3057.jpeg"), title: "Если бы моя жена стала младшеклассницей", genres: [.comedy, .seinen, .romance])
 ]}
 
-let previewUserProfileIcon = URL(string: "https://lh3.googleusercontent.com/a/ACg8ocKLZtHNr6Zmas68qSITdLdEioxLLnmJZQZ6vNukWls6ZPzQTsA9=s96-c")
+let previewUserAvatarURL = URL(string: "https://lh3.googleusercontent.com/a/ACg8ocKLZtHNr6Zmas68qSITdLdEioxLLnmJZQZ6vNukWls6ZPzQTsA9=s96-c")
+
+let previewUser = User(name: "Maksim Sazanovich", avatarUrl: previewUserAvatarURL, level: 1)

@@ -10,13 +10,13 @@ import NukeUI
 
 struct ProfileButton: View {
     
-    var profileImageURL: URL?
+    var avatarURL: URL?
     
     var body: some View {
         Button {
             print("Profile Button pressed")
         } label: {
-            LazyImage(url: profileImageURL) { state in
+            LazyImage(url: avatarURL) { state in
                 if let image = state.image {
                    image
                         .resizable()
@@ -37,5 +37,5 @@ struct ProfileButton: View {
 }
 
 #Preview {
-    ProfileButton(profileImageURL: previewUserProfileIcon)
+    ProfileButton(avatarURL: previewUserAvatarURL)
 }
