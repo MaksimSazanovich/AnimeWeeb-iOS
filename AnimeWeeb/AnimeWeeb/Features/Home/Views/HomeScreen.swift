@@ -18,6 +18,8 @@ struct HomeScreen: View {
         GridItem(.flexible(), spacing: 16)
     ]
     
+    let appHeaderViewModel: AppHeaderViewModel
+    
     var body: some View {
         
         ZStack(alignment: .top) {
@@ -80,7 +82,7 @@ struct HomeScreen: View {
             }
             .safeAreaInset(edge: .top) {
                 // MARK: - App Header
-                AppHeaderView()
+                AppHeaderView(viewModel: appHeaderViewModel)
             }
             .scrollDismissesKeyboard(.immediately)
         }
@@ -90,7 +92,9 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen(newRealeses: previewNewReleasesAnimeModels)
+    let appURLOpener = AppURLOpener()
+    
+    HomeScreen(newRealeses: previewNewReleasesAnimeModels, appHeaderViewModel: AppHeaderViewModel(urlOpener: appURLOpener, isLoggedIn: false, user: previewUser))
 }
 
 

@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct AnimeWeebApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            HomeScreen(newRealeses: previewNewReleasesAnimeModels)
+            makeHomeScreen()
         }
+    }
+    
+    func makeHomeScreen() -> some View {
+        let appURLOpener = AppURLOpener()
+        let appHeaderViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
+        
+        return HomeScreen(newRealeses: previewNewReleasesAnimeModels, appHeaderViewModel: appHeaderViewModel)
     }
 }

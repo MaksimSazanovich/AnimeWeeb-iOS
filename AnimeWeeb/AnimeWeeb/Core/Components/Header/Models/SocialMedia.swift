@@ -23,4 +23,13 @@ enum SocialMedia: String, Identifiable, CaseIterable {
         case .telegram: return "telegram-2.fill"
         }
     }
+    
+    var url: URL? {
+        switch self {
+        case .tikTok: URL(string: "https://www.tiktok.com/@off.animeweeb")
+        case .instagram: URL(string: "https://www.instagram.com/off.animeweeb/")
+        case .patreon: URL(string: "https://www.patreon.com/c/offanimeweeb")
+        case .telegram: URL(string: "https://t.me/animeweeb_site")
+        }
+    }
 }

@@ -9,11 +9,7 @@ import SwiftUI
 
 struct AppHeaderView: View {
     
-    @State private var isMenuOpen = false
-    @State var isLoggedIn = false
-    
-    //TODO: User Service
-    var user: User?
+    @State var viewModel: AppHeaderViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -40,12 +36,12 @@ struct AppHeaderView: View {
                     
                     HStack(spacing: 12) {
                         // MARK: Profile Button
-                        ProfileButton(avatarURL: user?.avatarUrl)
+                        ProfileButton(avatarURL: viewModel.user?.avatarUrl)
                         
                         // MARK: Menu Button
                         MenuButton() {
-                            withAnimation(.easeOut(duration: 0.28)){
-                                isMenuOpen.toggle()
+                            withAnimation(.easeOut(duration: 0.28)) {
+                                viewModel.onMenuButtonTapped()
                             }
                         }
                     }
@@ -68,7 +64,7 @@ struct AppHeaderView: View {
             }
             .zIndex(1)
             
-            if isMenuOpen {
+            if viewModel.isMenuOpen {
                 // MARK: - Menu Header
                 VStack(alignment: .leading, spacing: 30) {
                     // MARK: Home Button
@@ -95,28 +91,28 @@ struct AppHeaderView: View {
                         Grid(horizontalSpacing: 8, verticalSpacing: 8) {
                             GridRow {
                                 SocialButton(for: .tikTok) { socialMedia in
-                                    
+                                    viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
                                 
                                 SocialButton(for: .instagram) { socialMedia in
-                                    
+                                    viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
                             }
                             
                             GridRow {
                                 SocialButton(for: .patreon) { socialMedia in
-                                    
+                                    viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
                                 
                                 SocialButton(for: .telegram) { socialMedia in
-                                    
+                                    viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
                             }
                         }
                         
-                        if isLoggedIn {
+                        if viewModel.isLoggedIn {
                             //MARK: User Profile Card
-                            if let user = user {
+                            if let user = viewModel.user {
                                 Button {
                                     print("Profile Button pressed")
                                 } label: {
@@ -183,8 +179,10 @@ struct AppHeaderView: View {
 }
 
 #Preview {
+    
+    let appURLOpener = AppURLOpener()
     VStack {
-        AppHeaderView(isLoggedIn: true, user: previewUser)
+        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: appURLOpener, isLoggedIn: false, user: previewUser))
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.background)
@@ -193,28 +191,4 @@ struct AppHeaderView: View {
 
 
 
-struct SocialButton: View {
-    
-    let socialMedia: SocialMedia
-    
-    let onAction: (SocialMedia) -> Void
-    
-    var body: some View {
-        Button {
-            onAction(socialMedia)
-        } label: {
-            Label(socialMedia.rawValue, image: socialMedia.image)
-                .font(.system(.body, weight: .medium))
-                .foregroundStyle(.subtitle)
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
-                .padding(.vertical, 12)
-                .animeCardBackgroundModifier()
-        }
-    }
-    
-    init(for socialMedia: SocialMedia, onAction: @escaping (SocialMedia) -> Void) {
-        self.socialMedia = socialMedia
-        self.onAction = onAction
-    }
-}
+
