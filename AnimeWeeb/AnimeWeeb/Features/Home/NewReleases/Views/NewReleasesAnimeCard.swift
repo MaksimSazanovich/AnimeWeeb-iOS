@@ -52,13 +52,9 @@ struct NewReleasesAnimeCard: View {
                 VStack(alignment: .leading) {
                     //MARK: Title
                     ZStack(alignment: .topLeading) {
-                        Text(" \n ")
-                            .font(.system(.subheadline, weight: .medium))
-                            .hidden()
-                        
                         Text(model.title)
                             .font(.system(.subheadline, weight: .medium))
-                            .lineLimit(2)
+                            .lineLimit(2, reservesSpace: true)
                     }
                    
                     
