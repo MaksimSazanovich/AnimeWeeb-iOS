@@ -6,18 +6,22 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct ProfileButton: View {
     
-    var profileImage: Image?
+    var profileImageURL: URL?
     
     var body: some View {
         Button {
             print("Profile Button pressed")
         } label: {
-            ZStack {
-                if let profileImage {
-                    profileImage
+            LazyImage(url: profileImageURL) { state in
+                if let image = state.image {
+                   image
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape( RoundedRectangle(cornerRadius: 8))
                 }
             }
             .frame(width: 36, height: 36)
@@ -27,8 +31,11 @@ struct ProfileButton: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .strokeBorder(.stroke, lineWidth: 1))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
         }
 
     }
+}
+
+#Preview {
+    ProfileButton(profileImageURL: previewUserProfileIcon)
 }
