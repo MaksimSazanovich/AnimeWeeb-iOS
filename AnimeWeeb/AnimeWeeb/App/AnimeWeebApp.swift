@@ -11,7 +11,7 @@ import SwiftUI
 struct AnimeWeebApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeScreen(animes: previewNewReleasesAnimeModels)
+            HomeScreen(newRealeses: previewNewReleasesAnimeModels)
         }
     }
 }

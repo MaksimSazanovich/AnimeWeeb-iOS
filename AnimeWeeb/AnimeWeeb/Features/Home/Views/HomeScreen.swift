@@ -9,9 +9,14 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    var animes: [NewReleasesAnimeModel]
+    var newRealeses: [NewReleasesAnimeModel]
     @State private var searchTerm: String = ""
     @State private var selectedGenre: Genre = .all
+    
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
+    ]
     
     var body: some View {
         
@@ -29,7 +34,7 @@ struct HomeScreen: View {
                         
                         VStack(spacing: 30) {
                             //MARK: New Releases ScrollView
-                            NewReleasesScrollView(animes: animes)
+                            NewReleasesScrollView(animes: newRealeses)
                             
                             Rectangle()
                                 .fill(.stroke.opacity(0.8))
@@ -56,6 +61,13 @@ struct HomeScreen: View {
                                 //MARK: Genre Selector
                                 AnimeGenrePicker(selectedGenre: $selectedGenre)
                             }
+                            
+                            // MARK: Anime Grid
+                            LazyVGrid(columns: columns, spacing: 16) {
+                                ForEach(previewAnimeModels) { anime in
+                                    AnimeCard(model: anime)
+                                }
+                            }
                         }
                         
                     }
@@ -78,7 +90,7 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen(animes: previewNewReleasesAnimeModels)
+    HomeScreen(newRealeses: previewNewReleasesAnimeModels)
 }
 
 
