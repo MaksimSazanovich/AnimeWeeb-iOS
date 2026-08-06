@@ -1,0 +1,15 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "symbol-rendering-intent" : "template"
+  },
+  "symbols" : [
+    {
+      "filename" : "telegram-2.fill.svg",
+      "idiom" : "universal"
+    }
+  ]
+}
