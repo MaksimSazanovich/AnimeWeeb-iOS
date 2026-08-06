@@ -72,14 +72,7 @@ struct AnimeCard: View {
             
             Spacer(minLength: 0)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(.viewBackground.opacity(0.4))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(.stroke.opacity(0.9), lineWidth: 1)
-        )
+        .animeCardBackgroundModifier(cornerRadius: 12)
     }
 }
 
