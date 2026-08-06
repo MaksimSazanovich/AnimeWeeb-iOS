@@ -10,18 +10,13 @@ import SwiftUI
 struct AppHeaderView: View {
     
     @State private var isMenuOpen = false
-    @AppStorage(StorageKeys.isLoggedIn) private var isLoggedIn = false
-    
-    private let columns: [GridItem] = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    @State var isLoggedIn = false
     
     //TODO: User Service
     var user: User?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 0) {
             // MARK: - App Header
             ZStack {
                 HStack {
@@ -48,7 +43,11 @@ struct AppHeaderView: View {
                         ProfileButton(avatarURL: user?.avatarUrl)
                         
                         // MARK: Menu Button
-                        MenuButton()
+                        MenuButton() {
+                            withAnimation(.easeOut(duration: 0.28)){
+                                isMenuOpen.toggle()
+                            }
+                        }
                     }
                 }
             }
@@ -67,10 +66,10 @@ struct AppHeaderView: View {
                     .fill(.stroke.opacity(0.8))
                     .frame(height: 1)
             }
+            .zIndex(1)
             
-            // MARK: - Menu Header
-            VStack(alignment: .leading) {
-                
+            if isMenuOpen {
+                // MARK: - Menu Header
                 VStack(alignment: .leading, spacing: 30) {
                     // MARK: Home Button
                     Button {
@@ -93,47 +92,58 @@ struct AppHeaderView: View {
                             .foregroundStyle(.gray)
                         
                         // MARK: Social Media Grid
-                        LazyVGrid(columns: columns, spacing: 8) {
-                            ForEach(SocialMedia.allCases) { socialMedia in
-                                Button {
-                                    print(socialMedia.rawValue, "pressed")
-                                } label: {
-                                    Label(socialMedia.rawValue, image: socialMedia.symbolName)
-                                        .font(.system(.body, weight: .medium))
-                                        .foregroundStyle(.subtitle)
-                                        .frame(maxWidth: .infinity)
-                                        .padding(.horizontal)
-                                        .padding(.vertical, 12)
-                                        .animeCardBackgroundModifier()
+                        Grid(horizontalSpacing: 8, verticalSpacing: 8) {
+                            GridRow {
+                                SocialButton(for: .tikTok) { socialMedia in
+                                    
                                 }
-
                                 
+                                SocialButton(for: .instagram) { socialMedia in
+                                    
+                                }
+                            }
+                            
+                            GridRow {
+                                SocialButton(for: .patreon) { socialMedia in
+                                    
+                                }
+                                
+                                SocialButton(for: .telegram) { socialMedia in
+                                    
+                                }
                             }
                         }
                         
-                        if !isLoggedIn {
+                        if isLoggedIn {
                             //MARK: User Profile Card
                             if let user = user {
-                                HStack() {
-                                    ProfileButton(avatarURL: user.avatarUrl)
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text(user.name)
-                                            .font(.system(.body, weight: .semibold))
+                                Button {
+                                    print("Profile Button pressed")
+                                } label: {
+                                    HStack() {
+                                        ProfileButton(avatarURL: user.avatarUrl)
                                         
-                                        Text("Уровень \(user.level) • Профиль")
-                                            .font(.footnote)
-                                            .foregroundStyle(.gray)
+                                        VStack(alignment: .leading) {
+                                            Text(user.name)
+                                                .font(.system(.body, weight: .semibold))
+                                                .foregroundStyle(.white)
+                                            
+                                            Text("Уровень \(user.level) • Профиль")
+                                                .font(.footnote)
+                                                .foregroundStyle(.gray)
+                                        }
                                     }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(.profileButtonBackground))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .strokeBorder(.stroke, lineWidth: 1))
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(.profileButtonBackground))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .strokeBorder(.stroke, lineWidth: 1))
+
+                               
                             }
                         } else {
                             //MARK: LogIn Button
@@ -153,22 +163,28 @@ struct AppHeaderView: View {
                         }
                     }
                 }
-
-            }
-            .padding()
-            .overlay(alignment: .bottom) {
-                Rectangle()
-                    .fill(.stroke.opacity(0.8))
-                    .frame(height: 1)
+                .padding(.horizontal)
+                .padding(.vertical, 25)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .fill(.stroke.opacity(0.8))
+                        .frame(height: 1)
+                }
+                .background(Color.background)
+                .drawingGroup()
+                .transition(
+                    .move(edge: .top)
+                    .combined(with: .opacity)
+                )
+                .zIndex(0)
             }
         }
-        
     }
 }
 
 #Preview {
     VStack {
-        AppHeaderView(user: previewUser)
+        AppHeaderView(isLoggedIn: true, user: previewUser)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.background)
@@ -177,3 +193,28 @@ struct AppHeaderView: View {
 
 
 
+struct SocialButton: View {
+    
+    let socialMedia: SocialMedia
+    
+    let onAction: (SocialMedia) -> Void
+    
+    var body: some View {
+        Button {
+            onAction(socialMedia)
+        } label: {
+            Label(socialMedia.rawValue, image: socialMedia.image)
+                .font(.system(.body, weight: .medium))
+                .foregroundStyle(.subtitle)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+                .animeCardBackgroundModifier()
+        }
+    }
+    
+    init(for socialMedia: SocialMedia, onAction: @escaping (SocialMedia) -> Void) {
+        self.socialMedia = socialMedia
+        self.onAction = onAction
+    }
+}

@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct MenuButton: View {
+    
+    var onAction: () -> Void
+    
     var body: some View {
         Button {
-            print("Menu Button pressed")
+            onAction()
         } label: {
             ZStack {
                 Image(systemName: "line.horizontal.3")

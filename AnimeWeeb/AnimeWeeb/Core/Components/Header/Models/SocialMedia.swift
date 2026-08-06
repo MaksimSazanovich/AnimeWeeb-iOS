@@ -15,7 +15,7 @@ enum SocialMedia: String, Identifiable, CaseIterable {
     case patreon = "Patreon"
     case telegram = "Telegram"
     
-    var symbolName: String {
+    var image: String {
         switch self {
         case .tikTok: return "tiktok.fill"
         case .instagram: return "instagram"
