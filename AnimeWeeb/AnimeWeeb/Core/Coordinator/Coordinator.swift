@@ -12,6 +12,8 @@ import SwiftUI
 final class Coordinator {
     var path = NavigationPath()
     
+    let headerViewModel: AppHeaderViewModel
+    
     @ViewBuilder
     func resolve(screen: Screen) -> some View {
         switch screen {
@@ -30,11 +32,11 @@ final class Coordinator {
         }
     }
     
-    func makeHomeScreen() -> some View {
+    init() {
         let appURLOpener = AppURLOpener()
-        let viewModel = AppHeaderViewModel(urlOpener: appURLOpener)
+        self.headerViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
         
-        viewModel.onRoute = { [weak self] destination in
+        headerViewModel.onRoute = { [weak self] destination in
             switch destination {
             case .home:
                 self?.openHome()
@@ -48,8 +50,14 @@ final class Coordinator {
                 break
             }
         }
+    }
+    
+    func makeHomeScreen() -> some View {
         
-        return HomeScreen(newRealeses: previewNewReleasesAnimeModels, appHeaderViewModel: viewModel)
+        
+        
+        
+        return HomeScreen(newRealeses: previewNewReleasesAnimeModels)
     }
     
     func makeLoginScreen() -> some View {
