@@ -13,23 +13,41 @@ public class AppHeaderViewModel {
     
     private let urlOpener: AppURLOpener
     
+    var onRoute: ((Screen) -> Void)?
+    
     var isMenuOpen = false
-    var isLoggedIn = false
+    var isAuthorized = false
     
     //TODO: User Service
     var user: User?
     
-    init(urlOpener: AppURLOpener, isLoggedIn: Bool = false, user: User? = nil) {
+    init(urlOpener: AppURLOpener, isMenuOpen: Bool = false, isAuthorized: Bool = false, user: User? = nil) {
         self.urlOpener = urlOpener
-        self.isLoggedIn = isLoggedIn
+        self.isMenuOpen = isMenuOpen
+        self.isAuthorized = isAuthorized
         self.user = user
     }
     
-    func onMenuButtonTapped() {
+    func didTapMenu() {
         isMenuOpen.toggle()
+    }
+    
+    func didTapHome() {
+        isMenuOpen = false
+        onRoute?(.home)
     }
     
     func didTapSocial(socialMedia: SocialMedia) {
         urlOpener.open(socialMedia.url)
+    }
+    
+    func didTapProfile() {
+        isMenuOpen = false
+        onRoute?(.profile)
+    }
+    
+    func didTapLogin() {
+        isMenuOpen = false
+        onRoute?(.login)
     }
 }

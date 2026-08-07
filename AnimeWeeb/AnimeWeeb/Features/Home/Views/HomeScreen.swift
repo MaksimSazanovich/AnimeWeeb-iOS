@@ -94,7 +94,7 @@ struct HomeScreen: View {
 #Preview {
     let appURLOpener = AppURLOpener()
     
-    HomeScreen(newRealeses: previewNewReleasesAnimeModels, appHeaderViewModel: AppHeaderViewModel(urlOpener: appURLOpener, isLoggedIn: false, user: previewUser))
+    HomeScreen(newRealeses: previewNewReleasesAnimeModels, appHeaderViewModel: AppHeaderViewModel(urlOpener: appURLOpener, isAuthorized: false, user: previewUser))
 }
 
 

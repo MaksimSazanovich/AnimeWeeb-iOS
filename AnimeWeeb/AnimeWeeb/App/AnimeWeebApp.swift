@@ -10,16 +10,18 @@ import SwiftUI
 @main
 struct AnimeWeebApp: App {
     
+    @State private var coordinator = Coordinator()
+    
     var body: some Scene {
         WindowGroup {
-            makeHomeScreen()
+            NavigationStack(path: $coordinator.path) {
+                coordinator.makeHomeScreen()
+                    .navigationDestination(for: Screen.self) { screen in
+                        coordinator.resolve(screen: screen)
+                    }
+            }
         }
     }
     
-    func makeHomeScreen() -> some View {
-        let appURLOpener = AppURLOpener()
-        let appHeaderViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
-        
-        return HomeScreen(newRealeses: previewNewReleasesAnimeModels, appHeaderViewModel: appHeaderViewModel)
-    }
+    
 }

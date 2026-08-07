@@ -18,7 +18,7 @@ struct AppHeaderView: View {
                 HStack {
                     // MARK: Home Button
                     Button {
-                        print("Go home")
+                        viewModel.didTapHome()
                     } label: {
                         HStack {
                             // MARK: Icon
@@ -36,12 +36,14 @@ struct AppHeaderView: View {
                     
                     HStack(spacing: 12) {
                         // MARK: Profile Button
-                        ProfileButton(avatarURL: viewModel.user?.avatarUrl)
+                        ProfileButton(avatarURL: viewModel.user?.avatarUrl) {
+                            viewModel.didTapProfile()
+                        }
                         
                         // MARK: Menu Button
                         MenuButton() {
                             withAnimation(.easeOut(duration: 0.28)) {
-                                viewModel.onMenuButtonTapped()
+                                viewModel.didTapMenu()
                             }
                         }
                     }
@@ -69,7 +71,7 @@ struct AppHeaderView: View {
                 VStack(alignment: .leading, spacing: 30) {
                     // MARK: Home Button
                     Button {
-                        print("Menu Button pressed")
+                        viewModel.didTapHome()
                     } label: {
                         Label {
                             Text("Каталог")
@@ -110,14 +112,16 @@ struct AppHeaderView: View {
                             }
                         }
                         
-                        if viewModel.isLoggedIn {
+                        if viewModel.isAuthorized {
                             //MARK: User Profile Card
                             if let user = viewModel.user {
                                 Button {
                                     print("Profile Button pressed")
                                 } label: {
                                     HStack() {
-                                        ProfileButton(avatarURL: user.avatarUrl)
+                                        ProfileButton(avatarURL: user.avatarUrl) {
+                                            viewModel.didTapProfile()
+                                        }
                                         
                                         VStack(alignment: .leading) {
                                             Text(user.name)
@@ -142,9 +146,9 @@ struct AppHeaderView: View {
                                
                             }
                         } else {
-                            //MARK: LogIn Button
+                            //MARK: Login Button
                             Button {
-                                print("LogIn Button pressed")
+                                viewModel.didTapLogin()
                             } label: {
                                 Text("Войти")
                                     .font(.system(.title2, weight: .semibold))
@@ -182,7 +186,7 @@ struct AppHeaderView: View {
     
     let appURLOpener = AppURLOpener()
     VStack {
-        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: appURLOpener, isLoggedIn: false, user: previewUser))
+        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: appURLOpener, isAuthorized: false, user: previewUser))
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.background)
