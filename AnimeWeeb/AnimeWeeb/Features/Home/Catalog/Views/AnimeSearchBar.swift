@@ -10,7 +10,9 @@ import SwiftUI
 struct AnimeSearchBar: View {
     
     @Binding var searchTerm: String
-    @FocusState private var isFocused: Bool
+    @Binding var isFocused: Bool
+    
+    @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
         HStack(spacing: 13) {
@@ -19,7 +21,7 @@ struct AnimeSearchBar: View {
                 .foregroundStyle(.genreText)
             
             TextField("Поиск по RU, EN, JP или алиасам...", text: $searchTerm)
-                .focused($isFocused)
+                .focused($isTextFieldFocused)
                 .font(.subheadline)
         }
         .frame(height: 42)
@@ -30,14 +32,19 @@ struct AnimeSearchBar: View {
         )
         .overlay {
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(isFocused ? .focusedStroke : .stroke, lineWidth: 1)
+                .strokeBorder(isTextFieldFocused ? .focusedStroke : .stroke, lineWidth: 1)
                 
         }
         .padding(2)
         .overlay {
             RoundedRectangle(cornerRadius: 13)
-                .strokeBorder(isFocused ? .focusedSecondStroke : .clear, lineWidth: 2)
+                .strokeBorder(isTextFieldFocused ? .focusedSecondStroke : .clear, lineWidth: 2)
         }
-        
+        .onChange(of: isTextFieldFocused) { _, newValue in
+            isFocused = isTextFieldFocused
+        }
+        .onChange(of: isFocused) { _, newValue in
+            isTextFieldFocused = isFocused
+        }
     }
 }
