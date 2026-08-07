@@ -23,8 +23,8 @@ final class Coordinator {
             makeLoginScreen()
         case .register:
             makeRegisterScreen()
-        case .animeDetails:
-            makeAnimeDetailsScreen()
+        case .animeDetails(let anime):
+            makeAnimeDetailsScreen(anime: anime)
         case .player:
             makePlayerScreen()
         case .profile:
@@ -42,22 +42,22 @@ final class Coordinator {
                 self?.openHome()
             case .login:
                 self?.openLogin()
-            case .animeDetails:
-                self?.openAnimeDetails()
             case .profile:
                 self?.openProfile()
-            case .player, .register:
+            case .player, .register, .animeDetails:
                 break
             }
         }
     }
     
     func makeHomeScreen() -> some View {
+        //TODO: REAL API DATA
+        let viewModel = HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels)
+        viewModel.onRoute = { [weak self] anime in
+            self?.openAnimeDetails(anime: anime)
+        }
         
-        
-        
-        
-        return HomeScreen(newRealeses: previewNewReleasesAnimeModels)
+        return HomeScreen(viewModel: viewModel)
     }
     
     func makeLoginScreen() -> some View {
@@ -68,8 +68,9 @@ final class Coordinator {
         return RegisterScreen()
     }
     
-    func makeAnimeDetailsScreen() -> some View {
-        return AnimeDetailsScreen()
+    func makeAnimeDetailsScreen(anime: AnimeModel) -> some View {
+        let viewModel = AnimeDetailsViewModel(anime: anime)
+        return AnimeDetailsScreen(viewModel: viewModel)
     }
     
     func makePlayerScreen() -> some View {
@@ -92,8 +93,8 @@ final class Coordinator {
         path.append(Screen.register)
     }
     
-    func openAnimeDetails() {
-        path.append(Screen.animeDetails)
+    func openAnimeDetails(anime: AnimeModel) {
+        path.append(Screen.animeDetails(anime: anime))
     }
     
     func openPlayer() {

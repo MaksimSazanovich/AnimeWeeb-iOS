@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct AnimeModel: Identifiable {
+struct AnimeModel: Identifiable, Hashable {
     let id = UUID()
     
     let imageURL: URL?
     let title: String
+    let description: String?
     let genres: [Genre]
 }

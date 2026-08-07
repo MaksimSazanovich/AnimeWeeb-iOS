@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum Screen {
+enum Screen: Hashable {
     case home
     case login
     case register
-    case animeDetails
+    case animeDetails(anime: AnimeModel)
     case player
     case profile
 }

@@ -15,5 +15,10 @@ struct RegisterScreen: View {
 }
 
 #Preview {
-    RegisterScreen()
+    VStack(spacing: 0){
+        
+        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
+        
+        RegisterScreen()
+    }
 }
