@@ -12,7 +12,7 @@ struct HomeScreen: View {
     @State var viewModel: HomeViewModel
     
     @State private var searchTerm: String = ""
-    @State private var selectedGenre: Genre = .all
+    
     
     private let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),
@@ -57,12 +57,12 @@ struct HomeScreen: View {
                             AnimeSearchBar(searchTerm: $searchTerm)
                             
                             //MARK: Genre Selector
-                            AnimeGenrePicker(selectedGenre: $selectedGenre)
+                            AnimeGenrePicker(selectedGenre: $viewModel.selectedGenre)
                         }
                         
                         // MARK: Anime Grid
                         LazyVGrid(columns: columns, spacing: 16) {
-                            ForEach(viewModel.animes) { anime in
+                            ForEach(viewModel.filteredAnimes) { anime in
                                 AnimeCard(model: anime) { anime in
                                     viewModel.onRoute?(anime)
                                 }
