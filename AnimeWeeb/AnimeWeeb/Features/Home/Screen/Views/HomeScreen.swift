@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     
     @State var viewModel: HomeViewModel
+    let namespace: Namespace.ID
     
     private let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),
@@ -56,6 +57,7 @@ struct HomeScreen: View {
                                         AnimeCard(model: anime) { anime in
                                             viewModel.onRoute?(anime)
                                         }
+                                        .matchedTransitionSource(id: anime.id, in: namespace)
                                     }
                                 }
                             } else {
@@ -91,11 +93,12 @@ struct HomeScreen: View {
 }
 
 #Preview {
+    @Previewable @Namespace var animeNamespace
     VStack(spacing: 0){
         
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
         
-        HomeScreen(viewModel: HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels))
+        HomeScreen(viewModel: HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels), namespace: animeNamespace)
     }
 }
 

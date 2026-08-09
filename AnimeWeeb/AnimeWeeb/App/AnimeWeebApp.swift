@@ -11,6 +11,7 @@ import SwiftUI
 struct AnimeWeebApp: App {
     
     @State private var coordinator = Coordinator()
+    @Namespace private var animeNamespace
     
     var body: some Scene {
         WindowGroup {
@@ -19,9 +20,9 @@ struct AnimeWeebApp: App {
                 AppHeaderView(viewModel: coordinator.headerViewModel)
                 
                 NavigationStack(path: $coordinator.path) {
-                    coordinator.makeHomeScreen()
+                    coordinator.makeHomeScreen(namespace: animeNamespace)
                         .navigationDestination(for: Screen.self) { screen in
-                            coordinator.resolve(screen: screen)
+                            coordinator.resolve(screen: screen, namespace: animeNamespace)
                         }
                 }
             }

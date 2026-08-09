@@ -62,6 +62,7 @@ struct AnimeDetailsScreen: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
+        .navigationBarBackButtonHidden()
     }
 }
 

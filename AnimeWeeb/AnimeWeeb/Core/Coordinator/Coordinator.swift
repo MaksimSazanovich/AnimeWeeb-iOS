@@ -15,17 +15,17 @@ final class Coordinator {
     let headerViewModel: AppHeaderViewModel
     
     @ViewBuilder
-    func resolve(screen: Screen) -> some View {
+    func resolve(screen: Screen, namespace: Namespace.ID) -> some View {
         switch screen {
         case .home:
-            makeHomeScreen()
+            makeHomeScreen(namespace: namespace)
         case .login:
             makeLoginScreen()
         case .register:
             makeRegisterScreen()
         case .animeDetails(let anime):
             makeAnimeDetailsScreen(anime: anime)
-                
+                .navigationTransition(.zoom(sourceID: anime.id, in: namespace))
         case .player:
             makePlayerScreen()
         case .profile:
@@ -51,14 +51,14 @@ final class Coordinator {
         }
     }
     
-    func makeHomeScreen() -> some View {
+    func makeHomeScreen(namespace: Namespace.ID) -> some View {
         //TODO: REAL API DATA
         let viewModel = HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels)
         viewModel.onRoute = { [weak self] anime in
             self?.openAnimeDetails(anime: anime)
         }
         
-        return HomeScreen(viewModel: viewModel)
+        return HomeScreen(viewModel: viewModel, namespace: namespace)
     }
     
     func makeLoginScreen() -> some View {
