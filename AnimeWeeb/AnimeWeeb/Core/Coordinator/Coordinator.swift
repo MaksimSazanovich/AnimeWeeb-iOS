@@ -25,6 +25,7 @@ final class Coordinator {
             makeRegisterScreen()
         case .animeDetails(let anime):
             makeAnimeDetailsScreen(anime: anime)
+                
         case .player:
             makePlayerScreen()
         case .profile:
@@ -61,11 +62,21 @@ final class Coordinator {
     }
     
     func makeLoginScreen() -> some View {
-        return LoginScreen()
+        let viewModel = LoginViewModel()
+        viewModel.onRoute = { [weak self] in
+            self?.openRegister()
+        }
+        
+        return LoginScreen(viewModel: viewModel)
     }
     
     func makeRegisterScreen() -> some View {
-        return RegisterScreen()
+        let viewModel = RegisterViewModel()
+        viewModel.onRoute = { [weak self] in
+            self?.openLogin()
+        }
+        
+        return RegisterScreen(viewModel: viewModel)
     }
     
     func makeAnimeDetailsScreen(anime: AnimeModel) -> some View {

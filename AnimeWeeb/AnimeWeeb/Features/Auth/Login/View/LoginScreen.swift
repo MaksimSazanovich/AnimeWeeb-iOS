@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginScreen: View {
     
+    @State var viewModel: LoginViewModel
     @State var email: String = ""
     
     var body: some View {
@@ -54,15 +55,14 @@ struct LoginScreen: View {
                             
                             // MARK: GetCode Button
                             GetCodeButton {
-                                // TODO: GetCode logic
-                                print("Get code")
+                                
+                                viewModel.didTapGetCodeButton()
                             }
                         }
                         
                         // MARK: NoAccount Button
                         Button {
-                            // TODO: NoAccount logic
-                            print("No Account")
+                            viewModel.didTapSwitchAuthButton()
                         } label: {
                             Text("Нет аккаунта? Зарегистрироваться")
                                 .font(.system(size: 14))
@@ -85,6 +85,6 @@ struct LoginScreen: View {
 }
 
 #Preview {
-    LoginScreen()
+    LoginScreen(viewModel: LoginViewModel())
 }
 

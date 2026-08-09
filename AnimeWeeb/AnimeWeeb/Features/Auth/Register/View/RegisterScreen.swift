@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RegisterScreen: View {
+    
+    @State var viewModel: RegisterViewModel
     @State var email: String = ""
     
     var body: some View {
@@ -53,15 +55,14 @@ struct RegisterScreen: View {
                             
                             // MARK: GetCode Button
                             GetCodeButton {
-                                // TODO: GetCode logic
-                                print("Get code")
+                                viewModel.didTapGetCodeButton()
                             }
                         }
                         
                         // MARK: Login Button
                         Button {
                             // TODO: Login logic
-                            print("No Account")
+                            viewModel.didTapSwitchAuthButton()
                         } label: {
                             Text("Уже есть аккаунт? Войти")
                                 .font(.system(size: 14))
@@ -88,6 +89,6 @@ struct RegisterScreen: View {
         
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
         
-        RegisterScreen()
+        RegisterScreen(viewModel: RegisterViewModel())
     }
 }
