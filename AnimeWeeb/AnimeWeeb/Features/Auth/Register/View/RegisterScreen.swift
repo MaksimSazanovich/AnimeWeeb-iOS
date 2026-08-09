@@ -1,5 +1,5 @@
 //
-//  LoginScreen.swift
+//  RegisterScreen.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
-    
+struct RegisterScreen: View {
     @State var email: String = ""
     
     var body: some View {
@@ -16,7 +15,7 @@ struct LoginScreen: View {
         ZStack {
             VStack {
                 VStack(spacing: 8) {
-                    Text("Войти")
+                    Text("Создать аккаунт")
                         .font(.system(size: 30, weight: .bold))
                         .foregroundStyle(.white)
                     
@@ -59,12 +58,12 @@ struct LoginScreen: View {
                             }
                         }
                         
-                        // MARK: NoAccount Button
+                        // MARK: Login Button
                         Button {
-                            // TODO: NoAccount logic
+                            // TODO: Login logic
                             print("No Account")
                         } label: {
-                            Text("Нет аккаунта? Зарегистрироваться")
+                            Text("Уже есть аккаунт? Войти")
                                 .font(.system(size: 14))
                                 .foregroundStyle(.seasonBadgeText)
                         }
@@ -85,6 +84,10 @@ struct LoginScreen: View {
 }
 
 #Preview {
-    LoginScreen()
+    VStack(spacing: 0){
+        
+        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
+        
+        RegisterScreen()
+    }
 }
-
