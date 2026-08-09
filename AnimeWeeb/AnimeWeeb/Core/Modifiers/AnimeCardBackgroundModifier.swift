@@ -28,6 +28,6 @@ struct AnimeCardBackgroundModifier: ViewModifier {
 
 extension View {
     func animeCardBackgroundModifier(cornerRadius: CGFloat = 12, fillOpacity: CGFloat = 0.4, strokeOpacity: CGFloat = 0.9) -> some View {
-        modifier(AnimeCardBackgroundModifier(cornerRadius: cornerRadius))
+        modifier(AnimeCardBackgroundModifier(cornerRadius: cornerRadius, fillOpacity: fillOpacity, strokeOpacity: strokeOpacity))
     }
 }

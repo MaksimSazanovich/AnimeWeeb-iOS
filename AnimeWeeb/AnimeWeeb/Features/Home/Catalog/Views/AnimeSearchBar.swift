@@ -30,16 +30,7 @@ struct AnimeSearchBar: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(.viewBackground.opacity(0.6))
         )
-        .overlay {
-            RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(isTextFieldFocused ? .focusedStroke : .stroke, lineWidth: 1)
-                
-        }
-        .padding(2)
-        .overlay {
-            RoundedRectangle(cornerRadius: 13)
-                .strokeBorder(isTextFieldFocused ? .focusedSecondStroke : .clear, lineWidth: 2)
-        }
+        .textFieldFocusModifier(isTextFieldFocused)
         .onChange(of: isTextFieldFocused) { _, newValue in
             isFocused = isTextFieldFocused
         }
