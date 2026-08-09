@@ -30,6 +30,10 @@ struct AnimeSearchBar: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(.viewBackground.opacity(0.6))
         )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isTextFieldFocused = true
+        }
         .textFieldFocusModifier(isTextFieldFocused)
         .onChange(of: isTextFieldFocused) { _, newValue in
             isFocused = isTextFieldFocused

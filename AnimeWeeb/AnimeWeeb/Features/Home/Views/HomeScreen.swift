@@ -80,7 +80,7 @@ struct HomeScreen: View {
                 }
             }
         }
-        .contentShape(Rectangle())
+        .dismissKeyboardOnTap()
         .onTapGesture {
             viewModel.isSearchFocused = false
         }

@@ -11,7 +11,9 @@ import SwiftUI
 struct DismissKeyboardOnTapModifier: ViewModifier {
     
     func body(content: Content) -> some View {
-        content.onTapGesture {
+        content
+            .contentShape(Rectangle())
+            .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
