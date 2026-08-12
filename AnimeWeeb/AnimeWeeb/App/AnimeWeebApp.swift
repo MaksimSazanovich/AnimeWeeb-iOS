@@ -14,19 +14,15 @@ struct AnimeWeebApp: App {
     
     var body: some Scene {
         WindowGroup {
-            VStack(spacing: 0){
-                
+            NavigationStack(path: $coordinator.path) {
+                coordinator.makeHomeScreen()
+                    .navigationDestination(for: Screen.self) { screen in
+                        coordinator.resolve(screen: screen)
+                    }
+            }
+            .safeAreaInset(edge: .top) {
                 AppHeaderView(viewModel: coordinator.headerViewModel)
-                
-                NavigationStack(path: $coordinator.path) {
-                    coordinator.makeHomeScreen()
-                        .navigationDestination(for: Screen.self) { screen in
-                            coordinator.resolve(screen: screen)
-                        }
-                }
             }
         }
     }
-    
-    
 }
