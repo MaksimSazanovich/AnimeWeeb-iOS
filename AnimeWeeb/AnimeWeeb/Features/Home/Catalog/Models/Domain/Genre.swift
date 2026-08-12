@@ -15,15 +15,17 @@ enum Genre: String, CaseIterable, Identifiable {
     case sliceOfLife = "Повседневность"
     case adventure = "Приключения"
     case romance = "Романтика"
-    case shonen = "Сёнэн"
+    case shounen = "Сёнэн"
     case sports = "Спорт"
     case seinen = "Сэйнэн"
     case mystery = "Тайна"
+    case supernatural = "Сверхъестественное"
     case thriller = "Триллер"
     case horror = "Ужасы"
     case sciFi = "Фантастика"
     case fantasy = "Фэнтези"
     case action = "Экшен"
+
 
     var id: String { rawValue }
 }

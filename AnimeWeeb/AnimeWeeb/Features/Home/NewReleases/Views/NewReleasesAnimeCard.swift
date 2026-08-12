@@ -36,7 +36,8 @@ struct NewReleasesAnimeCard: View {
                             }
                             .overlay(alignment: .topTrailing) {
                                 // MARK: TV Tag
-                                if model.isTV == true {
+                                if model.format == .tv
+                                {
                                     Text("TV")
                                         .font(.system(.caption, weight: .bold))
                                         .padding(.horizontal, 8)
@@ -58,13 +59,13 @@ struct NewReleasesAnimeCard: View {
                             .font(.system(.subheadline, weight: .medium))
                             .lineLimit(2, reservesSpace: true)
                     }
-                   
                     
-//                    //MARK: Subtitle
-//                    Text(model.subtitle)
-//                        .font(.caption)
-//                        .foregroundStyle(.subtitle)
-//                        .lineLimit(1)
+                    
+                    //                    //MARK: Subtitle
+                    //                    Text(model.subtitle)
+                    //                        .font(.caption)
+                    //                        .foregroundStyle(.subtitle)
+                    //                        .lineLimit(1)
                     
                     //MARK: Season Badge
                     Text("Сезон \(model.season), эпизод \(model.episode)")
@@ -82,13 +83,13 @@ struct NewReleasesAnimeCard: View {
                             RoundedRectangle(cornerRadius: 6)
                                 .stroke(.seasonBadge.opacity(0.2), lineWidth: 1)
                         )
-                        
+                    
                 }
                 .padding(12)
             }
             
-           
-                
+            
+            
         }
         .frame(width: 150) //TODO: Hardcode width
         .animeCardBackgroundModifier(cornerRadius: 12)

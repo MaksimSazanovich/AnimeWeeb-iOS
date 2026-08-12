@@ -12,3 +12,9 @@ struct HomeResponse: Codable {
     let titles: [TitleDTO]
     let totalTitles: Int
 }
+
+extension HomeResponse {
+    func toDomain() -> HomeModel {
+        HomeModel(newReleases: latestEpisodes.map { $0.toDomain() }, animes: titles.map { $0.toDomain() }, totalAnimes: totalTitles)
+    }
+}

@@ -27,3 +27,9 @@ struct LatestEpisodeDTO: Codable {
         case seasonNumber, seasonName, episodeNumber, episodeIndex, createdAt, titleObj, seasonObj, episodeObj
     }
 }
+
+extension LatestEpisodeDTO {
+    func toDomain() -> NewReleasesAnimeModel {
+        NewReleasesAnimeModel(imageURL: URL(string: posterURL), title: titleNameRu, season: seasonNumber, episode: episodeNumber, format: seasonObj.type.toDomain())
+    }
+}

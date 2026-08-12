@@ -25,3 +25,9 @@ struct TitleDTO: Codable {
         case rating, status, createdAt, genres, dubbers
     }
 }
+
+extension TitleDTO {
+    func toDomain() -> AnimeModel {
+        AnimeModel(imageURL: URL(string: posterURL), title: nameRu, description: description, genres: genres.map { $0.toDomain() })
+    }
+}
