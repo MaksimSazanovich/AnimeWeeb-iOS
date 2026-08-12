@@ -21,6 +21,10 @@ final class HomeViewModel {
         return animes.filter { ($0.genres.contains(selectedGenre) || selectedGenre == .all) && ($0.title.localizedCaseInsensitiveContains(searchTerm) || searchTerm.isEmpty) }
     }
     
+    var newReleases: [NewReleasesAnimeModel] {
+        model?.newReleases ?? []
+    }
+    
     var onRoute: ((AnimeModel) -> Void)?
     
     var selectedGenre: Genre = .all
@@ -32,11 +36,15 @@ final class HomeViewModel {
     }
     
     init(newRealeses: [NewReleasesAnimeModel], animes: [AnimeModel]) {
-        self.model = HomeModel(newReleases: newRealeses, animes: animes, totalAnimes: 0)
+        self.model = HomeModel(newReleases: newRealeses, animes: animes, totalAnimes: animes.count)
         self.repository = HomeRepository()
+        state = .loaded
     }
     
     func loadHomeAnimes() async {
+        
+        guard state != .loaded else { return }
+        
         state = .loading
         
         do {

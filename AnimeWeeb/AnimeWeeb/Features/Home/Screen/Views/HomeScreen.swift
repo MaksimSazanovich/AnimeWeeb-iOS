@@ -11,81 +11,19 @@ struct HomeScreen: View {
     
     @State var viewModel: HomeViewModel
     
-    private let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
-    ]
-    
     var body: some View {
         
         ZStack {
-            ScrollView {
-                ScrollViewReader { proxy in
-                    VStack(alignment: .leading) {
-                        
-                        if !viewModel.isSearchFocused && viewModel.searchTerm.isEmpty {
-                            // MARK: - New Releases
-                            NewReleasesView(animes: viewModel.model?.newReleases ?? [])
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 32) {
-                            // MARK: - Catalog
-                            VStack(alignment: .leading, spacing: 16) {
-                                
-                                VStack(alignment: .leading, spacing: 8){
-                                    Text("Каталог")
-                                        .font(.system(.largeTitle, weight: .semibold))
-                                        .foregroundStyle(.largeTitle)
-                                    
-                                    Text("От ценителей — для ценителей!")
-                                        .font(.subheadline)
-                                        .foregroundColor(.subtitle)
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 12) {
-                                    // MARK: Search Bar
-                                    AnimeSearchBar(searchTerm: $viewModel.searchTerm, isFocused: $viewModel.isSearchFocused)
-                                    
-                                    //MARK: Genre Selector
-                                    AnimeGenrePicker(selectedGenre: $viewModel.selectedGenre)
-                                }
-                                
-                                if !viewModel.filteredAnimes.isEmpty {
-                                    // MARK: Anime Grid
-                                    LazyVGrid(columns: columns, spacing: 16) {
-                                        ForEach(viewModel.filteredAnimes) { anime in
-                                            AnimeCard(model: anime) { anime in
-                                                viewModel.onRoute?(anime)
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    
-                                    Text("Ничего не найдено. Измените запрос или фильтр.")
-                                        .font(.system(size: 14))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.gray)
-                                        .padding(.top, 100)
-                                }
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 105)
-                    .padding(.horizontal)
-                    .id("scrollTop")
-                    .onChange(of: viewModel.searchTerm) { _, newValue in
-                        if !newValue.isEmpty {
-                            proxy.scrollTo("scrollTop", anchor: .top)
-                        }
-                    }
-                }
+            switch viewModel.state {
+            case .idle, .loading:
+                ProgressView()
+            case .loaded:
+                HomeContentView(viewModel: self.viewModel)
+            case .empty:
+                Text("Empty")
+            case .failed(let error):
+                Text("Failed to load: \(error.localizedDescription)")
             }
-            .dismissKeyboardOnTap()
-            .onTapGesture {
-                viewModel.isSearchFocused = false
-            }
-            .scrollDismissesKeyboard(.immediately)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
@@ -100,3 +38,82 @@ struct HomeScreen: View {
 }
 
 
+struct HomeContentView: View {
+    
+    @Bindable var viewModel: HomeViewModel
+    
+    private let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
+    ]
+    
+    var body: some View {
+        ScrollView {
+            ScrollViewReader { proxy in
+                VStack(alignment: .leading) {
+                    
+                    if !viewModel.isSearchFocused && viewModel.searchTerm.isEmpty {
+                        // MARK: - New Releases
+                        NewReleasesView(animes: viewModel.newReleases)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 32) {
+                        // MARK: - Catalog
+                        VStack(alignment: .leading, spacing: 16) {
+                            
+                            VStack(alignment: .leading, spacing: 8){
+                                Text("Каталог")
+                                    .font(.system(.largeTitle, weight: .semibold))
+                                    .foregroundStyle(.largeTitle)
+                                
+                                Text("От ценителей — для ценителей!")
+                                    .font(.subheadline)
+                                    .foregroundColor(.subtitle)
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 12) {
+                                // MARK: Search Bar
+                                AnimeSearchBar(searchTerm: $viewModel.searchTerm, isFocused: $viewModel.isSearchFocused)
+                                
+                                //MARK: Genre Selector
+                                AnimeGenrePicker(selectedGenre: $viewModel.selectedGenre)
+                            }
+                            
+                            if !viewModel.filteredAnimes.isEmpty {
+                                // MARK: Anime Grid
+                                LazyVGrid(columns: columns, spacing: 16) {
+                                    ForEach(viewModel.filteredAnimes) { anime in
+                                        AnimeCard(model: anime) { anime in
+                                            viewModel.onRoute?(anime)
+                                        }
+                                    }
+                                }
+                            } else {
+                                
+                                Text("Ничего не найдено. Измените запрос или фильтр.")
+                                    .font(.system(size: 14))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.gray)
+                                    .padding(.top, 100)
+                            }
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 105)
+                .padding(.horizontal)
+                .id("scrollTop")
+                .onChange(of: viewModel.searchTerm) { _, newValue in
+                    if !newValue.isEmpty {
+                        proxy.scrollTo("scrollTop", anchor: .top)
+                    }
+                }
+            }
+        }
+        .dismissKeyboardOnTap()
+        .onTapGesture {
+            viewModel.isSearchFocused = false
+        }
+        .scrollDismissesKeyboard(.immediately)
+    }
+}
