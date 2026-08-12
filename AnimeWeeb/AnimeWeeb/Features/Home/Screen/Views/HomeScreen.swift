@@ -72,7 +72,7 @@ struct HomeScreen: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 40)
+                .padding(.top, 105)
                 .padding(.horizontal)
                 .id("scrollTop")
                 .onChange(of: viewModel.searchTerm) { _, newValue in
@@ -93,13 +93,10 @@ struct HomeScreen: View {
 }
 
 #Preview {
+    
     @Previewable @Namespace var animeNamespace
-    VStack(spacing: 0){
-        
-        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
-        
-        HomeScreen(viewModel: HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels), namespace: animeNamespace)
-    }
+    
+    HomeScreen(viewModel: HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels), namespace: animeNamespace)
 }
 
 

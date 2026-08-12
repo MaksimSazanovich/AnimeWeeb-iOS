@@ -57,7 +57,7 @@ struct AnimeDetailsScreen: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.top, 32)
+            .padding(.top, 100)
             .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -23,6 +23,7 @@ struct NewReleasesAnimeCard: View {
                             .aspectRatio(2/3, contentMode: .fit)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(alignment: .topLeading) {
+                                // MARK: New Tag
                                 Text("НОВОЕ")
                                     .font(.system(.caption, weight: .bold))
                                     .padding(.horizontal, 8)
@@ -34,6 +35,7 @@ struct NewReleasesAnimeCard: View {
                                     .padding(8)
                             }
                             .overlay(alignment: .topTrailing) {
+                                // MARK: TV Tag
                                 if model.isTV == true {
                                     Text("TV")
                                         .font(.system(.caption, weight: .bold))
