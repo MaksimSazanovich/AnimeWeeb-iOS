@@ -1,0 +1,45 @@
+//
+//  HomeContentView.swift
+//  AnimeWeeb
+//
+//  Created by Maksim Sazanovich
+//
+
+import SwiftUI
+
+struct HomeContentView: View {
+    
+    @Bindable var viewModel: HomeViewModel
+    
+    var body: some View {
+        ScrollView {
+            ScrollViewReader { proxy in
+                VStack(alignment: .leading) {
+                    
+                    if !viewModel.isSearchFocused && viewModel.searchTerm.isEmpty {
+                        // MARK: - New Releases
+                        NewReleasesView(animes: viewModel.newReleases)
+                    }
+                    
+                    // MARK: - Catalog
+                    CatalogView(viewModel: viewModel)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 105)
+                .padding(.horizontal)
+                .id("scrollTop")
+                .onChange(of: viewModel.searchTerm) { _, newValue in
+                    if !newValue.isEmpty {
+                        proxy.scrollTo("scrollTop", anchor: .top)
+                    }
+                }
+            }
+        }
+        .dismissKeyboardOnTap()
+        .onTapGesture {
+            viewModel.isSearchFocused = false
+        }
+        .scrollDismissesKeyboard(.immediately)
+    }
+}
+
