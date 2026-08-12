@@ -14,6 +14,8 @@ final class Coordinator {
     
     let headerViewModel: AppHeaderViewModel
     
+    private let homeRepository: HomeRepositoryProtocol
+    
     @ViewBuilder
     func resolve(screen: Screen) -> some View {
         switch screen {
@@ -33,9 +35,11 @@ final class Coordinator {
         }
     }
     
-    init() {
+    init(homeRepository: HomeRepositoryProtocol) {
         let appURLOpener = AppURLOpener()
         self.headerViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
+        
+        self.homeRepository = homeRepository
         
         headerViewModel.onRoute = { [weak self] destination in
             switch destination {
@@ -53,7 +57,7 @@ final class Coordinator {
     
     func makeHomeScreen() -> some View {
         //TODO: REAL API DATA
-        let viewModel = HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels)
+        let viewModel = HomeViewModel(repository: self.homeRepository)
         viewModel.onRoute = { [weak self] anime in
             self?.openAnimeDetails(anime: anime)
         }

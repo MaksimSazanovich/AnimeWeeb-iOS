@@ -10,7 +10,8 @@ import SwiftUI
 @main
 struct AnimeWeebApp: App {
     
-    @State private var coordinator = Coordinator()
+    private let homeRepository = HomeRepository()
+    @State private var coordinator = Coordinator(homeRepository: HomeRepository())
     
     var body: some Scene {
         WindowGroup {
