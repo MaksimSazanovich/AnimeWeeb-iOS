@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppHeaderView: View {
     
-    @State var viewModel: AppHeaderViewModel
+    let viewModel: AppHeaderViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -171,7 +171,7 @@ struct AppHeaderView: View {
                         .frame(height: 1)
                 }
                 .background(Color.background)
-                .drawingGroup()
+                //.drawingGroup()
                 .transition(
                     .move(edge: .top)
                     .combined(with: .opacity)
