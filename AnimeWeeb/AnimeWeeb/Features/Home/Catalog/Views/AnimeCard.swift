@@ -16,6 +16,7 @@ struct AnimeCard: View {
     var onAction: (AnimeModel) -> Void
     
     private let maxVisibleTags = 3
+    
     private var displayTagItems: [TagItem] {
         if model.genres.count <= maxVisibleTags {
             return model.genres.map { TagItem.tag($0) }

@@ -16,7 +16,7 @@ struct HomeScreen: View {
         ZStack {
             switch viewModel.state {
             case .idle, .loading:
-                ProgressView()
+                SkeletonHomeContentView()
             case .loaded:
                 HomeContentView(viewModel: self.viewModel)
             case .empty:
