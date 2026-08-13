@@ -77,7 +77,6 @@ struct SkeletonHomeContentView: View {
                                     .frame(width: 200, height: 42)
                             }
                             
-                            
                             // MARK: Anime Grid
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(0...5, id: \.self) { _ in

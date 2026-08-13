@@ -8,6 +8,7 @@
 import SwiftUI
 import NukeUI
 import TagCloud
+import Shimmer
 
 struct AnimeCard: View {
     
@@ -46,6 +47,15 @@ struct AnimeCard: View {
                                     bottomTrailing: 0,
                                     topTrailing: 12))
                             )
+                    } else {
+                        UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(
+                            topLeading: 12,
+                            bottomLeading: 0,
+                            bottomTrailing: 0,
+                            topTrailing: 12))
+                        .aspectRatio(2/3, contentMode: .fill)
+                        .skeletonColor()
+                        .shimmering()
                     }
                 }
                 

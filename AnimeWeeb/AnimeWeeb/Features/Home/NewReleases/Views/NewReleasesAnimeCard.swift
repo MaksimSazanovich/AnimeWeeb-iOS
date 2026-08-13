@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NukeUI
+import Shimmer
 
 struct NewReleasesAnimeCard: View {
     
@@ -55,6 +56,15 @@ struct NewReleasesAnimeCard: View {
                                         .padding(8)
                                 }
                             }
+                    } else {
+                        UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(
+                            topLeading: 12,
+                            bottomLeading: 0,
+                            bottomTrailing: 0,
+                            topTrailing: 12))
+                        .aspectRatio(2/3, contentMode: .fill)
+                        .skeletonColor()
+                        .shimmering()
                     }
                 }
                 
