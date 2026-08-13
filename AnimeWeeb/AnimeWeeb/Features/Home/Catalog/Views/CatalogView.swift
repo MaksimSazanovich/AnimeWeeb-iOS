@@ -46,6 +46,13 @@ struct CatalogView: View {
                             AnimeCard(model: anime) { anime in
                                 viewModel.onRoute?(anime)
                             }
+                            .onAppear {
+                                if anime == viewModel.filteredAnimes.last {
+                                    Task {
+                                        await viewModel.loadMoreAnimes()
+                                    }
+                                }
+                            }
                         }
                     }
                 } else {

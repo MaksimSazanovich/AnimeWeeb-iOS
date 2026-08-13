@@ -9,6 +9,6 @@ import Foundation
 
 struct HomeModel {
     let newReleases: [NewReleasesAnimeModel]
-    let animes: [AnimeModel]
-    let totalAnimes: Int
+    var animes: [AnimeModel]
+    var totalAnimes: Int
 }
