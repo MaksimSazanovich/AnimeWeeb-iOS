@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5950086302DBB260071B04A /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = B5950085302DBB260071B04A /* Shimmer */; };
 		B5DD7CC73020B163001A007C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC63020B163001A007C /* Nuke */; };
 		B5DD7CC93020B163001A007C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC83020B163001A007C /* NukeUI */; };
 		B5DD7D493022145E001A007C /* TagCloud in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7D483022145E001A007C /* TagCloud */; };
@@ -29,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5950086302DBB260071B04A /* Shimmer in Frameworks */,
 				B5DD7CC73020B163001A007C /* Nuke in Frameworks */,
 				B5DD7D493022145E001A007C /* TagCloud in Frameworks */,
 				B5DD7CC93020B163001A007C /* NukeUI in Frameworks */,
@@ -77,6 +79,7 @@
 				B5DD7CC63020B163001A007C /* Nuke */,
 				B5DD7CC83020B163001A007C /* NukeUI */,
 				B5DD7D483022145E001A007C /* TagCloud */,
+				B5950085302DBB260071B04A /* Shimmer */,
 			);
 			productName = AnimeWeeb;
 			productReference = B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */;
@@ -109,6 +112,7 @@
 			packageReferences = (
 				B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */,
 				B5DD7D473022145E001A007C /* XCRemoteSwiftPackageReference "TagCloud" */,
+				B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B5DD7C7E301F6BA8001A007C /* Products */;
@@ -348,6 +352,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
 		B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -367,6 +379,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B5950085302DBB260071B04A /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
 		B5DD7CC63020B163001A007C /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */;
