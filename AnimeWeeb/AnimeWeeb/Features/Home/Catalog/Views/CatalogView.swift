@@ -63,14 +63,8 @@ struct CatalogView: View {
                         }
                     }
                     
-                    switch viewModel.state {
-                    case .idle, .empty, .loaded:
-                        EmptyView()
-                    case .loading:
-                        ProgressView()
-                    case .failed:
-                        EmptyView()
-                    }
+                    // MARK: Pagination State View
+                    CatalogPaginationStateView(homeViewModel: homeViewModel, viewModel: viewModel)
                 } else {
                     
                     Text("Ничего не найдено. Измените запрос или фильтр.")
@@ -83,3 +77,4 @@ struct CatalogView: View {
         }
     }
 }
+

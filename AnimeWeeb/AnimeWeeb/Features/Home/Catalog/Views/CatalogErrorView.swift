@@ -16,6 +16,8 @@ struct CatalogErrorView: View {
             Text("Не удалось загрузить каталог.")
                 .font(.body)
                 .foregroundStyle(.errorText)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
            
             Button {
                 onRetry()
@@ -24,6 +26,8 @@ struct CatalogErrorView: View {
                     .underline()
                     .font(.body)
                     .foregroundStyle(.errorText)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
             }
         }
         .padding()
