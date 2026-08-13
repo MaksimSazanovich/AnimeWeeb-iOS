@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 @Observable
 final class HomeViewModel {
     
@@ -43,7 +44,7 @@ final class HomeViewModel {
     
     func loadHomeAnimes() async {
         
-        guard state != .loaded else { return }
+        guard state != .loaded && state != .loading else { return }
         
         state = .loading
         

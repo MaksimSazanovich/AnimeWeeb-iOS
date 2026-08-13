@@ -15,14 +15,19 @@ struct HomeScreen: View {
         
         ZStack {
             switch viewModel.state {
+                
             case .idle, .loading:
                 SkeletonHomeContentView()
+                
             case .loaded:
                 HomeContentView(viewModel: self.viewModel)
-            case .empty:
-                Text("Empty")
-            case .failed(let error):
-                Text("Failed to load: \(error.localizedDescription)")
+                
+            case .empty, .failed:
+                CatalogErrorView {
+                    Task {
+                        await viewModel.loadHomeAnimes()
+                    }
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,6 +41,3 @@ struct HomeScreen: View {
 #Preview {
     HomeScreen(viewModel: HomeViewModel(newRealeses: previewNewReleasesAnimeModels, animes: previewAnimeModels))
 }
-
-
-
