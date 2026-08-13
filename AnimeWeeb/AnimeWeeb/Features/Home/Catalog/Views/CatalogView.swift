@@ -9,12 +9,19 @@ import SwiftUI
 
 struct CatalogView: View {
     
-    @Bindable var viewModel: HomeViewModel
+    @Bindable var homeViewModel: HomeViewModel
+    let viewModel: CatalogViewModel
+    
     
     private let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
+    
+    init(homeViewModel: HomeViewModel) {
+        self.homeViewModel = homeViewModel
+        self.viewModel = homeViewModel.catalogViewModel
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
@@ -33,27 +40,36 @@ struct CatalogView: View {
                 
                 VStack(alignment: .leading, spacing: 12) {
                     // MARK: Search Bar
-                    AnimeSearchBar(searchTerm: $viewModel.searchTerm, isFocused: $viewModel.isSearchFocused)
+                    AnimeSearchBar(searchTerm: $homeViewModel.searchTerm, isFocused: $homeViewModel.isSearchFocused)
                     
                     //MARK: Genre Selector
-                    AnimeGenrePicker(selectedGenre: $viewModel.selectedGenre)
+                    AnimeGenrePicker(selectedGenre: $homeViewModel.selectedGenre)
                 }
                 
-                if !viewModel.filteredAnimes.isEmpty {
+                if !homeViewModel.filteredAnimes.isEmpty {
                     // MARK: Anime Grid
                     LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(viewModel.filteredAnimes) { anime in
+                        ForEach(homeViewModel.filteredAnimes) { anime in
                             AnimeCard(model: anime) { anime in
-                                viewModel.onRoute?(anime)
+                                homeViewModel.onRoute?(anime)
                             }
                             .onAppear {
-                                if anime == viewModel.filteredAnimes.last {
+                                if anime == homeViewModel.filteredAnimes.last {
                                     Task {
-                                        await viewModel.loadMoreAnimes()
+                                        await viewModel.loadMoreAnimes(skip: homeViewModel.filteredAnimes.count)
                                     }
                                 }
                             }
                         }
+                    }
+                    
+                    switch viewModel.state {
+                    case .idle, .empty, .loaded:
+                        EmptyView()
+                    case .loading:
+                        ProgressView()
+                    case .failed:
+                        EmptyView()
                     }
                 } else {
                     

@@ -22,7 +22,7 @@ struct HomeContentView: View {
                     }
                     
                     // MARK: - Catalog
-                    CatalogView(viewModel: viewModel)
+                    CatalogView(homeViewModel: viewModel)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 105)

@@ -13,6 +13,7 @@ final class HomeViewModel {
     
     private(set) var model: HomeModel?
     private let repository: HomeRepositoryProtocol
+    let catalogViewModel: CatalogViewModel
     
     private(set) var state: ViewState = .idle
     
@@ -34,11 +35,22 @@ final class HomeViewModel {
     
     init(repository: HomeRepositoryProtocol) {
         self.repository = repository
+        self.catalogViewModel = CatalogViewModel(repository: repository)
+        
+        catalogViewModel.onMoreAnimesLoaded = { [weak self] newAnimes in
+            self?.model?.animes.append(contentsOf: newAnimes)
+        }
+        
+        catalogViewModel.canLoadMore = { [weak self] in
+            guard let model = self?.model else { return nil }
+            return (model.animes.count + model.newReleases.count, /*model.totalAnimes*/61)
+        }
     }
     
     init(newRealeses: [NewReleasesAnimeModel], animes: [AnimeModel]) {
         self.model = HomeModel(newReleases: newRealeses, animes: animes, totalAnimes: animes.count)
         self.repository = HomeRepository(networkService: NetworkService())
+        self.catalogViewModel = CatalogViewModel(repository: repository)
         state = .loaded
     }
     
@@ -61,19 +73,5 @@ final class HomeViewModel {
         }
     }
     
-    func loadMoreAnimes(take: Int = 20) async {
-        
-        guard var currentModel = model else { return }
-        guard currentModel.animes.count < currentModel.totalAnimes else { return }
-        
-        let skip = currentModel.animes.count
-        
-        do {
-           let newAnimes = try await repository.fetchMoreAnimes(skip: skip, take: take)
-            currentModel.animes.append(contentsOf: newAnimes)
-            self.model = currentModel
-        } catch {
-            print("❌ Ошибка загрузки следующей страницы: \(error)")
-        }
-    }
+    
 }
