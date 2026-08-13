@@ -24,17 +24,17 @@ struct SkeletonHomeContentView: View {
                     // MARK: - New Releases
                     VStack(alignment: .leading, spacing: 24) {
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .skeletonColor()
                             .frame(height: 36)
+                            .skeletonColor()
+                        
                         
                         VStack(spacing: 30) {
                             //MARK: New Releases ScrollView
                             ScrollView(.horizontal) {
                                 LazyHStack(spacing: 16) {
                                     ForEach(0...5, id: \.self) { _ in
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .skeletonColor()
-                                            .frame(width: 150, height: 333.25)
+                                        SkeletonAnimeCard()
+                                            .frame(width: 150)
                                     }
                                 }
                                 .padding(.bottom, 30)
@@ -66,10 +66,10 @@ struct SkeletonHomeContentView: View {
                             VStack(alignment: .leading, spacing: 12) {
                                 // MARK: Search Bar
                                 RoundedRectangle(cornerRadius: 12)
-                                .skeletonColor()
-                                .frame(height: 42)
-                               
-                               
+                                    .skeletonColor()
+                                    .frame(height: 42)
+                                
+                                
                                 
                                 //MARK: Genre Selector
                                 RoundedRectangle(cornerRadius: 12)
@@ -81,10 +81,7 @@ struct SkeletonHomeContentView: View {
                             // MARK: Anime Grid
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(0...5, id: \.self) { _ in
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .skeletonColor()
-                                        .frame(maxWidth: .infinity, idealHeight: 380)
-                                        
+                                    SkeletonAnimeCard()
                                 }
                             }
                             

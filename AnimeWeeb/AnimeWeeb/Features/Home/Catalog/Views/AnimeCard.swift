@@ -39,7 +39,13 @@ struct AnimeCard: View {
                         image
                             .resizable()
                             .aspectRatio(2/3, contentMode: .fit)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .clipShape(
+                                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(
+                                    topLeading: 12,
+                                    bottomLeading: 0,
+                                    bottomTrailing: 0,
+                                    topTrailing: 12))
+                            )
                     }
                 }
                 
@@ -86,3 +92,6 @@ struct AnimeCard: View {
     }
 }
 
+#Preview {
+    AnimeCard(model: previewAnimeModel, onAction: {_ in })
+}

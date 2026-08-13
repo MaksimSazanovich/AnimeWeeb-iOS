@@ -21,7 +21,13 @@ struct NewReleasesAnimeCard: View {
                         image
                             .resizable()
                             .aspectRatio(2/3, contentMode: .fit)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .clipShape(
+                                UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(
+                                    topLeading: 12,
+                                    bottomLeading: 0,
+                                    bottomTrailing: 0,
+                                    topTrailing: 12))
+                            )
                             .overlay(alignment: .topLeading) {
                                 // MARK: New Tag
                                 Text("НОВОЕ")
