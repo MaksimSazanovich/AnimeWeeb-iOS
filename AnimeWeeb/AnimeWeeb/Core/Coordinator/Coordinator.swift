@@ -28,7 +28,7 @@ final class Coordinator {
         case .animeDetails(let anime):
             makeAnimeDetailsScreen(anime: anime)
                 
-        case .player:
+        case .watch:
             makePlayerScreen()
         case .profile:
             makeProfileScreen()
@@ -49,7 +49,7 @@ final class Coordinator {
                 self?.openLogin()
             case .profile:
                 self?.openProfile()
-            case .player, .register, .animeDetails:
+            case .watch, .register, .animeDetails:
                 break
             }
         }
@@ -89,7 +89,7 @@ final class Coordinator {
     }
     
     func makePlayerScreen() -> some View {
-        return PlayerScreen()
+        return WatchScreen()
     }
     
     func makeProfileScreen() -> some View {
@@ -113,7 +113,7 @@ final class Coordinator {
     }
     
     func openPlayer() {
-        path.append(Screen.player)
+        path.append(Screen.watch)
     }
     
     func openProfile() {

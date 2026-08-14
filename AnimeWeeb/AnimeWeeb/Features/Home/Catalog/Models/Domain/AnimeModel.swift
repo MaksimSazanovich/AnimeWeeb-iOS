@@ -8,7 +8,7 @@
 import Foundation
 
 struct AnimeModel: Identifiable, Hashable {
-    let id = UUID()
+    let id: Int
     
     let imageURL: URL?
     let title: String

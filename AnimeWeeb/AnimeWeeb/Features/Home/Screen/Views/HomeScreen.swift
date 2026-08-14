@@ -31,6 +31,7 @@ struct HomeScreen: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 105)
         .background(Color.background)
         .task {
             await viewModel.loadHomeAnimes()

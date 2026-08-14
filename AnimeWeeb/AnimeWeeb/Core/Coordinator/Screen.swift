@@ -12,6 +12,6 @@ enum Screen: Hashable {
     case login
     case register
     case animeDetails(anime: AnimeModel)
-    case player
+    case watch
     case profile
 }

@@ -88,7 +88,6 @@ struct SkeletonHomeContentView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 105)
                 .padding(.horizontal)
                 .shimmering()
             }

@@ -25,7 +25,6 @@ struct HomeContentView: View {
                     CatalogView(homeViewModel: viewModel)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 105)
                 .padding(.horizontal)
                 .id("scrollTop")
                 .onChange(of: viewModel.searchTerm) { _, newValue in
