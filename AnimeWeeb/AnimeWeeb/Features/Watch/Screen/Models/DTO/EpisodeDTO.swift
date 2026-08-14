@@ -10,7 +10,8 @@ import Foundation
 struct EpisodeDTO: Codable {
     let id, seasonID, titleID, episodeNumber: Int
     let numberInSeason: Int
-    let videos, subtitleTracks: [Data] // TODO: Add types
+    let videos: [VideoDTO]
+    let subtitleTracks: [Data] // TODO: Add types
     let playback: PlaybackDTO
 
     enum CodingKeys: String, CodingKey {
@@ -18,5 +19,11 @@ struct EpisodeDTO: Codable {
         case seasonID = "seasonId"
         case titleID = "titleId"
         case episodeNumber, numberInSeason, videos, subtitleTracks, playback
+    }
+}
+
+extension EpisodeDTO {
+    func toDomain() -> Episode {
+        Episode(seasonID: seasonID, episode: numberInSeason, videos: videos.map { $0.toDomain() })
     }
 }

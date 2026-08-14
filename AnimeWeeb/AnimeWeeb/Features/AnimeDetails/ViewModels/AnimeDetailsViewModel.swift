@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 @Observable
 final class AnimeDetailsViewModel {
     var anime: AnimeModel

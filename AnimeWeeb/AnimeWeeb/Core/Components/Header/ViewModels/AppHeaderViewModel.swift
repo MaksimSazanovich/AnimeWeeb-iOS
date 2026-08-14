@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 
+@MainActor
 @Observable
 public class AppHeaderViewModel {
     

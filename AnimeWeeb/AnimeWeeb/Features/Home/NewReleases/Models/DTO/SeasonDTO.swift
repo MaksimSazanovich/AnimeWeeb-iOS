@@ -16,7 +16,7 @@ struct SeasonDTO: Codable {
     let releaseDate: String
     let status: StatusDTO
     let description: String
-    let episodes: [Data] // TODO: Add type
+    let episodes: [EpisodeDTO] 
     let shikimoriID: String
 
     enum CodingKeys: String, CodingKey {

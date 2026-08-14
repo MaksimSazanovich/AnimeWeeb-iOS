@@ -29,7 +29,7 @@ final class Coordinator {
             makeAnimeDetailsScreen(anime: anime)
                 
         case .watch:
-            makePlayerScreen()
+            makeWatchScreen()
         case .profile:
             makeProfileScreen()
         }
@@ -88,7 +88,7 @@ final class Coordinator {
         return AnimeDetailsScreen(viewModel: viewModel)
     }
     
-    func makePlayerScreen() -> some View {
+    func makeWatchScreen() -> some View {
         return WatchScreen()
     }
     

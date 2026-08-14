@@ -7,6 +7,8 @@
 
 import Foundation
 
+@MainActor
+@Observable
 final class RegisterViewModel: AuthViewModelProtocol {
     var onRoute: (() -> Void)?
     
