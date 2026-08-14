@@ -10,16 +10,12 @@ import SwiftUI
 @main
 struct AnimeWeebApp: App {
        
-    @State private var coordinator: Coordinator
-    
-    init() {
-        _coordinator = State(wrappedValue: Coordinator())
-    }
+    @State private var coordinator: Coordinator = Coordinator()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
-                coordinator.makeHomeScreen()
+                coordinator.resolve(screen: .home)
                     .navigationDestination(for: Screen.self) { screen in
                         coordinator.resolve(screen: screen)
                     }

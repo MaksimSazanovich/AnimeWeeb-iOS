@@ -13,38 +13,13 @@ final class Coordinator {
     var path = NavigationPath()
     
     let headerViewModel: AppHeaderViewModel
-    
-    private let networkService: NetworkServiceProtocol
-    
-    private let homeRepository: HomeRepositoryProtocol
-    private let watchRepository: WatchRepositoryProtocol
-    
-    @ViewBuilder
-    func resolve(screen: Screen) -> some View {
-        switch screen {
-        case .home:
-            makeHomeScreen()
-        case .login:
-            makeLoginScreen()
-        case .register:
-            makeRegisterScreen()
-        case .animeDetails(let anime):
-            makeAnimeDetailsScreen(anime: anime)
-                
-        case .watch(let model):
-            makeWatchScreen(model: model)
-        case .profile:
-            makeProfileScreen()
-        }
-    }
-    
-    init() {
+    let factory: ScreenFactory
+  
+    init(factory: ScreenFactory = ScreenFactory()) {
         let appURLOpener = AppURLOpener()
         self.headerViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
         
-        self.networkService = NetworkService()
-        self.homeRepository = HomeRepository(networkService: networkService)
-        self.watchRepository = WatchRepository(networkService: networkService)
+        self.factory = factory
         
         headerViewModel.onRoute = { [weak self] destination in
             switch destination {
@@ -60,52 +35,29 @@ final class Coordinator {
         }
     }
     
-    func makeHomeScreen() -> some View {
-        
-        let viewModel = HomeViewModel(repository: self.homeRepository)
-        viewModel.onRouteToDetails = { [weak self] anime in
-            self?.openAnimeDetails(anime: anime)
+    @ViewBuilder
+    func resolve(screen: Screen) -> some View {
+        switch screen {
+        case .home:
+                factory.makeHomeScreen(coordinator: self)
+            
+        case .login:
+            factory.makeLoginScreen(coordinator: self)
+            
+        case .register:
+            factory.makeRegisterScreen(coordinator: self)
+            
+        case .animeDetails(let anime):
+            factory.makeAnimeDetailsScreen(anime: anime)
+            
+        case .watch(let model):
+            factory.makeWatchScreen(model: model)
+            
+        case .profile:
+            factory.makeProfileScreen()
         }
-        
-        viewModel.onRouteToEpisode = { [weak self] watchModel in
-            self?.openWatch(watchModel: watchModel)
-        }
-        
-        return HomeScreen(viewModel: viewModel)
     }
-    
-    func makeLoginScreen() -> some View {
-        let viewModel = LoginViewModel()
-        viewModel.onRoute = { [weak self] in
-            self?.openRegister()
-        }
-        
-        return LoginScreen(viewModel: viewModel)
-    }
-    
-    func makeRegisterScreen() -> some View {
-        let viewModel = RegisterViewModel()
-        viewModel.onRoute = { [weak self] in
-            self?.openLogin()
-        }
-        
-        return RegisterScreen(viewModel: viewModel)
-    }
-    
-    func makeAnimeDetailsScreen(anime: AnimeModel) -> some View {
-        let viewModel = AnimeDetailsViewModel(anime: anime)
-        return AnimeDetailsScreen(viewModel: viewModel)
-    }
-    
-    func makeWatchScreen(model: WatchModel) -> some View {
-        let viewModel = WatchViewModel(model: model, repository: watchRepository)
-        return WatchScreen(viewModel: viewModel)
-    }
-    
-    func makeProfileScreen() -> some View {
-        return ProfileScreen()
-    }
-    
+       
     func openHome() {
         path = NavigationPath()
     }
