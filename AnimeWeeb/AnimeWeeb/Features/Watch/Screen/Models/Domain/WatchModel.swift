@@ -11,5 +11,5 @@ struct WatchModel {
     let title: String
     let episodeID: Int
     let season: String
-    let episode: Episode? = nil
+    var episode: Episode? = nil
 }

@@ -24,7 +24,7 @@ public enum AnimeEndpoint: Endpoint {
             
         case .getHomeAnimes:
             return "/titles/home"
-        case .getAnimes(skip: let skip, take: let limit):
+        case .getAnimes(skip: _, take: _):
             return "/titles"
         }
     }

@@ -191,6 +191,6 @@ struct WatchScreen: View {
 }
 
 #Preview {
-    WatchScreen(viewModel: WatchViewModel(model: previewWatchModel))
+    WatchScreen(viewModel: WatchViewModel(model: previewWatchModel, repository: WatchRepository(networkService: NetworkService())))
 }
 

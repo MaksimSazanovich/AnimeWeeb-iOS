@@ -9,16 +9,11 @@ import SwiftUI
 
 @main
 struct AnimeWeebApp: App {
-    
-    private let networkService: NetworkServiceProtocol
-    private let homeRepository: HomeRepositoryProtocol
+       
     @State private var coordinator: Coordinator
     
     init() {
-        networkService = NetworkService()
-        homeRepository = HomeRepository(networkService: networkService)
-        
-        _coordinator = State(wrappedValue: Coordinator(homeRepository: homeRepository))
+        _coordinator = State(wrappedValue: Coordinator())
     }
     
     var body: some Scene {

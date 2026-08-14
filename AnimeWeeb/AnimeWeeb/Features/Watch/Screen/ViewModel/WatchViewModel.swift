@@ -12,6 +12,7 @@ import Foundation
 final class WatchViewModel {
     
     var model: WatchModel
+    private let repository: WatchRepositoryProtocol
     
     var title: String {
         model.title
@@ -22,14 +23,19 @@ final class WatchViewModel {
     }
     
     var episode: Int {
-        model.episode?.episode ?? -1
+        model.episode?.episode ?? 0
     }
     
-    init(model: WatchModel) {
+    init(model: WatchModel, repository: WatchRepositoryProtocol) {
         self.model = model
+        self.repository = repository
     }
     
     func loadEpisode() async {
-        
+        do {
+            model.episode = try await repository.fetchEpisode(id: model.episodeID)
+        } catch {
+            
+        }
     }
 }

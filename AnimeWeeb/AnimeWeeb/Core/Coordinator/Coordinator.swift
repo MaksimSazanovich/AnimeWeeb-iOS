@@ -14,7 +14,10 @@ final class Coordinator {
     
     let headerViewModel: AppHeaderViewModel
     
+    private let networkService: NetworkServiceProtocol
+    
     private let homeRepository: HomeRepositoryProtocol
+    private let watchRepository: WatchRepositoryProtocol
     
     @ViewBuilder
     func resolve(screen: Screen) -> some View {
@@ -35,11 +38,13 @@ final class Coordinator {
         }
     }
     
-    init(homeRepository: HomeRepositoryProtocol) {
+    init() {
         let appURLOpener = AppURLOpener()
         self.headerViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
         
-        self.homeRepository = homeRepository
+        self.networkService = NetworkService()
+        self.homeRepository = HomeRepository(networkService: networkService)
+        self.watchRepository = WatchRepository(networkService: networkService)
         
         headerViewModel.onRoute = { [weak self] destination in
             switch destination {
@@ -93,7 +98,7 @@ final class Coordinator {
     }
     
     func makeWatchScreen(model: WatchModel) -> some View {
-        let viewModel = WatchViewModel(model: model)
+        let viewModel = WatchViewModel(model: model, repository: watchRepository)
         return WatchScreen(viewModel: viewModel)
     }
     
