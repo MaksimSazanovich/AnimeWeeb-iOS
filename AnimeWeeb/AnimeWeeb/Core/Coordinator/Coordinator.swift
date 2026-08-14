@@ -28,8 +28,8 @@ final class Coordinator {
         case .animeDetails(let anime):
             makeAnimeDetailsScreen(anime: anime)
                 
-        case .watch:
-            makeWatchScreen()
+        case .watch(let model):
+            makeWatchScreen(model: model)
         case .profile:
             makeProfileScreen()
         }
@@ -56,10 +56,14 @@ final class Coordinator {
     }
     
     func makeHomeScreen() -> some View {
-        //TODO: REAL API DATA
+        
         let viewModel = HomeViewModel(repository: self.homeRepository)
-        viewModel.onRoute = { [weak self] anime in
+        viewModel.onRouteToDetails = { [weak self] anime in
             self?.openAnimeDetails(anime: anime)
+        }
+        
+        viewModel.onRouteToEpisode = { [weak self] watchModel in
+            self?.openWatch(watchModel: watchModel)
         }
         
         return HomeScreen(viewModel: viewModel)
@@ -88,8 +92,9 @@ final class Coordinator {
         return AnimeDetailsScreen(viewModel: viewModel)
     }
     
-    func makeWatchScreen() -> some View {
-        return WatchScreen()
+    func makeWatchScreen(model: WatchModel) -> some View {
+        let viewModel = WatchViewModel(model: model)
+        return WatchScreen(viewModel: viewModel)
     }
     
     func makeProfileScreen() -> some View {
@@ -112,8 +117,8 @@ final class Coordinator {
         path.append(Screen.animeDetails(anime: anime))
     }
     
-    func openPlayer() {
-        path.append(Screen.watch)
+    func openWatch(watchModel: WatchModel) {
+        path.append(Screen.watch(model: watchModel))
     }
     
     func openProfile() {

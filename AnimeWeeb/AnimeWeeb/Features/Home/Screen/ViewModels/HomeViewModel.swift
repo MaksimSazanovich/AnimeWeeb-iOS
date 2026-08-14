@@ -27,7 +27,8 @@ final class HomeViewModel {
         model?.newReleases ?? []
     }
     
-    var onRoute: ((AnimeModel) -> Void)?
+    var onRouteToDetails: ((AnimeModel) -> Void)?
+    var onRouteToEpisode: ((WatchModel) -> Void)?
     
     var selectedGenre: Genre = .all
     var searchTerm: String = ""

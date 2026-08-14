@@ -51,7 +51,7 @@ struct CatalogView: View {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(homeViewModel.filteredAnimes) { anime in
                             AnimeCard(model: anime) { anime in
-                                homeViewModel.onRoute?(anime)
+                                homeViewModel.onRouteToDetails?(anime)
                             }
                             .onAppear {
                                 if anime == homeViewModel.filteredAnimes.last {

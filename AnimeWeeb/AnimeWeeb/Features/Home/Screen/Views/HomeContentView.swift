@@ -18,7 +18,7 @@ struct HomeContentView: View {
                     
                     if !viewModel.isSearchFocused && viewModel.searchTerm.isEmpty {
                         // MARK: - New Releases
-                        NewReleasesView(animes: viewModel.newReleases)
+                        NewReleasesView(animes: viewModel.newReleases, homeViewModel: viewModel)
                     }
                     
                     // MARK: - Catalog

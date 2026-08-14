@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum Screen: Hashable {
+enum Screen: ComplexEquatable {
     case home
     case login
     case register
     case animeDetails(anime: AnimeModel)
-    case watch(episodeID: Int)
+    case watch(model: WatchModel)
     case profile
 }

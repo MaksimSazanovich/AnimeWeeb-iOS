@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WatchScreen: View {
     
+    let viewModel: WatchViewModel
     @State var selectedPlayer: PlayerType = .animeWeeb
     
     var body: some View {
@@ -16,17 +17,17 @@ struct WatchScreen: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(alignment: .leading, spacing: 30){
-                        Text("Каталог / История о перекуре за супермаркетом / Эпизод 4")
+                        Text("Каталог / \(viewModel.title) / Эпизод \(viewModel.episode)")
                             .font(.body)
                             .foregroundStyle(.genreText)
                             
                         
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("История о перекуре за супермаркетом")
+                            Text(viewModel.season)
                                 .font(.system(.title, weight: .semibold))
                                 .foregroundStyle(.white)
                             
-                            Text("Эпизод 4")
+                            Text("Эпизод \(viewModel.episode)")
                                 .font(.body)
                                 .foregroundStyle(.subtitle)
                         }
@@ -180,13 +181,16 @@ struct WatchScreen: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.top, 105)
+        .padding(.top, 50)
         .padding(.horizontal)
         .background(Color.background)
+        .task {
+            await viewModel.loadEpisode()
+        }
     }
 }
 
 #Preview {
-    WatchScreen()
+    WatchScreen(viewModel: WatchViewModel(model: previewWatchModel))
 }
 

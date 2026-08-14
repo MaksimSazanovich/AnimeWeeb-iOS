@@ -10,12 +10,15 @@ import SwiftUI
 struct NewReleasesScrollView: View {
     
     var animes: [NewReleasesAnimeModel]
+    let homeViewModel: HomeViewModel
     
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 16) {
                 ForEach(animes) { anime in
-                    NewReleasesAnimeCard(model: anime)
+                    NewReleasesAnimeCard(model: anime) { episodeID in
+                        homeViewModel.onRouteToEpisode?(episodeID)
+                    }
                 }
             }
             .padding(.bottom, 30)

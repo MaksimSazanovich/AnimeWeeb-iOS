@@ -10,6 +10,7 @@ import SwiftUI
 struct NewReleasesView: View {
     
     var animes: [NewReleasesAnimeModel]
+    let homeViewModel: HomeViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -19,7 +20,7 @@ struct NewReleasesView: View {
             
             VStack(spacing: 30) {
                 //MARK: New Releases ScrollView
-                NewReleasesScrollView(animes: animes)
+                NewReleasesScrollView(animes: animes, homeViewModel: homeViewModel)
                 
                 Rectangle()
                     .fill(.stroke.opacity(0.8))
@@ -31,7 +32,7 @@ struct NewReleasesView: View {
 
 #Preview {
     ZStack {
-        NewReleasesView(animes: previewNewReleasesAnimeModels)
+        NewReleasesView(animes: previewNewReleasesAnimeModels, homeViewModel: HomeViewModel(repository: HomeRepository(networkService: NetworkService())))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 40)
             .padding(.horizontal)
