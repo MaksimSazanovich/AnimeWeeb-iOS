@@ -14,7 +14,7 @@ struct AnimeCard: View {
     
     let model: AnimeModel
     
-    var onAction: (AnimeModel) -> Void
+    var onAction: (Int) -> Void
     
     private let maxVisibleTags = 3
     
@@ -31,7 +31,7 @@ struct AnimeCard: View {
     var body: some View {
         
         Button {
-            onAction(model)
+            onAction(model.id)
         } label: {
             VStack(alignment: .leading) {
                 // MARK: Image

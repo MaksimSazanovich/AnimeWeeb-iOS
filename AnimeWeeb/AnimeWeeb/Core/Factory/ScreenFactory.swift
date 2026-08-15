@@ -24,8 +24,8 @@ final class ScreenFactory {
     func makeHomeScreen(coordinator: Coordinator) -> some View {
         
         let viewModel = HomeViewModel(repository: self.homeRepository)
-        viewModel.onRouteToDetails = { [weak coordinator] anime in
-            coordinator?.openAnimeDetails(anime: anime)
+        viewModel.onRouteToDetails = { [weak coordinator] animeID in
+            coordinator?.openAnimeDetails(animeID: animeID)
         }
         
         viewModel.onRouteToEpisode = { [weak coordinator] watchModel in
@@ -53,9 +53,9 @@ final class ScreenFactory {
         return RegisterScreen(viewModel: viewModel)
     }
     
-    func makeAnimeDetailsScreen(anime: AnimeModel) -> some View {
-        let viewModel = AnimeDetailsViewModel(anime: anime)
-        return AnimeDetailsScreen(viewModel: viewModel)
+    func makeAnimeDetailsScreen(animeID: Int) -> some View {
+        let viewModel = AnimeDetailsViewModel(animeID: animeID)
+        return AnimeDetailsScreen(viewModel: viewModel) 
     }
     
     func makeWatchScreen(model: WatchModel) -> some View {

@@ -11,6 +11,7 @@ struct NewReleasesAnimeModel: Identifiable {
     let id = UUID()
     
     let imageURL: URL?
+    let titleID: Int
     let title: String
     let season: Int
     let seasonName: String
@@ -19,8 +20,9 @@ struct NewReleasesAnimeModel: Identifiable {
     
     let format: AnimeFormat
     
-    init(imageURL: URL?, title: String, season: Int, seasonName: String, episode: Int, episodeID: Int, format: AnimeFormat = .none) {
+    init(imageURL: URL?, titleID: Int, title: String, season: Int, seasonName: String, episode: Int, episodeID: Int, format: AnimeFormat = .none) {
         self.imageURL = imageURL
+        self.titleID = titleID
         self.title = title
         self.season = season
         self.seasonName = seasonName

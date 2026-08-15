@@ -17,7 +17,7 @@ struct NewReleasesAnimeCard: View {
     
     var body: some View {
         Button {
-            onAction(WatchModel(title: model.title, episodeID: model.episodeID, season: model.seasonName))
+            onAction(WatchModel(titleID: model.titleID ,title: model.title, season: model.seasonName, episodeID: model.episodeID))
         } label: {
             ZStack {
                 VStack() {

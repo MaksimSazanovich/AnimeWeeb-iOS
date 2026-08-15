@@ -14,7 +14,7 @@ final class Coordinator {
     
     let headerViewModel: AppHeaderViewModel
     let factory: ScreenFactory
-  
+    
     init(factory: ScreenFactory = ScreenFactory()) {
         let appURLOpener = AppURLOpener()
         self.headerViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
@@ -39,7 +39,7 @@ final class Coordinator {
     func resolve(screen: Screen) -> some View {
         switch screen {
         case .home:
-                factory.makeHomeScreen(coordinator: self)
+            factory.makeHomeScreen(coordinator: self)
             
         case .login:
             factory.makeLoginScreen(coordinator: self)
@@ -47,8 +47,8 @@ final class Coordinator {
         case .register:
             factory.makeRegisterScreen(coordinator: self)
             
-        case .animeDetails(let anime):
-            factory.makeAnimeDetailsScreen(anime: anime)
+        case .animeDetails(let animeID):
+            factory.makeAnimeDetailsScreen(animeID: animeID)
             
         case .watch(let model):
             factory.makeWatchScreen(model: model)
@@ -57,7 +57,7 @@ final class Coordinator {
             factory.makeProfileScreen()
         }
     }
-       
+    
     func openHome() {
         path = NavigationPath()
     }
@@ -70,8 +70,8 @@ final class Coordinator {
         path.append(Screen.register)
     }
     
-    func openAnimeDetails(anime: AnimeModel) {
-        path.append(Screen.animeDetails(anime: anime))
+    func openAnimeDetails(animeID: Int) {
+        path.append(Screen.animeDetails(animeID: animeID))
     }
     
     func openWatch(watchModel: WatchModel) {

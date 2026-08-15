@@ -38,11 +38,11 @@ struct WatchScreen: View {
                         HStack(spacing: 24) {
                             VStack(alignment: .leading) {
                                 Text("ОЗВУЧКА")
-                                    .font(.system(.body, weight: .medium))
+                                    .font(.system(.caption, weight: .medium))
                                     .foregroundStyle(.genreText)
                                 
                                 Text("RU")
-                                    .font(.system(.body, weight: .medium))
+                                    .font(.system(.subheadline, weight: .medium))
                                     .foregroundStyle(.white)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
@@ -59,11 +59,11 @@ struct WatchScreen: View {
                             
                             VStack(alignment: .leading) {
                                 Text("ВАРИАНТ")
-                                    .font(.system(.body, weight: .medium))
+                                    .font(.system(.caption, weight: .medium))
                                     .foregroundStyle(.genreText)
                                 
                                 Text("AniLibria")
-                                    .font(.system(.body, weight: .medium))
+                                    .font(.system(.subheadline, weight: .medium))
                                     .foregroundStyle(Color.background)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
@@ -82,7 +82,7 @@ struct WatchScreen: View {
                         // MARK: Quality Picker
                         VStack(alignment: .leading) {
                             Text("КАЧЕСТВО")
-                                .font(.system(.body, weight: .medium))
+                                .font(.system(.caption, weight: .medium))
                                 .foregroundStyle(.genreText)
                             
                             HStack(spacing: 8) {
@@ -91,7 +91,7 @@ struct WatchScreen: View {
                                         
                                     } label: {
                                         Text("\(size)P")
-                                            .font(.system(.body, weight: .medium))
+                                            .font(.system(.subheadline, weight: .medium))
                                             .foregroundStyle(Color.background)
                                             .padding(.horizontal, 12)
                                             .padding(.vertical, 6)

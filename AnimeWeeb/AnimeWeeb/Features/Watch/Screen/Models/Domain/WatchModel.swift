@@ -8,8 +8,12 @@
 import Foundation
 
 struct WatchModel {
+    
+    let titleID: Int
     let title: String
-    let episodeID: Int
+    
     let season: String
+    
+    let episodeID: Int
     var episode: Episode? = nil
 }

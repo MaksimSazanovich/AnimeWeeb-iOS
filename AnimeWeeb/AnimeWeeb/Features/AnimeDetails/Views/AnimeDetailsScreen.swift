@@ -18,7 +18,7 @@ struct AnimeDetailsScreen: View {
         ScrollView {
             VStack(spacing: 32) {
                 // MARK: Image
-                LazyImage(url: viewModel.anime.imageURL) { state in
+                LazyImage(url: viewModel.imageURL) { state in
                     if let image = state.image {
                         image
                             .resizable()
@@ -33,12 +33,12 @@ struct AnimeDetailsScreen: View {
                 
                 VStack(alignment: .leading, spacing: 12) {
                     // MARK: Title
-                    Text(viewModel.anime.title)
+                    Text(viewModel.title)
                         .font(.system(size: 30, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     // MARK: Tag Cloud
-                    TagCloudView(data: viewModel.anime.genres) { genre in
+                    TagCloudView(data: viewModel.genres) { genre in
                         Text(genre.rawValue.uppercased())
                             .font(.system(.body, weight: .medium))
                             .foregroundStyle(.subtitle)
@@ -51,7 +51,7 @@ struct AnimeDetailsScreen: View {
                     }
                     
                     // MARK: Description
-                    Text(viewModel.anime.description ?? "Нет описания")
+                    Text(viewModel.despription)
                         .font(.system(.body))
                         .foregroundStyle(.subtitle)
                 }
@@ -70,7 +70,7 @@ struct AnimeDetailsScreen: View {
         
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
         
-        AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(anime: previewAnimeModel))
+        AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id))
     }
     
 }
