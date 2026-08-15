@@ -20,7 +20,20 @@ final class HomeViewModel {
     var filteredAnimes: [AnimeModel] {
         guard let animes = model?.animes else { return [] }
         
-        return animes.filter { ($0.genres.contains(selectedGenre) || selectedGenre == .all) && ($0.title.localizedCaseInsensitiveContains(searchTerm) || searchTerm.isEmpty) }
+        return animes.filter { anime in
+            
+            let matchesGenre: Bool = anime.genres.contains(selectedGenre) || selectedGenre == .all
+            
+            let matchesSearch: Bool = searchTerm.isEmpty
+            || anime.title.localizedCaseInsensitiveContains(searchTerm)
+            || anime.nameEn.localizedCaseInsensitiveContains(searchTerm)
+            || anime.nameJp.localizedCaseInsensitiveContains(searchTerm)
+            
+            || anime.altNamesRu.contains(where: { $0.localizedCaseInsensitiveContains(searchTerm) })
+            || anime.altNamesEn.contains(where: { $0.localizedCaseInsensitiveContains(searchTerm) })
+            
+            return matchesGenre && matchesSearch
+        }
     }
     
     var newReleases: [NewReleasesAnimeModel] {

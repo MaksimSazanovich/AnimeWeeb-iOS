@@ -28,6 +28,6 @@ struct TitleDTO: Codable {
 
 extension TitleDTO {
     func toDomain() -> AnimeModel {
-        AnimeModel(id: id, imageURL: URL(string: posterURL), title: nameRu, description: description, genres: genres.map { $0.toDomain() })
+        AnimeModel(id: id, imageURL: URL(string: posterURL), title: nameRu, description: description, genres: genres.map { $0.toDomain() }, nameRu: nameRu, nameEn: nameEn, nameJp: nameJp, altNamesRu: altNamesRu, altNamesEn: altNamesEn )
     }
 }
