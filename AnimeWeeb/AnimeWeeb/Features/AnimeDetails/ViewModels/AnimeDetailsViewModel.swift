@@ -10,26 +10,48 @@ import Foundation
 @MainActor
 @Observable
 final class AnimeDetailsViewModel {
-    var anime: AnimeModel?
-    let animeID: Int
+    private var model: AnimeModel?
+    private let repository: AnimeDetailsRepositoryProtocol
     
-    init(animeID: Int) {
+    let animeID: Int
+    private(set) var state: ViewState = .idle
+    
+    init(animeID: Int, repository: AnimeDetailsRepositoryProtocol) {
         self.animeID = animeID
+        self.repository = repository
     }
     
     var imageURL: URL? {
-        return anime?.imageURL
+        return model?.imageURL
     }
     
     var title: String {
-        return anime?.title ?? "Unknown"
+        return model?.title ?? "Unknown"
     }
     
     var genres: [Genre] {
-        return anime?.genres ?? []
+        return model?.genres ?? []
     }
     
     var despription: String {
-        return anime?.description ?? "Нет описания"
+        return model?.description ?? "Нет описания"
+    }
+    
+    func loadDetails() async {
+        guard state != .loaded && state != .loading else { return }
+        
+        state = .loading
+        
+        do {
+            model = try await repository.fetchAnimeDetails(id: animeID)
+            
+            if model == nil {
+                state = .failed(NetworkError.emptyResponse)
+            } else {
+                state = .loaded
+            }
+        } catch {
+            state = .failed(error)
+        }
     }
 }

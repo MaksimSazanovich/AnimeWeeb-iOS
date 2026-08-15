@@ -12,13 +12,16 @@ final class ScreenFactory {
     
     private let homeRepository: HomeRepositoryProtocol
     private let watchRepository: WatchRepositoryProtocol
+    private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
     
     init(networkService: NetworkServiceProtocol = NetworkService(),
          homeRepository: HomeRepositoryProtocol? = nil,
-         watchRepository: WatchRepositoryProtocol? = nil) {
+         watchRepository: WatchRepositoryProtocol? = nil,
+         animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil) {
         self.networkService = networkService
         self.homeRepository = homeRepository ?? HomeRepository(networkService: networkService)
         self.watchRepository = watchRepository ?? WatchRepository(networkService: networkService)
+        self.animeDetailsRepository = animeDetailsRepository ?? AnimeDetailsRepository(networkService: networkService)
     }
     
     func makeHomeScreen(coordinator: Coordinator) -> some View {
@@ -54,8 +57,8 @@ final class ScreenFactory {
     }
     
     func makeAnimeDetailsScreen(animeID: Int) -> some View {
-        let viewModel = AnimeDetailsViewModel(animeID: animeID)
-        return AnimeDetailsScreen(viewModel: viewModel) 
+        let viewModel = AnimeDetailsViewModel(animeID: animeID, repository: animeDetailsRepository)
+        return AnimeDetailsScreen(viewModel: viewModel)
     }
     
     func makeWatchScreen(model: WatchModel, coordinator: Coordinator) -> some View {

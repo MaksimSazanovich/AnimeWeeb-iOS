@@ -62,6 +62,9 @@ struct AnimeDetailsScreen: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
+        .task {
+            await viewModel.loadDetails()
+        }
     }
 }
 
@@ -70,7 +73,7 @@ struct AnimeDetailsScreen: View {
         
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
         
-        AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id))
+        AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id, repository: AnimeDetailsRepository(networkService: NetworkService())))
     }
     
 }

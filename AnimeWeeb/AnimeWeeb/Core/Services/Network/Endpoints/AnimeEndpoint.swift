@@ -10,11 +10,12 @@ import Foundation
 public enum AnimeEndpoint: Endpoint {
     case getHomeAnimes
     case getAnimes(skip: Int, take: Int)
+    case getAnime(id: Int)
     
     public var method: HTTPMethod {
         switch self {
             
-        case .getHomeAnimes, .getAnimes:
+        case .getHomeAnimes, .getAnimes, .getAnime:
                 .get
         }
     }
@@ -26,6 +27,8 @@ public enum AnimeEndpoint: Endpoint {
             return "/titles/home"
         case .getAnimes(skip: _, take: _):
             return "/titles"
+        case .getAnime(let id):
+            return "/titles/\(id)"
         }
     }
     
@@ -36,7 +39,7 @@ public enum AnimeEndpoint: Endpoint {
     public var queryItems: [URLQueryItem]? {
         switch self {
             
-        case .getHomeAnimes:
+        case .getHomeAnimes, .getAnime:
             return nil
         case .getAnimes(skip: let skip, take: let take):
             return [
