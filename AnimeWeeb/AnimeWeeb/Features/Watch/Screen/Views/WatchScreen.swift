@@ -17,9 +17,10 @@ struct WatchScreen: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(alignment: .leading, spacing: 30){
-                        Text("Каталог / \(viewModel.title) / Эпизод \(viewModel.episode)")
-                            .font(.body)
-                            .foregroundStyle(.genreText)
+                        // MARK: Breadcrumbs
+                        BreadcrumbsView(items: viewModel.breadcrumbs) { item in
+                            viewModel.breadcrumbItemDidTap(item)
+                        }
                             
                         
                         VStack(alignment: .leading, spacing: 10) {

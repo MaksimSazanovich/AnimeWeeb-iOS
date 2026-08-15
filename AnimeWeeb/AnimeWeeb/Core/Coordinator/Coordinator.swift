@@ -51,7 +51,7 @@ final class Coordinator {
             factory.makeAnimeDetailsScreen(animeID: animeID)
             
         case .watch(let model):
-            factory.makeWatchScreen(model: model)
+            factory.makeWatchScreen(model: model, coordinator: self)
             
         case .profile:
             factory.makeProfileScreen()

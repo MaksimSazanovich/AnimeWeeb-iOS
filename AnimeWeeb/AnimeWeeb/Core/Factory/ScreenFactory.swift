@@ -58,8 +58,19 @@ final class ScreenFactory {
         return AnimeDetailsScreen(viewModel: viewModel) 
     }
     
-    func makeWatchScreen(model: WatchModel) -> some View {
+    func makeWatchScreen(model: WatchModel, coordinator: Coordinator) -> some View {
         let viewModel = WatchViewModel(model: model, repository: watchRepository)
+        viewModel.onRoute = { [weak coordinator] screen in
+            switch screen {
+            case .home:
+                coordinator?.openHome()
+            case .animeDetails(animeID: let id):
+                coordinator?.openAnimeDetails(animeID: id)
+            default :
+                break
+            }
+        }
+        
         return WatchScreen(viewModel: viewModel)
     }
     
