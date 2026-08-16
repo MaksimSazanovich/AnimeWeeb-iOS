@@ -56,7 +56,7 @@ struct CatalogView: View {
                             .onAppear {
                                 if anime == homeViewModel.filteredAnimes.last {
                                     Task {
-                                        await viewModel.loadMoreAnimes(skip: homeViewModel.filteredAnimes.count)
+                                        await viewModel.loadMoreAnimes(skip: homeViewModel.loadedAnimes.count)
                                     }
                                 }
                             }
