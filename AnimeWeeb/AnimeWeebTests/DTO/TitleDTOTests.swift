@@ -31,7 +31,7 @@ struct TitleDTOTests {
             dubbers: [])
     }
     
-    @Test("Check mapping when valid DTO")
+    @Test("Valid DTO")
     func testToDomainReturnsAnimeModelWhenValidDTO()  {
         // Arrange
         let dto = makeDTO(genreIDs: [1, 2])
@@ -55,7 +55,7 @@ struct TitleDTOTests {
         ])
     }
     
-    @Test("Check mapping when invalid poster URL")
+    @Test("Invalid poster URL")
     func testToDomainReturnsAnimeModelWithNilImageURLWhenInvalidPosterURL()  {
         // Arrange
         let dto = makeDTO(posterURL: "", genreIDs: [1, 2])
@@ -67,7 +67,7 @@ struct TitleDTOTests {
         #expect(result.imageURL == nil)
     }
     
-    @Test("Check filtering unknown genres")
+    @Test("Filtering unknown genres")
     func testToDomainReturnsFilteredGenresWhenUnknownGenres()  {
         // Arrange
         let dto = makeDTO(genreIDs: [0, 1])

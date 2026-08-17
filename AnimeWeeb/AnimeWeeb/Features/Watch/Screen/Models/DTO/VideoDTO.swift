@@ -25,6 +25,6 @@ struct VideoDTO: Codable {
 
 extension VideoDTO {
     func toDomain() -> Video {
-        Video(dubberName: dubberName, resolution: resolution, url: url)
+        Video(dubberName: dubberName, resolution: resolution, url: URL(string: url))
     }
 }

@@ -10,7 +10,7 @@ import Testing
 
 struct GenreDTOTests {
     
-    @Test("Check mapping when valid ID", arguments: [
+    @Test("Valid ID", arguments: [
         (1, Genre.shounen),
         (2, Genre.adventure),
         (3, Genre.drama),
@@ -39,7 +39,7 @@ struct GenreDTOTests {
         #expect(result == expectedGenre)
     }
     
-    @Test("Check mapping when invalid ID", arguments: [-1, 0, 100])
+    @Test("Invalid ID", arguments: [-1, 0, 100])
     func testToDomainReturnsNilWhenInvalidID(id: Int) {
         // Arrange
         let dto = GenreDTO(id: id, nameRu: "Тест", nameEn: "Test")
