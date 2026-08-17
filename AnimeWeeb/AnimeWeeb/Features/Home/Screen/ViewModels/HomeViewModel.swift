@@ -17,6 +17,10 @@ final class HomeViewModel {
     
     private(set) var state: ViewState = .idle
     
+    var loadedAnimes: [AnimeModel] {
+        model?.animes ?? []
+    }
+    
     var filteredAnimes: [AnimeModel] {
         guard let animes = model?.animes else { return [] }
         

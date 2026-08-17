@@ -19,14 +19,14 @@ extension GenreDTO {
         case 2: .adventure
         case 3: .drama
         case 4: .fantasy
-        case 5: .thriller
+        case 5: .suspense
         case 6: .action
         case 7: .comedy
         case 8: .seinen
         case 9: .mystery
         case 10: .supernatural
         case 11: .romance
-            // TODO: case 12: 
+        case 12: .shoujo
         case 13: .sciFi
         case 14: .horror
         case 15: .sports

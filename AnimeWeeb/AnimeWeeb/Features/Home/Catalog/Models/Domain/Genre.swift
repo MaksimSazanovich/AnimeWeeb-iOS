@@ -9,23 +9,23 @@ import Foundation
 
 enum Genre: String, CaseIterable, Identifiable {
     case all = "Все"
-    case gourmet = "Гурман"
-    case drama = "Драма"
-    case comedy = "Комедия"
-    case sliceOfLife = "Повседневность"
-    case adventure = "Приключения"
-    case romance = "Романтика"
     case shounen = "Сёнэн"
-    case sports = "Спорт"
+    case adventure = "Приключения"
+    case drama = "Драма"
+    case fantasy = "Фэнтези"
+    case suspense = "Триллер"
+    case action = "Экшен"
+    case comedy = "Комедия"
     case seinen = "Сэйнэн"
     case mystery = "Тайна"
     case supernatural = "Сверхъестественное"
-    case thriller = "Триллер"
-    case horror = "Ужасы"
+    case romance = "Романтика"
+    case shoujo = "Сёдзё"
     case sciFi = "Фантастика"
-    case fantasy = "Фэнтези"
-    case action = "Экшен"
-
+    case horror = "Ужасы"
+    case sports = "Спорт"
+    case gourmet = "Гурман"
+    case sliceOfLife = "Повседневность"
 
     var id: String { rawValue }
 }
