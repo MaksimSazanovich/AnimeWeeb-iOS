@@ -79,4 +79,84 @@ struct TitleDTOTests {
         #expect(result.genres.count == 1)
         #expect(result.genres == [.shounen])
     }
+    
+    private func makeJSON(
+        posterURL: String? = "https://example.com/poster.jpg",
+        status: String = "Ongoing",
+        genres: String = "[{\"id\": 1, \"nameRu\": \"Сёнэн\", \"nameEn\": \"Shounen\"}]"
+    ) -> String {
+        let posterLine = posterURL.map { "\"posterUrl\": \"\($0)\"," } ?? ""
+        return """
+        {
+            "id": 1,
+            "nameRu": "Название",
+            "nameEn": "Title",
+            "nameJp": "タイトル",
+            "altNamesRu": [],
+            "altNamesEn": [],
+            "description": "Описание",
+            \(posterLine)
+            "rating": 7,
+            "status": "\(status)",
+            "createdAt": "2026-01-01",
+            "genres": \(genres),
+            "dubbers": []
+        }
+        """
+    }
+    
+    @Test("Decodes from JSON")
+    func testDecodingFromValidJSON() throws {
+        // Act
+        let dto = try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON().utf8))
+        
+        // Assert
+        #expect(dto.id == 1)
+        #expect(dto.nameRu == "Название")
+        #expect(dto.posterURL == "https://example.com/poster.jpg")
+        #expect(dto.status == .ongoing)
+        #expect(dto.rating == 7)
+        #expect(dto.genres.count == 1)
+        #expect(dto.genres.first?.id == 1)
+        #expect(dto.dubbers.isEmpty)
+    }
+    
+    @Test("Decodes then maps to domain")
+    func testDecodingThenToDomainReturnsAnimeModel() throws {
+        // Act
+        let dto = try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON().utf8))
+        let result = dto.toDomain()
+        
+        // Assert
+        #expect(result.id == 1)
+        #expect(result.title == "Название")
+        #expect(result.imageURL == URL(string: "https://example.com/poster.jpg"))
+        #expect(result.genres == [.shounen])
+    }
+    
+    @Test("Decodes empty genres and dubbers")
+    func testDecodingWithEmptyCollections() throws {
+        // Act
+        let dto = try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON(genres: "[]").utf8))
+        
+        // Assert
+        #expect(dto.genres.isEmpty)
+        #expect(dto.dubbers.isEmpty)
+    }
+    
+    @Test("Fails when required field missing")
+    func testDecodingThrowsWhenPosterURLMissing() throws {
+        // Assert
+        #expect(throws: DecodingError.self) {
+            try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON(posterURL: nil).utf8))
+        }
+    }
+    
+    @Test("Fails on unknown status")
+    func testDecodingThrowsWhenStatusInvalid() throws {
+        // Assert
+        #expect(throws: DecodingError.self) {
+            try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON(status: "Unknown").utf8))
+        }
+    }
 }

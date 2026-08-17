@@ -38,4 +38,53 @@ struct VideoDTOTests {
         #expect(result.url == nil)
     }
 
+    private func makeJSON(dubberID: String = "1") -> String {
+        """
+        {
+            "id": 5941,
+            "dubberId": \(dubberID),
+            "dubberName": "AniLibria",
+            "dubberLanguage": "ru",
+            "videoFormatId": 1,
+            "videoFormat": "m3u8",
+            "resolution": "m3u8",
+            "url": "https://example.com/video.m3u8"
+        }
+        """
+    }
+    
+    @Test("Decodes from JSON")
+    func testDecodingFromValidJSON() throws {
+        // Act
+        let dto = try JSONDecoder().decode(VideoDTO.self, from: Data(makeJSON().utf8))
+        
+        // Assert
+        #expect(dto.id == 5941)
+        #expect(dto.dubberID == 1)
+        #expect(dto.dubberName == "AniLibria")
+        #expect(dto.dubberLanguage == "ru")
+        #expect(dto.videoFormatID == 1)
+        #expect(dto.url == "https://example.com/video.m3u8")
+    }
+    
+    @Test("Decodes then maps to domain")
+    func testDecodingThenToDomainReturnsVideo() throws {
+        // Act
+        let dto = try JSONDecoder().decode(VideoDTO.self, from: Data(makeJSON().utf8))
+        let result = dto.toDomain()
+        
+        // Assert
+        #expect(result.dubberName == "AniLibria")
+        #expect(result.resolution == "m3u8")
+        #expect(result.url == URL(string: "https://example.com/video.m3u8"))
+    }
+    
+    @Test("Fails when dubberId has wrong type")
+    func testDecodingThrowsWhenDubberIDIsString() throws {
+        // Assert
+        #expect(throws: DecodingError.self) {
+            try JSONDecoder().decode(VideoDTO.self, from: Data(makeJSON(dubberID: "\"one\"").utf8))
+        }
+    }
+
 }
