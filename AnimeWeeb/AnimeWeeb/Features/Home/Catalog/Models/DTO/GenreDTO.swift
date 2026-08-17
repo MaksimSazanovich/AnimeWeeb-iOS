@@ -13,7 +13,7 @@ struct GenreDTO: Codable {
 }
 
 extension GenreDTO {
-    func toDomain() -> Genre {
+    func toDomain() -> Genre? {
         switch id {
         case 1: .shounen
         case 2: .adventure
@@ -32,8 +32,7 @@ extension GenreDTO {
         case 15: .sports
         case 16: .gourmet
         case 17: .sliceOfLife
-        default:
-                .none
+        default: nil
         }
     }
 }
