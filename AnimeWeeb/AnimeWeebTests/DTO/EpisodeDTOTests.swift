@@ -5,9 +5,9 @@
 //  Created by Maksim Sazanovich
 //
 
-import Testing
-import Foundation
 @testable import AnimeWeeb
+import Foundation
+import Testing
 
 struct EpisodeDTOTests {
 
@@ -68,7 +68,7 @@ struct EpisodeDTOTests {
         // Assert
         #expect(result.videos.isEmpty)
     }
-    
+
     private func makeJSON(
         videos: String = "[{\"id\": 1, \"dubberId\": 10, \"dubberName\": \"AniDUB\", \"dubberLanguage\": \"ru\", \"videoFormatId\": 2, \"videoFormat\": \"HLS\", \"resolution\": \"1080p\", \"url\": \"https://example.com/video.m3u8\"}]",
         defaultMode: String = "standard"
@@ -90,12 +90,12 @@ struct EpisodeDTOTests {
         }
         """
     }
-    
+
     @Test("Decodes from JSON")
     func testDecodingFromValidJSON() throws {
         // Act
         let dto = try JSONDecoder().decode(EpisodeDTO.self, from: Data(makeJSON().utf8))
-        
+
         // Assert
         #expect(dto.id == 101)
         #expect(dto.seasonID == 2)
@@ -108,29 +108,29 @@ struct EpisodeDTOTests {
         #expect(dto.playback.standardEnabled == true)
         #expect(dto.playback.learningEnabled == false)
     }
-    
+
     @Test("Decodes then maps to domain")
     func testDecodingThenToDomainReturnsEpisode() throws {
         // Act
         let dto = try JSONDecoder().decode(EpisodeDTO.self, from: Data(makeJSON().utf8))
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result.seasonID == 2)
         #expect(result.episode == 10)
         #expect(result.videos.count == 1)
         #expect(result.videos.first?.dubberName == "AniDUB")
     }
-    
+
     @Test("Decodes empty videos")
     func testDecodingWithEmptyVideos() throws {
         // Act
         let dto = try JSONDecoder().decode(EpisodeDTO.self, from: Data(makeJSON(videos: "[]").utf8))
-        
+
         // Assert
         #expect(dto.videos.isEmpty)
     }
-    
+
     @Test("Fails on invalid defaultMode")
     func testDecodingThrowsWhenDefaultModeInvalid() throws {
         // Assert

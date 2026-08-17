@@ -5,14 +5,14 @@
 //  Created by Maksim Sazanovich
 //
 
-import SwiftUI
 import NukeUI
+import SwiftUI
 import TagCloud
 
 struct AnimeDetailsContentView: View {
-    
+
     let viewModel: AnimeDetailsViewModel
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
@@ -29,16 +29,16 @@ struct AnimeDetailsContentView: View {
                 }
                 .animeCardBackgroundModifier(cornerRadius: 12, strokeOpacity: 1)
                 .padding(.horizontal)
-                
+
                 VStack(alignment: .leading, spacing: 12) {
                     // MARK: Title
                     Text(viewModel.title)
                         .font(.system(size: 30, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                     // MARK: Tag Cloud
                     TagCloudView(data: viewModel.genres) { genre in
-                        Text(genre.rawValue.uppercased())
+                        Text(genre.title.uppercased())
                             .font(.system(.body, weight: .medium))
                             .foregroundStyle(.subtitle)
                             .padding(.horizontal, 12)
@@ -48,7 +48,7 @@ struct AnimeDetailsContentView: View {
                                     .fill(.stroke.opacity(0.8))
                             )
                     }
-                    
+
                     // MARK: Description
                     Text(viewModel.despription)
                         .font(.system(.body))
@@ -61,4 +61,3 @@ struct AnimeDetailsContentView: View {
         }
     }
 }
-

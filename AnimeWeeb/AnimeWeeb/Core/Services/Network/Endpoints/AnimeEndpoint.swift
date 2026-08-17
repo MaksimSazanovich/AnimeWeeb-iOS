@@ -11,34 +11,34 @@ public enum AnimeEndpoint: Endpoint {
     case getHomeAnimes
     case getAnimes(skip: Int, take: Int)
     case getAnime(id: Int)
-    
+
     public var method: HTTPMethod {
         switch self {
-            
+
         case .getHomeAnimes, .getAnimes, .getAnime:
                 .get
         }
     }
-    
+
     public var path: String {
         switch self {
-            
+
         case .getHomeAnimes:
             return "/titles/home"
-        case .getAnimes(skip: _, take: _):
+        case .getAnimes:
             return "/titles"
         case .getAnime(let id):
             return "/titles/\(id)"
         }
     }
-    
-    public var headers: [String : String]? {
+
+    public var headers: [String: String]? {
         return nil
     }
-    
+
     public var queryItems: [URLQueryItem]? {
         switch self {
-            
+
         case .getHomeAnimes, .getAnime:
             return nil
         case .getAnimes(skip: let skip, take: let take):
@@ -48,11 +48,9 @@ public enum AnimeEndpoint: Endpoint {
             ]
         }
     }
-    
+
     public var body: (any Encodable)? {
         return nil
     }
-    
-   
-    
+
 }

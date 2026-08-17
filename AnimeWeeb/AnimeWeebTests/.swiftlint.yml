@@ -1,0 +1,9 @@
+disabled_rules:
+  - force_unwrap               
+  - force_try                  
+  - function_body_length       
+  - line_length                
+  - cyclomatic_complexity
+
+identifier_name:
+  max_length: 100     

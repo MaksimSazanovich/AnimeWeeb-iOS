@@ -5,25 +5,25 @@
 //  Created by Maksim Sazanovich
 //
 
-import SwiftUI
 import NukeUI
+import SwiftUI
 import TagCloud
 
 struct AnimeDetailsScreen: View {
-    
+
     @State var viewModel: AnimeDetailsViewModel
-    
+
     var body: some View {
-        
+
         ZStack {
             switch viewModel.state {
             case .idle, .loading:
                 SkeletonAnimeDetailsContentView()
-            
+
             case .loaded:
                 AnimeDetailsContentView(viewModel: viewModel)
-                
-            case .empty, .failed(_):
+
+            case .empty, .failed:
                 AnimeDetailsErrorView {
                     Task {
                         await viewModel.loadDetails()
@@ -40,11 +40,11 @@ struct AnimeDetailsScreen: View {
 }
 
 #Preview {
-    VStack(spacing: 0){
-        
+    VStack(spacing: 0) {
+
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
-        
+
         AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id, repository: AnimeDetailsRepository(networkService: NetworkService())))
     }
-    
+
 }

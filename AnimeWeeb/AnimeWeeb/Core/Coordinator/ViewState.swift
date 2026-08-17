@@ -13,7 +13,7 @@ enum ViewState: Equatable {
     case loading
     case loaded
     case failed(Error)
-    
+
     static func == (lhs: ViewState, rhs: ViewState) -> Bool {
         switch (lhs, rhs) {
         case (.idle, .idle),

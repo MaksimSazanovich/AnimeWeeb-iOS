@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct NewReleasesScrollView: View {
-    
+
     var animes: [NewReleasesAnimeModel]
     let homeViewModel: HomeViewModel
-    
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 16) {
@@ -23,8 +23,6 @@ struct NewReleasesScrollView: View {
             }
             .padding(.bottom, 30)
         }
-        
+
     }
 }
-
-

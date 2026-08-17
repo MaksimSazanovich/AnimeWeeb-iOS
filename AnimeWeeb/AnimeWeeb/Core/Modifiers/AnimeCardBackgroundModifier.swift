@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AnimeCardBackgroundModifier: ViewModifier {
-    
+
     var cornerRadius: CGFloat = 12
     var fillOpacity: CGFloat = 0.4
     var strokeOpacity: CGFloat = 0.9
-    
+
     func body(content: Content) -> some View {
         content
             .background(

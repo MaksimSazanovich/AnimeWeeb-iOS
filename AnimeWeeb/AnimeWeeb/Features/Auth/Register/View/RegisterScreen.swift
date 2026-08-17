@@ -8,57 +8,57 @@
 import SwiftUI
 
 struct RegisterScreen: View {
-    
+
     @State var viewModel: RegisterViewModel
     @State var email: String = ""
-    
+
     var body: some View {
-        
+
         ZStack {
             VStack {
                 VStack(spacing: 8) {
                     Text("Создать аккаунт")
                         .font(.system(size: 30, weight: .bold))
                         .foregroundStyle(.white)
-                    
+
                     VStack(spacing: 32) {
                         Text("Введите email, чтобы получить код")
                             .font(.subheadline)
                             .foregroundStyle(.subtitle)
-                        
+
                         // TODO: Google Button
                         ZStack {
                             RoundedRectangle(cornerRadius: 40)
                                 .fill(.white)
                                 .frame(maxWidth: .infinity, maxHeight: 40)
-                            
+
                             Text("Тут будет гугол")
                                 .font(.body)
                                 .foregroundStyle(.black)
                         }
-                        
+
                         ZStack {
                             Rectangle()
                                 .fill(.stroke)
                                 .frame(height: 1)
-                            
+
                             Text("или через email")
                                 .font(.caption)
                                 .foregroundStyle(.genreText)
                                 .padding(.horizontal, 12)
                                 .background(Color.background)
                         }
-                        
+
                         VStack(spacing: 16) {
                             // MARK: Email TextField
                             EmailTextField(email: $email)
-                            
+
                             // MARK: GetCode Button
                             GetCodeButton {
                                 viewModel.didTapGetCodeButton()
                             }
                         }
-                        
+
                         // MARK: Login Button
                         Button {
                             // TODO: Login logic
@@ -68,7 +68,7 @@ struct RegisterScreen: View {
                                 .font(.system(size: 14))
                                 .foregroundStyle(.seasonBadgeText)
                         }
-                        
+
                     }
                 }
             }
@@ -84,10 +84,10 @@ struct RegisterScreen: View {
 }
 
 #Preview {
-    VStack(spacing: 0){
-        
+    VStack(spacing: 0) {
+
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
-        
+
         RegisterScreen(viewModel: RegisterViewModel())
     }
 }

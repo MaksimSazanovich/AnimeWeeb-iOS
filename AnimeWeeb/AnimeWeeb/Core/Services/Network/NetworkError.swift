@@ -5,7 +5,6 @@
 //  Created by Maksim Sazanovich
 //
 
-
 public enum NetworkError: Error {
     case invalidURL
     case invalidBaseURL

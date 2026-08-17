@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MenuButton: View {
-    
+
     var onAction: () -> Void
-    
+
     var body: some View {
         Button {
             onAction()

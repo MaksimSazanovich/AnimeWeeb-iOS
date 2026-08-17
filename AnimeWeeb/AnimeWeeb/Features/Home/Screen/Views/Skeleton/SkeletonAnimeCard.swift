@@ -5,8 +5,8 @@
 //  Created by Maksim Sazanovich
 //
 
-import SwiftUI
 import Shimmer
+import SwiftUI
 
 struct SkeletonAnimeCard: View {
     var body: some View {
@@ -19,38 +19,33 @@ struct SkeletonAnimeCard: View {
                 topTrailing: 12))
             .aspectRatio(2/3, contentMode: .fill)
             .skeletonColor()
-            
-           
-            
-            
+
             VStack(alignment: .leading) {
-                //MARK: Title
+                // MARK: Title
                 RoundedRectangle(cornerRadius: 5)
                     .frame(width: 95, height: 15)
                     .skeletonColor()
-                
+
                 RoundedRectangle(cornerRadius: 5)
                     .frame(width: 70, height: 12)
                     .skeletonColor()
-                
+
                 // MARK: Tag Cloud
                 HStack {
                     RoundedRectangle(cornerRadius: 7)
                         .skeletonColor()
-                    
+
                     RoundedRectangle(cornerRadius: 7)
                         .skeletonColor()
                 }
                 .frame(height: 20)
-                
-                
-                
+
             }
             .padding(12)
-            
+
             Spacer(minLength: 0)
         }
-       
+
         .animeCardBackgroundModifier(cornerRadius: 12)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct DismissKeyboardOnTapModifier: ViewModifier {
-    
+
     func body(content: Content) -> some View {
         content
             .contentShape(Rectangle())

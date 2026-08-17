@@ -9,15 +9,15 @@ import Foundation
 import SwiftUI
 
 struct TextFieldFocusModifier: ViewModifier {
-    
+
     var isFocused: Bool
-    
+
     func body(content: Content) -> some View {
         content
             .overlay {
                 RoundedRectangle(cornerRadius: 12)
                     .strokeBorder(isFocused ? .focusedStroke : .stroke, lineWidth: 1)
-                    
+
             }
             .padding(2)
             .overlay {

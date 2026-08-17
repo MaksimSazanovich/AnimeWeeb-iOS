@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct EmailTextField: View {
-    
+
     @Binding var email: String
     @FocusState var isTextFieldFocused: Bool
-    
+
     var body: some View {
         TextField(
             "",

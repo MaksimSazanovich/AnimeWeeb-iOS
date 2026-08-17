@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AppHeaderView: View {
-    
+
     let viewModel: AppHeaderViewModel
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // MARK: - App Header
@@ -23,25 +23,24 @@ struct AppHeaderView: View {
                         HStack {
                             // MARK: Icon
                             Image(.icon)
-                            
+
                             // MARK: Title
                             Text("AnimeWeeb")
                                 .font(.callout.weight(.bold))
                                 .foregroundStyle(Color(.mainTitle))
                         }
                     }
-                    
-                    
+
                     Spacer()
-                    
+
                     HStack(spacing: 12) {
                         // MARK: Profile Button
                         ProfileButton(avatarURL: viewModel.user?.avatarUrl) {
                             viewModel.didTapProfile()
                         }
-                        
+
                         // MARK: Menu Button
-                        MenuButton() {
+                        MenuButton {
                             withAnimation(.easeOut(duration: 0.28)) {
                                 viewModel.didTapMenu()
                             }
@@ -65,7 +64,7 @@ struct AppHeaderView: View {
                     .frame(height: 1)
             }
             .zIndex(1)
-            
+
             if viewModel.isMenuOpen {
                 // MARK: - Menu Header
                 VStack(alignment: .leading, spacing: 30) {
@@ -88,46 +87,46 @@ struct AppHeaderView: View {
                         Text("Поддержите нас подпиской на соцсети, будем благодарны.")
                             .font(.footnote)
                             .foregroundStyle(.gray)
-                        
+
                         // MARK: Social Media Grid
                         Grid(horizontalSpacing: 8, verticalSpacing: 8) {
                             GridRow {
                                 SocialButton(for: .tikTok) { socialMedia in
                                     viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
-                                
+
                                 SocialButton(for: .instagram) { socialMedia in
                                     viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
                             }
-                            
+
                             GridRow {
                                 SocialButton(for: .patreon) { socialMedia in
                                     viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
-                                
+
                                 SocialButton(for: .telegram) { socialMedia in
                                     viewModel.didTapSocial(socialMedia: socialMedia)
                                 }
                             }
                         }
-                        
+
                         if viewModel.isAuthorized {
-                            //MARK: User Profile Card
+                            // MARK: User Profile Card
                             if let user = viewModel.user {
                                 Button {
                                     print("Profile Button pressed")
                                 } label: {
-                                    HStack() {
+                                    HStack {
                                         ProfileButton(avatarURL: user.avatarUrl) {
                                             viewModel.didTapProfile()
                                         }
-                                        
+
                                         VStack(alignment: .leading) {
                                             Text(user.name)
                                                 .font(.system(.body, weight: .semibold))
                                                 .foregroundStyle(.white)
-                                            
+
                                             Text("Уровень \(user.level) • Профиль")
                                                 .font(.footnote)
                                                 .foregroundStyle(.gray)
@@ -143,10 +142,9 @@ struct AppHeaderView: View {
                                             .strokeBorder(.stroke, lineWidth: 1))
                                 }
 
-                               
                             }
                         } else {
-                            //MARK: Login Button
+                            // MARK: Login Button
                             Button {
                                 viewModel.didTapLogin()
                             } label: {
@@ -171,7 +169,7 @@ struct AppHeaderView: View {
                         .frame(height: 1)
                 }
                 .background(Color.background)
-                //.drawingGroup()
+                // .drawingGroup()
                 .transition(
                     .move(edge: .top)
                     .combined(with: .opacity)
@@ -183,7 +181,7 @@ struct AppHeaderView: View {
 }
 
 #Preview {
-    
+
     let appURLOpener = AppURLOpener()
     VStack {
         AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: appURLOpener, isAuthorized: false, user: previewUser))
@@ -191,8 +189,3 @@ struct AppHeaderView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.background)
 }
-
-
-
-
-

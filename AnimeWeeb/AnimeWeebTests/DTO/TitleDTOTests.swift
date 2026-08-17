@@ -5,12 +5,12 @@
 //  Created by Maksim Sazanovich
 //
 
-import Testing
 @testable import AnimeWeeb
 import Foundation
+import Testing
 
 struct TitleDTOTests {
-    
+
     private func makeDTO(posterURL: String = "https://shikimori.io/uploads/poster/animes/62076/main_alt-d79ac691463b536120322c6b2c89eba1.jpeg", genreIDs: [Int]) -> TitleDTO {
         return TitleDTO(
             id: 1102,
@@ -30,15 +30,15 @@ struct TitleDTOTests {
             genres: genreIDs.map { GenreDTO(id: $0, nameRu: "Genre", nameEn: "Genre") },
             dubbers: [])
     }
-    
+
     @Test("Valid DTO")
-    func testToDomainReturnsAnimeModelWhenValidDTO()  {
+    func testToDomainReturnsAnimeModelWhenValidDTO() {
         // Arrange
         let dto = makeDTO(genreIDs: [1, 2])
-        
+
         // Act
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result.id == 1102)
         #expect(result.title == "История о перекуре за супермаркетом")
@@ -48,38 +48,38 @@ struct TitleDTOTests {
         #expect(result.genres == [.shounen, .adventure])
         #expect(result.nameEn == "Behind the Supermarket, Smoking with You.")
         #expect(result.nameJp == "スーパーの裏でヤニ吸うふたり")
-        #expect(result.altNamesRu == [])
+        #expect(result.altNamesRu.isEmpty)
         #expect(result.altNamesEn == [
             "Super no Ura de Yani Suu Futari",
             "Smoking Behind the Supermarket with You"
         ])
     }
-    
+
     @Test("Invalid poster URL")
-    func testToDomainReturnsAnimeModelWithNilImageURLWhenInvalidPosterURL()  {
+    func testToDomainReturnsAnimeModelWithNilImageURLWhenInvalidPosterURL() {
         // Arrange
         let dto = makeDTO(posterURL: "", genreIDs: [1, 2])
-        
+
         // Act
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result.imageURL == nil)
     }
-    
+
     @Test("Filtering unknown genres")
-    func testToDomainReturnsFilteredGenresWhenUnknownGenres()  {
+    func testToDomainReturnsFilteredGenresWhenUnknownGenres() {
         // Arrange
         let dto = makeDTO(genreIDs: [0, 1])
-        
+
         // Act
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result.genres.count == 1)
         #expect(result.genres == [.shounen])
     }
-    
+
     private func makeJSON(
         posterURL: String? = "https://example.com/poster.jpg",
         status: String = "Ongoing",
@@ -104,12 +104,12 @@ struct TitleDTOTests {
         }
         """
     }
-    
+
     @Test("Decodes from JSON")
     func testDecodingFromValidJSON() throws {
         // Act
         let dto = try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON().utf8))
-        
+
         // Assert
         #expect(dto.id == 1)
         #expect(dto.nameRu == "Название")
@@ -120,30 +120,30 @@ struct TitleDTOTests {
         #expect(dto.genres.first?.id == 1)
         #expect(dto.dubbers.isEmpty)
     }
-    
+
     @Test("Decodes then maps to domain")
     func testDecodingThenToDomainReturnsAnimeModel() throws {
         // Act
         let dto = try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON().utf8))
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result.id == 1)
         #expect(result.title == "Название")
         #expect(result.imageURL == URL(string: "https://example.com/poster.jpg"))
         #expect(result.genres == [.shounen])
     }
-    
+
     @Test("Decodes empty genres and dubbers")
     func testDecodingWithEmptyCollections() throws {
         // Act
         let dto = try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON(genres: "[]").utf8))
-        
+
         // Assert
         #expect(dto.genres.isEmpty)
         #expect(dto.dubbers.isEmpty)
     }
-    
+
     @Test("Fails when required field missing")
     func testDecodingThrowsWhenPosterURLMissing() throws {
         // Assert
@@ -151,7 +151,7 @@ struct TitleDTOTests {
             try JSONDecoder().decode(TitleDTO.self, from: Data(makeJSON(posterURL: nil).utf8))
         }
     }
-    
+
     @Test("Fails on unknown status")
     func testDecodingThrowsWhenStatusInvalid() throws {
         // Assert

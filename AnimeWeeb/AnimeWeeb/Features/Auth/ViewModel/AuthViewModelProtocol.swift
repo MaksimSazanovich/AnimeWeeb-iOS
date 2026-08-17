@@ -8,9 +8,9 @@
 import Foundation
 
 protocol AuthViewModelProtocol {
-    
+
     var onRoute: (() -> Void)? { get set }
-    
+
     func didTapGetCodeButton()
     func didTapSwitchAuthButton()
 }

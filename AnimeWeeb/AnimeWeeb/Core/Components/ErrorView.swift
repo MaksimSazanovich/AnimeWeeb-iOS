@@ -10,9 +10,9 @@ import SwiftUI
 struct ErrorView: View {
     let title: String
     let buttonTitle: String
-    
+
     var onRetry: () -> Void
-    
+
     var body: some View {
         HStack {
             Text(title)
@@ -20,7 +20,7 @@ struct ErrorView: View {
                 .foregroundStyle(.errorText)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
-           
+
             Button {
                 onRetry()
             } label: {

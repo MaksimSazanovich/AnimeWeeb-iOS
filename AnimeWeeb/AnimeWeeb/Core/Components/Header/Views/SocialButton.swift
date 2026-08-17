@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SocialButton: View {
-    
+
     let socialMedia: SocialMedia
-    
+
     let onAction: (SocialMedia) -> Void
-    
+
     var body: some View {
         Button {
             onAction(socialMedia)
@@ -26,7 +26,7 @@ struct SocialButton: View {
                 .animeCardBackgroundModifier()
         }
     }
-    
+
     init(for socialMedia: SocialMedia, onAction: @escaping (SocialMedia) -> Void) {
         self.socialMedia = socialMedia
         self.onAction = onAction

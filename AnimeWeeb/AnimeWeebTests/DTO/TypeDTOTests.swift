@@ -5,8 +5,8 @@
 //  Created by Maksim Sazanovich
 //
 
-import Testing
 @testable import AnimeWeeb
+import Testing
 
 struct TypeDTOTests {
 
@@ -16,7 +16,7 @@ struct TypeDTOTests {
     func testToDomainReturnsAnimeFormatWhenValidDTO(dto: TypeDTO, expected: AnimeFormat) {
         // Act
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result == expected)
     }

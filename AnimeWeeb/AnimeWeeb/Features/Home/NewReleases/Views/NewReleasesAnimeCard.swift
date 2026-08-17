@@ -5,22 +5,22 @@
 //  Created by Maksim Sazanovich
 //
 
-import SwiftUI
 import NukeUI
 import Shimmer
+import SwiftUI
 
 struct NewReleasesAnimeCard: View {
-    
+
     let model: NewReleasesAnimeModel
-    
+
     var onAction: (WatchModel) -> Void
-    
+
     var body: some View {
         Button {
-            onAction(WatchModel(titleID: model.titleID ,title: model.title, season: model.seasonName, episodeID: model.episodeID))
+            onAction(WatchModel(titleID: model.titleID, title: model.title, season: model.seasonName, episodeID: model.episodeID))
         } label: {
             ZStack {
-                VStack() {
+                VStack {
                     // MARK: Image
                     LazyImage(url: model.imageURL) { state in
                         if let image = state.image {
@@ -49,8 +49,7 @@ struct NewReleasesAnimeCard: View {
                                 }
                                 .overlay(alignment: .topTrailing) {
                                     // MARK: TV Tag
-                                    if model.format == .tv
-                                    {
+                                    if model.format == .tv {
                                         Text("TV")
                                             .font(.system(.caption, weight: .bold))
                                             .foregroundStyle(.largeTitle)
@@ -74,9 +73,9 @@ struct NewReleasesAnimeCard: View {
                             .shimmering()
                         }
                     }
-                    
+
                     VStack(alignment: .leading) {
-                        //MARK: Title
+                        // MARK: Title
                         ZStack(alignment: .topLeading) {
                             Text(model.title)
                                 .font(.system(.subheadline, weight: .medium))
@@ -84,15 +83,14 @@ struct NewReleasesAnimeCard: View {
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(2, reservesSpace: true)
                         }
-                        
-                        
+
                         //                    //MARK: Subtitle
                         //                    Text(model.subtitle)
                         //                        .font(.caption)
                         //                        .foregroundStyle(.subtitle)
                         //                        .lineLimit(1)
-                        
-                        //MARK: Season Badge
+
+                        // MARK: Season Badge
                         Text("Сезон \(model.season), эпизод \(model.episode)")
                             .lineLimit(1)
                             .minimumScaleFactor(0.8)
@@ -108,18 +106,15 @@ struct NewReleasesAnimeCard: View {
                                 RoundedRectangle(cornerRadius: 6)
                                     .stroke(.seasonBadge.opacity(0.2), lineWidth: 1)
                             )
-                        
+
                     }
                     .padding(12)
                 }
-                
-                
-                
+
             }
-            .frame(width: 150) //TODO: Hardcode width
+            .frame(width: 150) // TODO: Hardcode width
             .animeCardBackgroundModifier(cornerRadius: 12)
         }
 
-       
     }
 }

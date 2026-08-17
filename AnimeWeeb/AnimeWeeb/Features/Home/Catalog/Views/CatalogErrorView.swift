@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CatalogErrorView: View {
-    
+
     var onRetry: () -> Void
-    
+
     var body: some View {
         ErrorView(title: "Не удалось загрузить каталог.", buttonTitle: "Повторить", onRetry: onRetry)
     }
@@ -19,4 +19,3 @@ struct CatalogErrorView: View {
 #Preview {
     CatalogErrorView(onRetry: {})
 }
-

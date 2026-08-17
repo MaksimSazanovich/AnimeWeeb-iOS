@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct AnimeWeebApp: App {
-       
+
     @State private var coordinator: Coordinator = Coordinator()
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {

@@ -5,9 +5,9 @@
 //  Created by Maksim Sazanovich
 //
 
-import Testing
-import Foundation
 @testable import AnimeWeeb
+import Foundation
+import Testing
 
 @MainActor
 struct LatestEpisodeDTOTests {
@@ -111,7 +111,7 @@ struct LatestEpisodeDTOTests {
         // Assert
         #expect(result.imageURL == nil)
     }
-    
+
     private func makeJSON(includeEpisodeID: Bool = true) -> String {
         let episodeIDLine = includeEpisodeID ? "\"episodeId\": 100," : ""
         return """
@@ -173,12 +173,12 @@ struct LatestEpisodeDTOTests {
         }
         """
     }
-    
+
     @Test("Decodes from JSON with nested objects")
     func testDecodingFromValidJSON() throws {
         // Act
         let dto = try JSONDecoder().decode(LatestEpisodeDTO.self, from: Data(makeJSON().utf8))
-        
+
         // Assert
         #expect(dto.episodeID == 100)
         #expect(dto.titleID == 42)
@@ -190,13 +190,13 @@ struct LatestEpisodeDTOTests {
         #expect(dto.episodeObj.seasonID == 1)
         #expect(dto.episodeObj.playback.defaultMode == .standard)
     }
-    
+
     @Test("Decodes then maps to domain")
     func testDecodingThenToDomainReturnsNewReleasesAnimeModel() throws {
         // Act
         let dto = try JSONDecoder().decode(LatestEpisodeDTO.self, from: Data(makeJSON().utf8))
         let result = dto.toDomain()
-        
+
         // Assert
         #expect(result.titleID == 42)
         #expect(result.title == "История о перекуре за супермаркетом")
@@ -207,7 +207,7 @@ struct LatestEpisodeDTOTests {
         #expect(result.format == .tv)
         #expect(result.imageURL == URL(string: "https://example.com/poster.jpg"))
     }
-    
+
     @Test("Fails when required field missing")
     func testDecodingThrowsWhenEpisodeIDMissing() throws {
         // Assert

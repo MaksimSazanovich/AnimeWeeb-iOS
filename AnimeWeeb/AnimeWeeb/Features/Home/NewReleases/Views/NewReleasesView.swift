@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct NewReleasesView: View {
-    
+
     var animes: [NewReleasesAnimeModel]
     let homeViewModel: HomeViewModel
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Новое на сайте")
                 .font(.system(.largeTitle, weight: .semibold))
                 .foregroundStyle(.largeTitle)
-            
+
             VStack(spacing: 30) {
-                //MARK: New Releases ScrollView
+                // MARK: New Releases ScrollView
                 NewReleasesScrollView(animes: animes, homeViewModel: homeViewModel)
-                
+
                 Rectangle()
                     .fill(.stroke.opacity(0.8))
                     .frame(height: 1)

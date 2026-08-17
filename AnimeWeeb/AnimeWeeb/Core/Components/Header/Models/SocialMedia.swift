@@ -8,13 +8,13 @@
 import Foundation
 
 enum SocialMedia: String, Identifiable, CaseIterable {
-    var id : Self { self }
-    
+    var id: Self { self }
+
     case tikTok = "TikTok"
     case instagram = "Instagram"
     case patreon = "Patreon"
     case telegram = "Telegram"
-    
+
     var image: String {
         switch self {
         case .tikTok: return "tiktok.fill"
@@ -23,7 +23,7 @@ enum SocialMedia: String, Identifiable, CaseIterable {
         case .telegram: return "telegram-2.fill"
         }
     }
-    
+
     var url: URL? {
         switch self {
         case .tikTok: URL(string: "https://www.tiktok.com/@off.animeweeb")

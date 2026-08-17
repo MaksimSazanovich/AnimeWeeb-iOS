@@ -5,31 +5,31 @@
 //  Created by Maksim Sazanovich
 //
 
-import SwiftUI
 import NukeUI
-import TagCloud
 import Shimmer
+import SwiftUI
+import TagCloud
 
 struct AnimeCard: View {
-    
+
     let model: AnimeModel
-    
+
     var onAction: (Int) -> Void
-    
+
     private let maxVisibleTags = 3
-    
+
     private var displayTagItems: [TagItem] {
         if model.genres.count <= maxVisibleTags {
             return model.genres.map { TagItem.tag($0) }
         }
-        
+
         let visibleTags = model.genres.prefix(maxVisibleTags).map { TagItem.tag($0) }
         let overflow = model.genres.count - maxVisibleTags
         return visibleTags + [.overflow(overflow)]
     }
-    
+
     var body: some View {
-        
+
         Button {
             onAction(model.id)
         } label: {
@@ -58,22 +58,21 @@ struct AnimeCard: View {
                         .shimmering()
                     }
                 }
-                
+
                 VStack(alignment: .leading) {
-                    //MARK: Title
+                    // MARK: Title
                     Text(model.title)
                         .font(.system(.body, weight: .medium))
                         .foregroundStyle(.mainTitle)
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
-                    
-                    
+
                     // MARK: Tag Cloud
                     TagCloudView(data: displayTagItems, verticalSpacing: 4, horizontalSpacing: 4) { tagItem in
-                        
+
                         switch tagItem {
                         case .tag(let genre):
-                            Text(genre.rawValue.uppercased())
+                            Text(genre.title.uppercased())
                                 .font(.system(.caption2, weight: .medium))
                                 .foregroundStyle(.subtitle)
                                 .padding(.horizontal, 8)
@@ -87,18 +86,16 @@ struct AnimeCard: View {
                                 .font(.caption)
                                 .foregroundStyle(.genreText)
                         }
-                        
+
                     }
                 }
                 .padding(12)
-                
+
                 Spacer(minLength: 0)
             }
             .animeCardBackgroundModifier(cornerRadius: 12)
         }
-        
-        
-        
+
     }
 }
 

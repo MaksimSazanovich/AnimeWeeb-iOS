@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct HomeContentView: View {
-    
+
     @Bindable var viewModel: HomeViewModel
-    
+
     var body: some View {
         ScrollView {
             ScrollViewReader { proxy in
                 VStack(alignment: .leading) {
-                    
+
                     if !viewModel.isSearchFocused && viewModel.searchTerm.isEmpty {
                         // MARK: - New Releases
                         NewReleasesView(animes: viewModel.newReleases, homeViewModel: viewModel)
                     }
-                    
+
                     // MARK: - Catalog
                     CatalogView(homeViewModel: viewModel)
                 }
@@ -41,4 +41,3 @@ struct HomeContentView: View {
         .scrollDismissesKeyboard(.immediately)
     }
 }
-

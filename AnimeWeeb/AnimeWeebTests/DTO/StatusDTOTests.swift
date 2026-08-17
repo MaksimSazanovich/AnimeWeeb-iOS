@@ -5,9 +5,9 @@
 //  Created by Maksim Sazanovich
 //
 
-import Testing
-import Foundation
 @testable import AnimeWeeb
+import Foundation
+import Testing
 
 struct StatusDTOTests {
 

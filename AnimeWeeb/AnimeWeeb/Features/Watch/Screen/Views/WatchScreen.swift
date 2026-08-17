@@ -8,32 +8,31 @@
 import SwiftUI
 
 struct WatchScreen: View {
-    
+
     let viewModel: WatchViewModel
     @State var selectedPlayer: PlayerType = .animeWeeb
-    
+
     var body: some View {
         ZStack { // TODO: switch state
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 30){
+                    VStack(alignment: .leading, spacing: 30) {
                         // MARK: Breadcrumbs
                         BreadcrumbsView(items: viewModel.breadcrumbs) { item in
                             viewModel.breadcrumbItemDidTap(item)
                         }
-                            
-                        
+
                         VStack(alignment: .leading, spacing: 10) {
                             Text(viewModel.season)
                                 .font(.system(.title, weight: .semibold))
                                 .foregroundStyle(.white)
-                            
+
                             Text("Эпизод \(viewModel.episode)")
                                 .font(.body)
                                 .foregroundStyle(.subtitle)
                         }
                     }
-                    
+
                     VStack(alignment: .leading, spacing: 16.5) {
                         // MARK: Dabber
                         HStack(spacing: 24) {
@@ -41,7 +40,7 @@ struct WatchScreen: View {
                                 Text("ОЗВУЧКА")
                                     .font(.system(.caption, weight: .medium))
                                     .foregroundStyle(.genreText)
-                                
+
                                 Text("RU")
                                     .font(.system(.subheadline, weight: .medium))
                                     .foregroundStyle(.white)
@@ -52,17 +51,17 @@ struct WatchScreen: View {
                                             .fill(.purpleBackground)
                                     )
                             }
-                            
+
                             Rectangle()
                                 .fill(.stroke)
                                 .frame(width: 1)
                                 .padding(.vertical)
-                            
+
                             VStack(alignment: .leading) {
                                 Text("ВАРИАНТ")
                                     .font(.system(.caption, weight: .medium))
                                     .foregroundStyle(.genreText)
-                                
+
                                 Text("AniLibria")
                                     .font(.system(.subheadline, weight: .medium))
                                     .foregroundStyle(Color.background)
@@ -73,23 +72,23 @@ struct WatchScreen: View {
                                             .fill(.mainTitle)
                                     )
                             }
-                            
+
                             Rectangle()
                                 .fill(.stroke)
                                 .frame(width: 1)
                                 .padding(.vertical)
                         }
-                        
+
                         // MARK: Quality Picker
                         VStack(alignment: .leading) {
                             Text("КАЧЕСТВО")
                                 .font(.system(.caption, weight: .medium))
                                 .foregroundStyle(.genreText)
-                            
+
                             HStack(spacing: 8) {
                                 ForEach([1080, 720, 480], id: \.self) { size in
                                     Button {
-                                        
+
                                     } label: {
                                         Text("\(size)P")
                                             .font(.system(.subheadline, weight: .medium))
@@ -102,18 +101,15 @@ struct WatchScreen: View {
                                             )
                                     }
 
-                                    
                                 }
-                                
-                                
-                                
+
                             }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
                     .animeCardBackgroundModifier(cornerRadius: 12, fillOpacity: 0.5, strokeOpacity: 0.5)
-                    
+
                     // MARK: Player Segmented Picker
                     Picker("Плеер", selection: $selectedPlayer) {
                         Text("Наш плеер").tag(PlayerType.animeWeeb)
@@ -124,17 +120,17 @@ struct WatchScreen: View {
                    .animeCardBackgroundModifier(cornerRadius: 16, fillOpacity: 0.5, strokeOpacity: 1)
                     .onAppear {
                         UISegmentedControl.appearance().selectedSegmentTintColor = .purpleBackground
-                        
+
                         UISegmentedControl.appearance().setTitleTextAttributes([
                             .foregroundColor: UIColor.subtitle
                         ], for: .normal)
-                        
+
                         UISegmentedControl.appearance().setTitleTextAttributes([
                             .foregroundColor: UIColor.mainTitle
                         ], for: .selected)
                     }
-                    
-                    VStack(spacing: 12)  {
+
+                    VStack(spacing: 12) {
                         // MARK: AD
                         ZStack {
                             Text("AD")
@@ -149,10 +145,10 @@ struct WatchScreen: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .strokeBorder(.stroke, lineWidth: 1)
                         )
-                        
+
                         // MARK: Button
                         Button {
-                           
+
                         } label: {
                             Text("Продолжить просмотр")
                                 .font(.system(.body, weight: .semibold))
@@ -165,7 +161,6 @@ struct WatchScreen: View {
                                 )
                         }
 
-                        
                     }
                     .padding(.horizontal, 25)
                     .padding(.vertical, 13)
@@ -194,4 +189,3 @@ struct WatchScreen: View {
 #Preview {
     WatchScreen(viewModel: WatchViewModel(model: previewWatchModel, repository: WatchRepository(networkService: NetworkService())))
 }
-

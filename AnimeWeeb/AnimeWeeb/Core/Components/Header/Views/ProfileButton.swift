@@ -5,14 +5,14 @@
 //  Created by Maksim Sazanovich
 //
 
-import SwiftUI
 import NukeUI
+import SwiftUI
 
 struct ProfileButton: View {
-    
+
     var avatarURL: URL?
     var onAction: () -> Void
-    
+
     var body: some View {
         Button {
             onAction()

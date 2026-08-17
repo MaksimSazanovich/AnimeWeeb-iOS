@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    
+
     @State var viewModel: HomeViewModel
-    
+
     var body: some View {
-        
+
         ZStack {
             switch viewModel.state {
-                
+
             case .idle, .loading:
                 SkeletonHomeContentView()
-                
+
             case .loaded:
                 HomeContentView(viewModel: self.viewModel)
-                
+
             case .empty, .failed:
                 CatalogErrorView {
                     Task {

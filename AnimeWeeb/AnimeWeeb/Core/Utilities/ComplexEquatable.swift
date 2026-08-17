@@ -29,7 +29,7 @@ extension ComplexEquatable {
                 }
             }
         }
-        if result == "" {
+        if result.isEmpty {
             return String(describing: instance)
         }
         return result

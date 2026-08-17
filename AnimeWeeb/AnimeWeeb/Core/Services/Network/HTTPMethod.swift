@@ -5,7 +5,6 @@
 //  Created by Maksim Sazanovich
 //
 
-
 public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"

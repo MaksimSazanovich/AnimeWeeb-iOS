@@ -10,10 +10,10 @@ import SwiftUI
 
 struct CatalogProgressView: View {
     @State private var isAnimating = false
-    
+
     private let dotSize: CGFloat = 8
     private let jumpHeight: CGFloat = -6
-    
+
     var body: some View {
         HStack(spacing: 6) {
             ForEach(0..<3) { index in
