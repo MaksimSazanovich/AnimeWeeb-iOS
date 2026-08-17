@@ -13,11 +13,27 @@
 		B5DD7D493022145E001A007C /* TagCloud in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7D483022145E001A007C /* TagCloud */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B562C1AE30330E1F00874732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5DD7C75301F6BA8001A007C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5DD7C7C301F6BA8001A007C;
+			remoteInfo = AnimeWeeb;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		B562C1AA30330E1E00874732 /* AnimeWeebTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimeWeebTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeWeeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		B562C1AB30330E1F00874732 /* AnimeWeebTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AnimeWeebTests;
+			sourceTree = "<group>";
+		};
 		B5DD7C7F301F6BA8001A007C /* AnimeWeeb */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AnimeWeeb;
@@ -26,6 +42,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B562C1A730330E1E00874732 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5DD7C7A301F6BA8001A007C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				B5DD7C7F301F6BA8001A007C /* AnimeWeeb */,
+				B562C1AB30330E1F00874732 /* AnimeWeebTests */,
 				B5DD7C7E301F6BA8001A007C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */,
+				B562C1AA30330E1E00874732 /* AnimeWeebTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,6 +84,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B562C1A930330E1E00874732 /* AnimeWeebTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B562C1B030330E1F00874732 /* Build configuration list for PBXNativeTarget "AnimeWeebTests" */;
+			buildPhases = (
+				B562C1A630330E1E00874732 /* Sources */,
+				B562C1A730330E1E00874732 /* Frameworks */,
+				B562C1A830330E1E00874732 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B562C1AF30330E1F00874732 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B562C1AB30330E1F00874732 /* AnimeWeebTests */,
+			);
+			name = AnimeWeebTests;
+			packageProductDependencies = (
+			);
+			productName = AnimeWeebTests;
+			productReference = B562C1AA30330E1E00874732 /* AnimeWeebTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B5DD7C7C301F6BA8001A007C /* AnimeWeeb */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5DD7C88301F6BAA001A007C /* Build configuration list for PBXNativeTarget "AnimeWeeb" */;
@@ -95,6 +143,10 @@
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					B562C1A930330E1E00874732 = {
+						CreatedOnToolsVersion = 26.1;
+						TestTargetID = B5DD7C7C301F6BA8001A007C;
+					};
 					B5DD7C7C301F6BA8001A007C = {
 						CreatedOnToolsVersion = 26.1;
 					};
@@ -120,11 +172,19 @@
 			projectRoot = "";
 			targets = (
 				B5DD7C7C301F6BA8001A007C /* AnimeWeeb */,
+				B562C1A930330E1E00874732 /* AnimeWeebTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B562C1A830330E1E00874732 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5DD7C7B301F6BA8001A007C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,6 +195,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B562C1A630330E1E00874732 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5DD7C79301F6BA8001A007C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -144,7 +211,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B562C1AF30330E1F00874732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5DD7C7C301F6BA8001A007C /* AnimeWeeb */;
+			targetProxy = B562C1AE30330E1F00874732 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		B562C1B130330E1F00874732 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MS.AnimeWeebTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AnimeWeeb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AnimeWeeb";
+			};
+			name = Debug;
+		};
+		B562C1B230330E1F00874732 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MS.AnimeWeebTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AnimeWeeb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AnimeWeeb";
+			};
+			name = Release;
+		};
 		B5DD7C86301F6BAA001A007C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -333,6 +448,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B562C1B030330E1F00874732 /* Build configuration list for PBXNativeTarget "AnimeWeebTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B562C1B130330E1F00874732 /* Debug */,
+				B562C1B230330E1F00874732 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5DD7C78301F6BA8001A007C /* Build configuration list for PBXProject "AnimeWeeb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

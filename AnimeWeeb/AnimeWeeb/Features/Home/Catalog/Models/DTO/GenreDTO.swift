@@ -33,7 +33,7 @@ extension GenreDTO {
         case 16: .gourmet
         case 17: .sliceOfLife
         default:
-                .all
+                .none
         }
     }
 }

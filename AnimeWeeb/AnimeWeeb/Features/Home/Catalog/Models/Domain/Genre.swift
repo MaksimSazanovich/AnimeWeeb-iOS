@@ -26,6 +26,7 @@ enum Genre: String, CaseIterable, Identifiable {
     case sports = "Спорт"
     case gourmet = "Гурман"
     case sliceOfLife = "Повседневность"
+    case none = ""
 
     var id: String { rawValue }
 }
