@@ -24,7 +24,11 @@ struct AnimeDetailsScreen: View {
                 AnimeDetailsContentView(viewModel: viewModel)
                 
             case .empty, .failed(_):
-                EmptyView()
+                AnimeDetailsErrorView {
+                    Task {
+                        await viewModel.loadDetails()
+                    }
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
