@@ -20,7 +20,7 @@ struct NewReleasesAnimeModel: Identifiable {
     
     let format: AnimeFormat
     
-    init(imageURL: URL?, titleID: Int, title: String, season: Int, seasonName: String, episode: Int, episodeID: Int, format: AnimeFormat = .none) {
+    init(imageURL: URL?, titleID: Int, title: String, season: Int, seasonName: String, episode: Int, episodeID: Int, format: AnimeFormat) {
         self.imageURL = imageURL
         self.titleID = titleID
         self.title = title

@@ -11,7 +11,7 @@ let previewNewReleasesAnimeModel = NewReleasesAnimeModel(imageURL: URL(string: "
 
 let previewNewReleasesAnimeModels: [NewReleasesAnimeModel] = (0..<5).flatMap { _ in [
     NewReleasesAnimeModel(imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/35507/main_alt-528a79ed0d5f22e1c954df240efe63c3.jpeg"), titleID: 2, title: "Добро пожаловать в класс превосходства", season: 4, seasonName: "Добро пожаловать в класс превосходства 4: Второй год — Первый семестр", episode: 13, episodeID: 2706, format: .tv),
-    NewReleasesAnimeModel(imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/62076/main_alt-d79ac691463b536120322c6b2c89eba1.jpeg"), titleID: 1102, title: "История о перекуре за супермаркетом", season: 1, seasonName: "История о перекуре за супермаркетом", episode: 4, episodeID: 2710, format: .none),
+    NewReleasesAnimeModel(imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/62076/main_alt-d79ac691463b536120322c6b2c89eba1.jpeg"), titleID: 1102, title: "История о перекуре за супермаркетом", season: 1, seasonName: "История о перекуре за супермаркетом", episode: 4, episodeID: 2710, format: .tv),
     NewReleasesAnimeModel(imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/5680/main_alt-1f395adf0382f6f201b232c84a6dca6d.jpeg"), titleID: 1098, title: "Кэйон!", season: 1, seasonName: "Кэйон!", episode: 1, episodeID: 2641, format: .tv)
 ]}
 

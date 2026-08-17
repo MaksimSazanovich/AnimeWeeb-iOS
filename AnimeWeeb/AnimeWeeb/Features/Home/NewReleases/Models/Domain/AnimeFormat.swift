@@ -9,5 +9,4 @@ import Foundation
 
 enum AnimeFormat: String {
     case tv = "TV"
-    case none
 }
