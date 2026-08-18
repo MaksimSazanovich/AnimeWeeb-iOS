@@ -61,7 +61,7 @@ final class HomeViewModel {
 
         catalogViewModel.canLoadMore = { [weak self] in
             guard let model = self?.model else { return nil }
-            return (model.animes.count + model.newReleases.count, /*model.totalAnimes*/61)
+            return (model.animes.count, model.totalAnimes)
         }
     }
 
