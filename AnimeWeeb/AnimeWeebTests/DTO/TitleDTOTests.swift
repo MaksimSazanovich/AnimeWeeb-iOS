@@ -70,7 +70,7 @@ struct TitleDTOTests {
     @Test("Filtering unknown genres")
     func testToDomainReturnsFilteredGenresWhenUnknownGenres() {
         // Arrange
-        let dto = makeDTO(genreIDs: [0, 1])
+        let dto = makeDTO(genreIDs: [-1, 1])
 
         // Act
         let result = dto.toDomain()

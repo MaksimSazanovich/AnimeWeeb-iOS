@@ -10,25 +10,28 @@ import Testing
 
 struct GenreDTOTests {
 
-    @Test("Valid ID", arguments: [
-        (1, Genre.shounen),
-        (2, Genre.adventure),
-        (3, Genre.drama),
-        (4, Genre.fantasy),
-        (5, Genre.suspense),
-        (6, Genre.action),
-        (7, Genre.comedy),
-        (8, Genre.seinen),
-        (9, Genre.mystery),
-        (10, Genre.supernatural),
-        (11, Genre.romance),
-        (12, Genre.shoujo),
-        (13, Genre.sciFi),
-        (14, Genre.horror),
-        (15, Genre.sports),
-        (16, Genre.gourmet),
-        (17, Genre.sliceOfLife)
-    ]) func testToDomainReturnsGenreWhenValidID(id: Int, expectedGenre: Genre) {
+    private static let validGenreCases: [(Int, Genre)] = [
+            (0, .all),
+            (1, .shounen),
+            (2, .adventure),
+            (3, .drama),
+            (4, .fantasy),
+            (5, .suspense),
+            (6, .action),
+            (7, .comedy),
+            (8, .seinen),
+            (9, .mystery),
+            (10, .supernatural),
+            (11, .romance),
+            (12, .shoujo),
+            (13, .sciFi),
+            (14, .horror),
+            (15, .sports),
+            (16, .gourmet),
+            (17, .sliceOfLife)
+        ]
+
+    @Test("Valid ID", arguments: validGenreCases) func testToDomainReturnsGenreWhenValidID(id: Int, expectedGenre: Genre) {
         // Arrange
         let dto = GenreDTO(id: id, nameRu: "Тест", nameEn: "Test")
 
@@ -39,7 +42,7 @@ struct GenreDTOTests {
         #expect(result == expectedGenre)
     }
 
-    @Test("Invalid ID", arguments: [-1, 0, 100])
+    @Test("Invalid ID", arguments: [-1, 100])
     func testToDomainReturnsNilWhenInvalidID(id: Int) {
         // Arrange
         let dto = GenreDTO(id: id, nameRu: "Тест", nameEn: "Test")
