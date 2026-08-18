@@ -15,6 +15,7 @@ opt_in_rules:
   - sorted_imports
   - toggle_bool
   - untyped_error_in_catch
+  - force_unwrapping
   
 custom_rules:
   id_suffix_naming:
