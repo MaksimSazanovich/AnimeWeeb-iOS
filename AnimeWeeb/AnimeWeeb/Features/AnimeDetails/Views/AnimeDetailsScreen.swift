@@ -25,9 +25,7 @@ struct AnimeDetailsScreen: View {
 
             case .empty, .failed:
                 AnimeDetailsErrorView {
-                    Task {
-                        await viewModel.loadDetails()
-                    }
+                    viewModel.onRoute?(.home)
                 }
             }
         }

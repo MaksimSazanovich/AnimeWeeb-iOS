@@ -12,7 +12,7 @@ struct AnimeDetailsErrorView: View {
     var onRetry: () -> Void
 
     var body: some View {
-        ErrorView(title: "Не удалось загрузить тайтл.", buttonTitle: "Повторить", onRetry: onRetry)
+        ErrorView(title: "Тайтл не найдет или API недоступен.", buttonTitle: "В каталог", onRetry: onRetry)
     }
 }
 

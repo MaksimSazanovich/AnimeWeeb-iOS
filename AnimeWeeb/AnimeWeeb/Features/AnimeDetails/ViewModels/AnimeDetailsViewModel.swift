@@ -37,6 +37,8 @@ final class AnimeDetailsViewModel {
         return model?.description ?? "Нет описания"
     }
 
+    var onRoute: ((Screen) -> Void)?
+
     func loadDetails() async {
         guard state != .loaded && state != .loading else { return }
 
