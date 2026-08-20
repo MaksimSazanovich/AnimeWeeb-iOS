@@ -21,7 +21,7 @@ struct AnimeWeebApp: App {
                     }
             }
             .safeAreaInset(edge: .top) {
-                AppHeaderView(viewModel: coordinator.headerViewModel)
+                coordinator.factory.makeAppHeader(coordinator: coordinator)
             }
         }
     }

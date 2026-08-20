@@ -12,27 +12,10 @@ import SwiftUI
 final class Coordinator {
     var path = NavigationPath()
 
-    let headerViewModel: AppHeaderViewModel
     let factory: ScreenFactory
 
     init(factory: ScreenFactory = ScreenFactory()) {
-        let appURLOpener = AppURLOpener()
-        self.headerViewModel = AppHeaderViewModel(urlOpener: appURLOpener)
-
         self.factory = factory
-
-        headerViewModel.onRoute = { [weak self] destination in
-            switch destination {
-            case .home:
-                self?.openHome()
-            case .login:
-                self?.openLogin()
-            case .profile:
-                self?.openProfile()
-            case .watch, .register, .animeDetails:
-                break
-            }
-        }
     }
 
     @ViewBuilder

@@ -14,14 +14,40 @@ final class ScreenFactory {
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
 
+    private let appURLOpener: AppURLOpener
+    private let userService: UserService
+
     init(networkService: NetworkServiceProtocol = NetworkService(),
          homeRepository: HomeRepositoryProtocol? = nil,
          watchRepository: WatchRepositoryProtocol? = nil,
-         animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil) {
+         animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil,
+         appURLOpener: AppURLOpener = AppURLOpener(),
+         userService: UserService = UserService()) {
         self.networkService = networkService
         self.homeRepository = homeRepository ?? HomeRepository(networkService: networkService)
         self.watchRepository = watchRepository ?? WatchRepository(networkService: networkService)
         self.animeDetailsRepository = animeDetailsRepository ?? AnimeDetailsRepository(networkService: networkService)
+        self.appURLOpener = appURLOpener
+        self.userService = userService
+    }
+
+    func makeAppHeader(coordinator: Coordinator) -> some View {
+        let viewModel = AppHeaderViewModel(urlOpener: appURLOpener, userService: userService)
+
+        viewModel.onRoute = { [weak coordinator] destination in
+            switch destination {
+            case .home:
+                coordinator?.openHome()
+            case .login:
+                coordinator?.openLogin()
+            case .profile:
+                coordinator?.openProfile()
+            case .watch, .register, .animeDetails:
+                break
+            }
+        }
+
+        return AppHeaderView(viewModel: viewModel)
     }
 
     func makeHomeScreen(coordinator: Coordinator) -> some View {
@@ -58,8 +84,8 @@ final class ScreenFactory {
 
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {
         let viewModel = AnimeDetailsViewModel(animeID: animeID, repository: animeDetailsRepository)
-        viewModel.onRoute = { [weak coordinator] screen in
-            switch screen {
+        viewModel.onRoute = { [weak coordinator] destination in
+            switch destination {
             case .home:
                 coordinator?.openHome()
             default :
@@ -72,8 +98,8 @@ final class ScreenFactory {
 
     func makeWatchScreen(model: WatchModel, coordinator: Coordinator) -> some View {
         let viewModel = WatchViewModel(model: model, repository: watchRepository)
-        viewModel.onRoute = { [weak coordinator] screen in
-            switch screen {
+        viewModel.onRoute = { [weak coordinator] destination in
+            switch destination {
             case .home:
                 coordinator?.openHome()
             case .animeDetails(animeID: let id):

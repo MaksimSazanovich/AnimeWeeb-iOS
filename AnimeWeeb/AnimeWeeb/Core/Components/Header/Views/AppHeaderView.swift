@@ -111,7 +111,7 @@ struct AppHeaderView: View {
                             }
                         }
 
-                        if viewModel.isAuthorized {
+                        if viewModel.authState == .authenticated {
                             // MARK: User Profile Card
                             if let user = viewModel.user {
                                 Button {
@@ -169,7 +169,7 @@ struct AppHeaderView: View {
                         .frame(height: 1)
                 }
                 .background(Color.background)
-                // .drawingGroup()
+                .drawingGroup()
                 .transition(
                     .move(edge: .top)
                     .combined(with: .opacity)
@@ -184,7 +184,7 @@ struct AppHeaderView: View {
 
     let appURLOpener = AppURLOpener()
     VStack {
-        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: appURLOpener, isAuthorized: false, user: previewUser))
+        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: appURLOpener, userService: UserService(user: previewUser, state: .authenticated)))
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.background)

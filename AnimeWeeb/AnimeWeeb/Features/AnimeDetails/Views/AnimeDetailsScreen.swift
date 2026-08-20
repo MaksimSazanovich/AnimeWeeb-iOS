@@ -38,11 +38,5 @@ struct AnimeDetailsScreen: View {
 }
 
 #Preview {
-    VStack(spacing: 0) {
-
-        AppHeaderView(viewModel: AppHeaderViewModel(urlOpener: AppURLOpener()))
-
-        AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id, repository: AnimeDetailsRepository(networkService: NetworkService())))
-    }
-
+    AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id, repository: AnimeDetailsRepository(networkService: NetworkService())))
 }

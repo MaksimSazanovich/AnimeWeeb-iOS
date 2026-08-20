@@ -13,5 +13,4 @@ struct User {
     var name: String
     var avatarPath: URL?
     var level: Int
-    var authState: AuthState
 }

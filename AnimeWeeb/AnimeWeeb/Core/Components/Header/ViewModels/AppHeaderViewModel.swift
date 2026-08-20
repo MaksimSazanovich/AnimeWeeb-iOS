@@ -13,20 +13,24 @@ import Observation
 public class AppHeaderViewModel {
 
     private let urlOpener: AppURLOpener
+    private let userService: UserService
+
+    var user: User? {
+        userService.user
+    }
+
+    var authState: AuthState {
+        userService.authState
+    }
 
     var onRoute: ((Screen) -> Void)?
 
     var isMenuOpen = false
-    var isAuthorized = false
 
-    // TODO: User Service
-    var user: User?
-
-    init(urlOpener: AppURLOpener, isMenuOpen: Bool = false, isAuthorized: Bool = false, user: User? = nil) {
+    init(urlOpener: AppURLOpener, userService: UserService, isMenuOpen: Bool = false) {
         self.urlOpener = urlOpener
+        self.userService = userService
         self.isMenuOpen = isMenuOpen
-        self.isAuthorized = isAuthorized
-        self.user = user
     }
 
     func didTapMenu() {
