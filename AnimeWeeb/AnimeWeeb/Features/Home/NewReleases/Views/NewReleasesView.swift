@@ -22,9 +22,7 @@ struct NewReleasesView: View {
                 // MARK: New Releases ScrollView
                 NewReleasesScrollView(animes: animes, homeViewModel: homeViewModel)
 
-                Rectangle()
-                    .fill(.stroke.opacity(0.8))
-                    .frame(height: 1)
+                CustomDivider(color: .stroke.opacity(0.8))
             }
         }
     }

@@ -59,9 +59,7 @@ struct AppHeaderView: View {
                 .ignoresSafeArea(edges: .top)
             }
             .overlay(alignment: .bottom) {
-                Rectangle()
-                    .fill(.stroke.opacity(0.8))
-                    .frame(height: 1)
+                CustomDivider(color: .stroke.opacity(0.8))
             }
             .zIndex(1)
 
@@ -164,9 +162,7 @@ struct AppHeaderView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 25)
                 .overlay(alignment: .bottom) {
-                    Rectangle()
-                        .fill(.stroke.opacity(0.8))
-                        .frame(height: 1)
+                    CustomDivider(color: .stroke.opacity(0.8))
                 }
                 .background(Color.background)
                 .drawingGroup()

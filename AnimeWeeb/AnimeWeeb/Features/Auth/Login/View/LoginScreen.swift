@@ -39,9 +39,7 @@ struct LoginScreen: View {
                             }
 
                             ZStack {
-                                Rectangle()
-                                    .fill(.stroke)
-                                    .frame(height: 1)
+                                CustomDivider()
 
                                 Text("или через email")
                                     .font(.caption)
