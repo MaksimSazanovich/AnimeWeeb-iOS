@@ -88,7 +88,7 @@ final class ScreenFactory {
             switch destination {
             case .home:
                 coordinator?.openHome()
-            default :
+            default:
                 break
             }
 
@@ -114,8 +114,6 @@ final class ScreenFactory {
 
     func makeProfileScreen() -> some View {
         let viewModel = ProfileViewModel(userService: userService)
-        return ProfileScreen(viewModel: viewModel,
-                             // TODO: Real data
-                             imageURL: previewAnimeModel.imageURL)
+        return ProfileScreen(viewModel: viewModel)
     }
 }

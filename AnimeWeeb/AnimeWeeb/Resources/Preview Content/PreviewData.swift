@@ -137,3 +137,24 @@ let previewWatchHistoryItem = WatchHistoryItem(
     titleID: 1102,
     episodeID: 2710
 )
+
+let previewUserList: [UserAnimeListItem] = [
+    UserAnimeListItem(
+        titleID: 1102,
+        imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/62076/main_alt-d79ac691463b536120322c6b2c89eba1.jpeg"),
+        title: "История о перекуре за супермаркетом",
+        status: .watching
+    ),
+    UserAnimeListItem(
+        titleID: 2,
+        imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/35507/main_alt-528a79ed0d5f22e1c954df240efe63c3.jpeg"),
+        title: "Добро пожаловать в класс превосходства",
+        status: .watching
+    ),
+    UserAnimeListItem(
+        titleID: 1098,
+        imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/5680/main_alt-1f395adf0382f6f201b232c84a6dca6d.jpeg"),
+        title: "Кэйон!",
+        status: .planned
+    )
+]
