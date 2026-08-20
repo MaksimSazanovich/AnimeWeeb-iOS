@@ -113,6 +113,7 @@ final class ScreenFactory {
     }
 
     func makeProfileScreen() -> some View {
-        return ProfileScreen()
+        let viewModel = ProfileViewModel(userService: userService)
+        return ProfileScreen(viewModel: viewModel)
     }
 }

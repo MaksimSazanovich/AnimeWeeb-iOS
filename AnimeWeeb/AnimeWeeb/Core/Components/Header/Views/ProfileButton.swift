@@ -22,7 +22,7 @@ struct ProfileButton: View {
                    image
                         .resizable()
                         .scaledToFit()
-                        .clipShape( RoundedRectangle(cornerRadius: 8))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
             .frame(width: 36, height: 36)
