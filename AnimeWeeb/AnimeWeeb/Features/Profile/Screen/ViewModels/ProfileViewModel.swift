@@ -12,6 +12,7 @@ import Foundation
 final class ProfileViewModel {
 
     private let userService: UserService
+    private(set) var watchHistory: [WatchHistoryItem]?
 
     var user: User {
         userService.user ?? previewUser

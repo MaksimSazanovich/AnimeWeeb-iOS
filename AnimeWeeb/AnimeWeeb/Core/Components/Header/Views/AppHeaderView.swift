@@ -35,8 +35,10 @@ struct AppHeaderView: View {
 
                     HStack(spacing: 12) {
                         // MARK: Profile Button
-                        ProfileButton(avatarURL: viewModel.user?.avatarPath) {
-                            viewModel.didTapProfile()
+                        if viewModel.authState == .authenticated {
+                            ProfileButton(avatarURL: viewModel.user?.avatarPath) {
+                                viewModel.didTapProfile()
+                            }
                         }
 
                         // MARK: Menu Button

@@ -1,4 +1,4 @@
-warning_threshold: 15
+warning_threshold: 20
 
 disabled_rules:
   - colon

@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileScreen: View {
 
     let viewModel: ProfileViewModel
+    let imageURL: URL?
 
     var body: some View {
         ZStack {
@@ -78,8 +79,9 @@ struct ProfileScreen: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(33)
-                    .animeCardBackgroundModifier(cornerRadius: 16)
+                    .animeCardBackgroundModifier(cornerRadius: 16, fillOpacity: 0.4, strokeOpacity: 1)
                     .overlay(alignment: .topTrailing) {
+                        // MARK: Edit Button
                         Button {
                             // TODO: Edit logic
                             print("Edit")
@@ -95,8 +97,29 @@ struct ProfileScreen: View {
                             }
                         }
                         .padding(24)
+                    }
+
+                    CustomDivider()
+
+                    // MARK: Watch History
+                    VStack(alignment: .leading) {
+                        Text("История просмотра")
+                            .font(.system(.title, weight: .semibold))
+                            .foregroundStyle(.largeTitle)
+
+                        ForEach(viewModel.watchHistory ?? []) { model in
+                            VStack {
+                                WatchHistoryItemView(model: model) {
+                                    // TODO: Navigation
+                                    print("Navigation to episode with timecode")
+                                }
+                            }
+                        }
 
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    CustomDivider()
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, 50)
@@ -110,5 +133,5 @@ struct ProfileScreen: View {
 }
 
 #Preview {
-    ProfileScreen(viewModel: ProfileViewModel(userService: UserService(user: previewUser, state: .authenticated)))
+    ProfileScreen(viewModel: ProfileViewModel(userService: UserService(user: previewUser, state: .authenticated)), imageURL: previewAnimeModel.imageURL)
 }

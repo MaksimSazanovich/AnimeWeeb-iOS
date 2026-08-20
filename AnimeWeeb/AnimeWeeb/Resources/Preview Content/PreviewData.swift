@@ -127,3 +127,13 @@ let previewWatchModel = WatchModel(
     season: "Добро пожаловать в класс превосходства 4: Второй год — Первый семестр",
     episodeID: 2706
 )
+
+let previewWatchHistoryItem = WatchHistoryItem(
+    title: "История о перекуре за супермаркетом",
+    imageURL: URL(string: "https://shikimori.io/uploads/poster/animes/62076/main_alt-d79ac691463b536120322c6b2c89eba1.jpeg"),
+    season: 1,
+    episode: 1,
+    stoppedAtSeconds: 111,
+    titleID: 1102,
+    episodeID: 2710
+)
