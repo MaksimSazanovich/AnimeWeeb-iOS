@@ -35,7 +35,7 @@ struct AppHeaderView: View {
 
                     HStack(spacing: 12) {
                         // MARK: Profile Button
-                        ProfileButton(avatarURL: viewModel.user?.avatarUrl) {
+                        ProfileButton(avatarURL: viewModel.user?.avatarPath) {
                             viewModel.didTapProfile()
                         }
 
@@ -118,7 +118,7 @@ struct AppHeaderView: View {
                                     print("Profile Button pressed")
                                 } label: {
                                     HStack {
-                                        ProfileButton(avatarURL: user.avatarUrl) {
+                                        ProfileButton(avatarURL: user.avatarPath) {
                                             viewModel.didTapProfile()
                                         }
 

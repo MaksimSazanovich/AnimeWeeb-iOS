@@ -119,7 +119,7 @@ let previewAnimeModels: [AnimeModel] = (0..<5).flatMap { _ in [
 
 let previewUserAvatarURL = URL(string: "https://lh3.googleusercontent.com/a/ACg8ocKLZtHNr6Zmas68qSITdLdEioxLLnmJZQZ6vNukWls6ZPzQTsA9=s96-c")
 
-let previewUser = User(name: "Maksim Sazanovich", avatarUrl: previewUserAvatarURL, level: 1)
+let previewUser = User(id: 1, email: "test@gmail.com", name: "Maksim Sazanovich", avatarPath: previewUserAvatarURL, level: 1, authState: .guest)
 
 let previewWatchModel = WatchModel(
     titleID: 2,

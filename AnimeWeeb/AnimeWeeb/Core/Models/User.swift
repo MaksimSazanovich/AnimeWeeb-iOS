@@ -8,7 +8,10 @@
 import Foundation
 
 struct User {
+    let id: Int
+    var email: String
     var name: String
-    var avatarUrl: URL?
+    var avatarPath: URL?
     var level: Int
+    var authState: AuthState
 }
