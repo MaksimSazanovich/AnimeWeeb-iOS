@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B590E1BB3038470D00277639 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B590E1BA3038470D00277639 /* GoogleSignIn */; };
+		B590E1BD3038470D00277639 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B590E1BC3038470D00277639 /* GoogleSignInSwift */; };
 		B5950086302DBB260071B04A /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = B5950085302DBB260071B04A /* Shimmer */; };
 		B5DD7CC73020B163001A007C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC63020B163001A007C /* Nuke */; };
 		B5DD7CC93020B163001A007C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC83020B163001A007C /* NukeUI */; };
@@ -53,8 +55,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B590E1BB3038470D00277639 /* GoogleSignIn in Frameworks */,
 				B5950086302DBB260071B04A /* Shimmer in Frameworks */,
 				B5DD7CC73020B163001A007C /* Nuke in Frameworks */,
+				B590E1BD3038470D00277639 /* GoogleSignInSwift in Frameworks */,
 				B5DD7D493022145E001A007C /* TagCloud in Frameworks */,
 				B5DD7CC93020B163001A007C /* NukeUI in Frameworks */,
 			);
@@ -129,6 +133,8 @@
 				B5DD7CC83020B163001A007C /* NukeUI */,
 				B5DD7D483022145E001A007C /* TagCloud */,
 				B5950085302DBB260071B04A /* Shimmer */,
+				B590E1BA3038470D00277639 /* GoogleSignIn */,
+				B590E1BC3038470D00277639 /* GoogleSignInSwift */,
 			);
 			productName = AnimeWeeb;
 			productReference = B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */;
@@ -166,6 +172,7 @@
 				B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */,
 				B5DD7D473022145E001A007C /* XCRemoteSwiftPackageReference "TagCloud" */,
 				B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				B590E1B93038470D00277639 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B5DD7C7E301F6BA8001A007C /* Products */;
@@ -503,6 +510,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B590E1B93038470D00277639 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
 		B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
@@ -530,6 +545,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B590E1BA3038470D00277639 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B590E1B93038470D00277639 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		B590E1BC3038470D00277639 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B590E1B93038470D00277639 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		B5950085302DBB260071B04A /* Shimmer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
