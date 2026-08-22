@@ -13,6 +13,7 @@ final class ScreenFactory {
     private let homeRepository: HomeRepositoryProtocol
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
     private let authRepository: AuthRepositoryProtocol
 
     private let appURLOpener: AppURLOpener
@@ -23,6 +24,7 @@ final class ScreenFactory {
          homeRepository: HomeRepositoryProtocol? = nil,
          watchRepository: WatchRepositoryProtocol? = nil,
          animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil,
+         userRepository: UserRepositoryProtocol? = nil,
          authRepository: AuthRepositoryProtocol? = nil,
          appURLOpener: AppURLOpener = AppURLOpener(),
          userService: UserService = UserService(),
@@ -31,7 +33,8 @@ final class ScreenFactory {
         self.homeRepository = homeRepository ?? HomeRepository(networkService: networkService)
         self.watchRepository = watchRepository ?? WatchRepository(networkService: networkService)
         self.animeDetailsRepository = animeDetailsRepository ?? AnimeDetailsRepository(networkService: networkService)
-        self.authRepository = authRepository ?? AuthRepository(networkService: networkService, googleService: googleService)
+        self.userRepository = userRepository ?? UserRepository(networkService: networkService)
+        self.authRepository = authRepository ?? AuthRepository(networkService: networkService, googleService: googleService, userRepository: userRepository ?? UserRepository(networkService: networkService))
         self.appURLOpener = appURLOpener
         self.userService = userService
         self.googleService = googleService
@@ -121,5 +124,9 @@ final class ScreenFactory {
     func makeProfileScreen() -> some View {
         let viewModel = ProfileViewModel(userService: userService)
         return ProfileScreen(viewModel: viewModel)
+    }
+    
+    func makeAppViewModel() -> AppViewModel {
+        AppViewModel(authRepository: authRepository, userService: userService, googleService: googleService)
     }
 }

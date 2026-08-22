@@ -11,7 +11,14 @@ import SwiftUI
 struct AnimeWeebApp: App {
 
     @State private var coordinator: Coordinator = Coordinator()
+    @State private var appViewModel: AppViewModel
     private let googleService: GoogleService = GoogleService()
+    
+    init() {
+        let coordinator = Coordinator()
+        _coordinator = State(wrappedValue: coordinator)
+        _appViewModel = State(wrappedValue: coordinator.factory.makeAppViewModel())
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -25,7 +32,7 @@ struct AnimeWeebApp: App {
                 coordinator.factory.makeAppHeader(coordinator: coordinator)
             }
             .task {
-                await googleService.restorePreviousSignIn()
+                await appViewModel.bootstrapApp()
             }
             .onOpenURL { url in
                 _ = googleService.handleOpenURL(url)

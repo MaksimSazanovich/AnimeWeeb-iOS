@@ -12,15 +12,16 @@ final class GoogleService {
         GIDSignIn.sharedInstance.handle(url)
     }
     
-    func restorePreviousSignIn() async {
-        do {
-            let user = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
-            print("Тихая авторизация успешна: \(user.profile?.name ?? "")")
-        } catch {
-            print("Гостевой режим / Нет сохраненной сессии")
+    func restorePreviousSignIn() async throws -> String {
+        let user = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
+        
+        guard let idToken = user.idToken?.tokenString else {
+            throw AuthError.signInFailed("Не удалось получить ID Token")
         }
+        
+        return idToken
     }
-
+    
     @MainActor
     func getGoogleIDToken() async throws -> String {
         guard let rootViewController = UIApplication.shared.rootViewController else {
@@ -28,7 +29,7 @@ final class GoogleService {
         }
         
         let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
-
+        
         guard let idToken = result.user.idToken?.tokenString else {
             throw AuthError.signInFailed("Не удалось получить ID Token")
         }

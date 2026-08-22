@@ -7,4 +7,7 @@
 
 protocol AuthRepositoryProtocol {
     func fetchUserWithGoogle() async throws -> User
+    func fetchUserWithGoogle(idToken: String) async throws -> User
+    func fetchRefresh() async throws -> RefreshResponseDTO
+    func autoLogin() async throws -> User
 }

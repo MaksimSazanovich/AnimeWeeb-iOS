@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 final class UserService {
     private(set) var user: User?
     private(set) var authState: AuthState = .guest
@@ -19,5 +20,10 @@ final class UserService {
     func update(user: User) {
         self.user = user
         self.authState = .authenticated
+    }
+    
+    func logout() {
+        self.user = nil
+        self.authState = .guest
     }
 }
