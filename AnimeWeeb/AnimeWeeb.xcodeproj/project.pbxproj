@@ -10,6 +10,7 @@
 		B590E1BB3038470D00277639 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B590E1BA3038470D00277639 /* GoogleSignIn */; };
 		B590E1BD3038470D00277639 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B590E1BC3038470D00277639 /* GoogleSignInSwift */; };
 		B5950086302DBB260071B04A /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = B5950085302DBB260071B04A /* Shimmer */; };
+		B5CE0459303A161800331B7E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = B5CE0458303A161800331B7E /* KeychainAccess */; };
 		B5DD7CC73020B163001A007C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC63020B163001A007C /* Nuke */; };
 		B5DD7CC93020B163001A007C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7CC83020B163001A007C /* NukeUI */; };
 		B5DD7D493022145E001A007C /* TagCloud in Frameworks */ = {isa = PBXBuildFile; productRef = B5DD7D483022145E001A007C /* TagCloud */; };
@@ -70,6 +71,7 @@
 			files = (
 				B590E1BB3038470D00277639 /* GoogleSignIn in Frameworks */,
 				B5950086302DBB260071B04A /* Shimmer in Frameworks */,
+				B5CE0459303A161800331B7E /* KeychainAccess in Frameworks */,
 				B5DD7CC73020B163001A007C /* Nuke in Frameworks */,
 				B590E1BD3038470D00277639 /* GoogleSignInSwift in Frameworks */,
 				B5DD7D493022145E001A007C /* TagCloud in Frameworks */,
@@ -147,6 +149,7 @@
 				B5950085302DBB260071B04A /* Shimmer */,
 				B590E1BA3038470D00277639 /* GoogleSignIn */,
 				B590E1BC3038470D00277639 /* GoogleSignInSwift */,
+				B5CE0458303A161800331B7E /* KeychainAccess */,
 			);
 			productName = AnimeWeeb;
 			productReference = B5DD7C7D301F6BA8001A007C /* AnimeWeeb.app */;
@@ -185,6 +188,7 @@
 				B5DD7D473022145E001A007C /* XCRemoteSwiftPackageReference "TagCloud" */,
 				B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				B590E1B93038470D00277639 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				B5CE0457303A161800331B7E /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B5DD7C7E301F6BA8001A007C /* Products */;
@@ -522,6 +526,14 @@
 				minimumVersion = 1.5.1;
 			};
 		};
+		B5CE0457303A161800331B7E /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B5DD7CC53020B163001A007C /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -555,6 +567,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B5950084302DBB260071B04A /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
 			productName = Shimmer;
+		};
+		B5CE0458303A161800331B7E /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5CE0457303A161800331B7E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 		B5DD7CC63020B163001A007C /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
