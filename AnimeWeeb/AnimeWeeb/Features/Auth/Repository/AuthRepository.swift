@@ -28,7 +28,23 @@ final class AuthRepository: AuthRepositoryProtocol {
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
         
+        print("\(dto.accessToken)\n")
+        print(dto.refreshToken)
+        print("deviceID: \(UIDevice.deviceID)")
+        print("deviceName: \(UIDevice.deviceName)")
+        
         return dto.user.toDomain()
+    }
+    
+    func fetchRefresh() async throws {
+        guard let refreshToken = try keychain.get(KeychainKey.refreshToken.rawValue) else {
+            throw AuthError.noRefreshToken
+        }
+        
+        let dto: RefreshResponseDTO = try await networkService.request(AuthEndpoint.refresh(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        
+        try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
+        try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
     }
 }
 

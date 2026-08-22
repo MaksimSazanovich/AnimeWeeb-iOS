@@ -11,6 +11,7 @@ enum AuthError: Error, LocalizedError {
     case noRootViewController
     case signInFailed(String)
     case cancelled
+    case noRefreshToken
     case unknown
 
     var errorDescription: String? {
@@ -21,6 +22,8 @@ enum AuthError: Error, LocalizedError {
             return "Ошибка авторизации: \(message)"
         case .cancelled:
             return "Авторизация была отменена пользователем."
+        case .noRefreshToken:
+            return "Refresh token протух."
         case .unknown:
             return "Произошла неизвестная ошибка при попытке входа."
         }
