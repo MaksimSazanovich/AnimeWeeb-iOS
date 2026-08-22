@@ -18,5 +18,6 @@ final class UserService {
 
     func update(user: User) {
         self.user = user
+        self.authState = .authenticated
     }
 }

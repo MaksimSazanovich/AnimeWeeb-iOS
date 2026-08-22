@@ -13,22 +13,28 @@ final class ScreenFactory {
     private let homeRepository: HomeRepositoryProtocol
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
+    private let authRepository: AuthRepositoryProtocol
 
     private let appURLOpener: AppURLOpener
     private let userService: UserService
+    private let googleService: GoogleService
 
     init(networkService: NetworkServiceProtocol = NetworkService(),
          homeRepository: HomeRepositoryProtocol? = nil,
          watchRepository: WatchRepositoryProtocol? = nil,
          animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil,
+         authRepository: AuthRepositoryProtocol? = nil,
          appURLOpener: AppURLOpener = AppURLOpener(),
-         userService: UserService = UserService()) {
+         userService: UserService = UserService(),
+         googleService: GoogleService = GoogleService()) {
         self.networkService = networkService
         self.homeRepository = homeRepository ?? HomeRepository(networkService: networkService)
         self.watchRepository = watchRepository ?? WatchRepository(networkService: networkService)
         self.animeDetailsRepository = animeDetailsRepository ?? AnimeDetailsRepository(networkService: networkService)
+        self.authRepository = authRepository ?? AuthRepository(networkService: networkService, googleService: googleService)
         self.appURLOpener = appURLOpener
         self.userService = userService
+        self.googleService = googleService
     }
 
     func makeAppHeader(coordinator: Coordinator) -> some View {
@@ -65,7 +71,7 @@ final class ScreenFactory {
     }
 
     func makeLoginScreen(coordinator: Coordinator) -> some View {
-        let viewModel = LoginViewModel(authService: GoogleService(), userService: userService)
+        let viewModel = LoginViewModel(authRepository: authRepository, userService: userService)
         viewModel.onRoute = { [weak coordinator] in
             coordinator?.openRegister()
         }

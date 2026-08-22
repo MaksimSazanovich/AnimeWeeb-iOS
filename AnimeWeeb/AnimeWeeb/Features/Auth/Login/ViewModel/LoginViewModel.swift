@@ -11,22 +11,20 @@ import Foundation
 @Observable
 final class LoginViewModel: AuthViewModelProtocol {
     
-    private let authService: GoogleService
+    private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
     
     var onRoute: (() -> Void)?
     
-    init(authService: GoogleService, userService: UserService) {
-        self.authService = authService
+    init(authRepository: AuthRepositoryProtocol, userService: UserService) {
+        self.authRepository = authRepository
         self.userService = userService
     }
     
     func loginWithGoogle() async {
         do {
-            let authResult = try await authService.getGoogleIDToken()
-            print(authResult)
-            
-            //let user = User(id: <#T##Int#>, email: <#T##String#>, name: <#T##String#>, level: <#T##Int#>)
+            let user = try await authRepository.fetchUserWithGoogle()
+            userService.update(user: user)
         } catch {
             
         }
