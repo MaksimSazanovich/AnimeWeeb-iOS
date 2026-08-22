@@ -5,6 +5,7 @@
 //  Created by Maksim Sazanovich
 //
 
+import GoogleSignInSwift
 import SwiftUI
 
 struct LoginScreen: View {
@@ -27,7 +28,7 @@ struct LoginScreen: View {
                                 .font(.subheadline)
                                 .foregroundStyle(.subtitle)
 
-                            // TODO: Google Button
+
                             ZStack {
                                 RoundedRectangle(cornerRadius: 40)
                                     .fill(.white)
@@ -37,6 +38,17 @@ struct LoginScreen: View {
                                     .font(.body)
                                     .foregroundStyle(.black)
                             }
+
+                            GoogleSignInButton {
+                                Task {
+                                    do {
+                                        try await viewModel.loginWithGoogle()
+                                    } catch {
+                                        
+                                    }
+                                }
+                            }
+    
 
                             ZStack {
                                 CustomDivider()
@@ -85,5 +97,5 @@ struct LoginScreen: View {
 }
 
 #Preview {
-    LoginScreen(viewModel: LoginViewModel())
+    //LoginScreen(viewModel: LoginViewModel())
 }

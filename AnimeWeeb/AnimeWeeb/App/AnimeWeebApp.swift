@@ -11,6 +11,7 @@ import SwiftUI
 struct AnimeWeebApp: App {
 
     @State private var coordinator: Coordinator = Coordinator()
+    private let authService: GoogleService = GoogleService()
 
     var body: some Scene {
         WindowGroup {
@@ -22,6 +23,12 @@ struct AnimeWeebApp: App {
             }
             .safeAreaInset(edge: .top) {
                 coordinator.factory.makeAppHeader(coordinator: coordinator)
+            }
+            .task {
+                await authService.restorePreviousSignIn()
+            }
+            .onOpenURL { url in
+                _ = authService.handleOpenURL(url)
             }
         }
     }

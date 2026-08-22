@@ -128,7 +128,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5DD7C88301F6BAA001A007C /* Build configuration list for PBXNativeTarget "AnimeWeeb" */;
 			buildPhases = (
-				B54E905E30335219003FA0A8 /* Run SwiftLint */,
 				B5DD7C79301F6BA8001A007C /* Sources */,
 				B5DD7C7A301F6BA8001A007C /* Frameworks */,
 				B5DD7C7B301F6BA8001A007C /* Resources */,
@@ -214,28 +213,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B54E905E30335219003FA0A8 /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\n\ncd \"$SRCROOT/..\"\n\nif command -v swiftlint >/dev/null 2>&1; then\n    swiftlint \nelse\n    echo \"warning: SwiftLint not installed\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B562C1A630330E1E00874732 /* Sources */ = {
@@ -435,7 +412,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AnimeWeeb/Info.plist;
+				INFOPLIST_FILE = AnimeWeeb/Configs/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -472,7 +449,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AnimeWeeb/Info.plist;
+				INFOPLIST_FILE = AnimeWeeb/Configs/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

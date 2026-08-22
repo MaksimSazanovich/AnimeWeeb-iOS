@@ -65,7 +65,7 @@ final class ScreenFactory {
     }
 
     func makeLoginScreen(coordinator: Coordinator) -> some View {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(authService: GoogleService(), userService: userService)
         viewModel.onRoute = { [weak coordinator] in
             coordinator?.openRegister()
         }
