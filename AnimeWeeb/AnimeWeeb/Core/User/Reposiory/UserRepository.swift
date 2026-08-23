@@ -15,7 +15,7 @@ final class UserRepository: UserRepositoryProtocol {
     }
     
     func fetchUser(accessToken: String) async throws -> User  {
-        let dto: UserMeResponseDTO = try await networkService.request(UserEndpoint.getMe(accessToken: accessToken))
+        let dto: UserMeResponse = try await networkService.request(UserEndpoint.getMe(accessToken: accessToken))
         
         return dto.getUser()
     }

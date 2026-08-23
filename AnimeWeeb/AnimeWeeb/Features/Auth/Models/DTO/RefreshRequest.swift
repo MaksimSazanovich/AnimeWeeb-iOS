@@ -1,5 +1,5 @@
 //
-//  RefreshRequestDTO.swift
+//  RefreshRequest.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RefreshRequestDTO: Encodable {
+struct RefreshRequest: Encodable {
     let refreshToken: String
     let deviceId: String
     let deviceName: String

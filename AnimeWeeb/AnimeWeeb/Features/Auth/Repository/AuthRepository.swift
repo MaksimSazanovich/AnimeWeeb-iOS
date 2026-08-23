@@ -26,7 +26,7 @@ final class AuthRepository: AuthRepositoryProtocol {
     func fetchUserWithGoogle() async throws -> User {
         let idToken = try await googleService.getGoogleIDToken()
         
-        let dto: AuthResponseDTO = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: AuthResponse = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
         
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -40,7 +40,7 @@ final class AuthRepository: AuthRepositoryProtocol {
     }
     
     func fetchUserWithGoogle(idToken: String) async throws -> User {
-        let dto: AuthResponseDTO = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: AuthResponse = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
         
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -48,12 +48,12 @@ final class AuthRepository: AuthRepositoryProtocol {
         return dto.user.toDomain()
     }
     
-    func fetchRefresh() async throws -> RefreshResponseDTO {
+    func fetchRefresh() async throws -> RefreshResponse {
         guard let refreshToken = try keychain.get(KeychainKey.refreshToken.rawValue) else {
             throw AuthError.noRefreshToken
         }
         
-        let dto: RefreshResponseDTO = try await networkService.request(AuthEndpoint.refresh(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: RefreshResponse = try await networkService.request(AuthEndpoint.refresh(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
         
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -62,7 +62,7 @@ final class AuthRepository: AuthRepositoryProtocol {
     }
     
     func autoLogin() async throws -> User {
-        let dto: RefreshResponseDTO = try await fetchRefresh()
+        let dto: RefreshResponse = try await fetchRefresh()
         let accessToken = dto.accessToken
         print(dto.refreshToken)
         print("deviceID: \(UIDevice.deviceID)")
@@ -76,13 +76,13 @@ final class AuthRepository: AuthRepositoryProtocol {
             throw AuthError.noRefreshToken
         }
         
-        let dto: LogoutResponseDTO = try await networkService.request(AuthEndpoint.logout(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: LogoutResponse = try await networkService.request(AuthEndpoint.logout(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
         
         return dto.message
     }
     
     func fetchLoginRequestCode(email: String) async throws -> String {
-        let dto: LoginRequestCodeResponseDTO
+        let dto: LoginCodeResponse
         do {
             dto = try await networkService.request(AuthEndpoint.loginRequestCode(email: email))
         } catch NetworkError.serverError(let statusCode) where statusCode == 404 {

@@ -15,7 +15,7 @@ final class HomeRepository: HomeRepositoryProtocol {
     }
 
     func fetchHomeAnimes() async throws -> HomeModel {
-        let dto: HomeResponseDTO = try await networkService.request(AnimeEndpoint.getHomeAnimes)
+        let dto: HomeResponse = try await networkService.request(AnimeEndpoint.getHomeAnimes)
 
         return dto.toDomain()
     }

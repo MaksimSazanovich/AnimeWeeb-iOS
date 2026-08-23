@@ -33,7 +33,7 @@ public enum UserEndpoint: Endpoint {
     public var body: (any Encodable)? {
         switch self {
         case .getMe(accessToken: let accessToken):
-            return UserRequestDTO(accessToken: accessToken)
+            return UserRequest(accessToken: accessToken)
         }
     }
     

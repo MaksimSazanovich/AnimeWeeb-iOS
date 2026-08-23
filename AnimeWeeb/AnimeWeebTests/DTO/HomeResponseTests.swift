@@ -1,5 +1,5 @@
 //
-//  HomeResponseDTOTests.swift
+//  HomeResponseTests.swift
 //  AnimeWeebTests
 //
 //  Created by Maksim Sazanovich
@@ -9,7 +9,7 @@
 import Foundation
 import Testing
 
-struct HomeResponseDTOTests {
+struct HomeResponseTests {
 
     private func makeJSON(
         latestEpisodes: String = "[]",
@@ -33,7 +33,7 @@ struct HomeResponseDTOTests {
         """
 
         // Act
-        let dto = try JSONDecoder().decode(HomeResponseDTO.self, from: Data(makeJSON(titles: "[\(titleJSON)]").utf8))
+        let dto = try JSONDecoder().decode(HomeResponse.self, from: Data(makeJSON(titles: "[\(titleJSON)]").utf8))
 
         // Assert
         #expect(dto.totalTitles == 61)
@@ -46,7 +46,7 @@ struct HomeResponseDTOTests {
     @Test("Decodes empty lists and maps to empty domain model")
     func testDecodingEmptyThenToDomain() throws {
         // Act
-        let dto = try JSONDecoder().decode(HomeResponseDTO.self, from: Data(makeJSON().utf8))
+        let dto = try JSONDecoder().decode(HomeResponse.self, from: Data(makeJSON().utf8))
         let result = dto.toDomain()
 
         // Assert

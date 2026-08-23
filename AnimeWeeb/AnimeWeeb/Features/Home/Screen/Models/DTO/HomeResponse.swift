@@ -1,5 +1,5 @@
 //
-//  HomeResponseDTO.swift
+//  HomeResponse.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct HomeResponseDTO: Codable {
+struct HomeResponse: Codable {
     let latestEpisodes: [LatestEpisodeDTO]
     let titles: [TitleDTO]
     let totalTitles: Int
 }
 
-extension HomeResponseDTO {
+extension HomeResponse {
     func toDomain() -> HomeModel {
         HomeModel(newReleases: latestEpisodes.map { $0.toDomain() }, animes: titles.map { $0.toDomain() }, totalAnimes: totalTitles)
     }

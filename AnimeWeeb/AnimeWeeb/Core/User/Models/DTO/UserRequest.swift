@@ -1,5 +1,5 @@
 //
-//  UserRequestDTO.swift
+//  UserRequest.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct UserRequestDTO: Encodable {
+struct UserRequest: Encodable {
     let accessToken: String
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 @MainActor
 @Observable
@@ -35,7 +36,7 @@ final class LoginViewModel: AuthViewModelProtocol {
                 userService.update(user: user)
                 state = .loaded
                 onRoute?(Screen.home)
-            } catch is CancellationError {
+            } catch let error as GIDSignInError where error.code == .canceled {
                 state = .idle
             } catch {
                 state = .failed(error)

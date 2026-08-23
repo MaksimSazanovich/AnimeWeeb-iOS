@@ -1,12 +1,12 @@
 //
-//  AuthResponseDTO.swift
+//  AuthResponse.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
 //
 
 
-struct AuthResponseDTO: Decodable {
+struct AuthResponse: Decodable {
     let accessToken: String
     let refreshToken: String
     let user: UserDTO

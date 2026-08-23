@@ -39,13 +39,13 @@ public enum AuthEndpoint: Endpoint {
     public var body: (any Encodable)? {
         switch self {
         case .google(let idToken, let deviceID, let deviceName):
-            return GoogleAuthRequestDTO(idToken: idToken, deviceId: deviceID, deviceName: deviceName)
+            return GoogleAuthRequest(idToken: idToken, deviceId: deviceID, deviceName: deviceName)
         case .refresh(let refreshToken, let deviceID, let deviceName):
-            return RefreshRequestDTO(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
+            return RefreshRequest(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
         case .logout(let refreshToken, let deviceID, let deviceName):
-            return LogoutRequestDTO(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
+            return LogoutRequest(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
         case .loginRequestCode(email: let email):
-            return LoginRequestCodeRequestDTO(email: email)
+            return LoginCodeRequest(email: email)
         }
     }
 }

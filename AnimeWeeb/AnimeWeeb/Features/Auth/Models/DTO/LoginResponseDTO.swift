@@ -1,5 +1,5 @@
 //
-//  LogoutResponseDTO.swift
+//  LoginCodeResponse.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct LogoutResponseDTO: Decodable {
+struct LoginCodeResponse: Codable {
     let message: String
 }
