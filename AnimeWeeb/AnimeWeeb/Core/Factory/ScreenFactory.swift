@@ -8,33 +8,35 @@
 import SwiftUI
 
 final class ScreenFactory {
-    private let networkService: NetworkServiceProtocol
-
+    
     private let homeRepository: HomeRepositoryProtocol
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private let authRepository: AuthRepositoryProtocol
 
+    private let networkService: NetworkServiceProtocol
     private let appURLOpener: AppURLOpener
     private let userService: UserService
     private let googleService: GoogleService
 
-    init(networkService: NetworkServiceProtocol = NetworkService(),
-         homeRepository: HomeRepositoryProtocol? = nil,
-         watchRepository: WatchRepositoryProtocol? = nil,
-         animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil,
-         userRepository: UserRepositoryProtocol? = nil,
-         authRepository: AuthRepositoryProtocol? = nil,
-         appURLOpener: AppURLOpener = AppURLOpener(),
-         userService: UserService = UserService(),
-         googleService: GoogleService = GoogleService()) {
+    init(homeRepository: HomeRepositoryProtocol,
+         watchRepository: WatchRepositoryProtocol,
+         animeDetailsRepository: AnimeDetailsRepositoryProtocol,
+         userRepository: UserRepositoryProtocol,
+         authRepository: AuthRepositoryProtocol,
+         
+         networkService: NetworkServiceProtocol,
+         appURLOpener: AppURLOpener,
+         userService: UserService,
+         googleService: GoogleService) {
+        self.homeRepository = homeRepository
+        self.watchRepository = watchRepository
+        self.animeDetailsRepository = animeDetailsRepository
+        self.userRepository = userRepository
+        self.authRepository = authRepository
+        
         self.networkService = networkService
-        self.homeRepository = homeRepository ?? HomeRepository(networkService: networkService)
-        self.watchRepository = watchRepository ?? WatchRepository(networkService: networkService)
-        self.animeDetailsRepository = animeDetailsRepository ?? AnimeDetailsRepository(networkService: networkService)
-        self.userRepository = userRepository ?? UserRepository(networkService: networkService)
-        self.authRepository = authRepository ?? AuthRepository(networkService: networkService, googleService: googleService, userRepository: userRepository ?? UserRepository(networkService: networkService))
         self.appURLOpener = appURLOpener
         self.userService = userService
         self.googleService = googleService

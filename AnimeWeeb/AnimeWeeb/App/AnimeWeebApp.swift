@@ -10,32 +10,24 @@ import SwiftUI
 @main
 struct AnimeWeebApp: App {
 
-    @State private var coordinator: Coordinator = Coordinator()
-    @State private var appViewModel: AppViewModel
-    private let googleService: GoogleService = GoogleService()
+    @State private var container = AppContainer()
     
-    init() {
-        let coordinator = Coordinator()
-        _coordinator = State(wrappedValue: coordinator)
-        _appViewModel = State(wrappedValue: coordinator.factory.makeAppViewModel())
-    }
-
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $coordinator.path) {
-                coordinator.resolve(screen: .home)
+            NavigationStack(path: $container.coordinator.path) {
+                container.coordinator.resolve(screen: .home)
                     .navigationDestination(for: Screen.self) { screen in
-                        coordinator.resolve(screen: screen)
+                        container.coordinator.resolve(screen: screen)
                     }
             }
             .safeAreaInset(edge: .top) {
-                coordinator.factory.makeAppHeader(coordinator: coordinator)
+                container.screenFactory.makeAppHeader(coordinator: container.coordinator)
             }
             .task {
-                await appViewModel.bootstrapApp()
+                await container.appViewModel.bootstrapApp()
             }
             .onOpenURL { url in
-                _ = googleService.handleOpenURL(url)
+                _ = container.googleService.handleOpenURL(url)
             }
         }
     }

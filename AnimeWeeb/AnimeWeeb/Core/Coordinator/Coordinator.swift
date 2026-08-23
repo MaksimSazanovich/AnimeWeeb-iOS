@@ -14,7 +14,7 @@ final class Coordinator {
 
     let factory: ScreenFactory
 
-    init(factory: ScreenFactory = ScreenFactory()) {
+    init(factory: ScreenFactory) {
         self.factory = factory
     }
 
