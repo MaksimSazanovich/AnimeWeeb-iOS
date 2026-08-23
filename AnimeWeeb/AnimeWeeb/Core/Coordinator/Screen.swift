@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Screen: ComplexEquatable {
+enum Screen: Hashable {
     case home
     case login
     case register

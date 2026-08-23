@@ -40,28 +40,19 @@ final class Coordinator {
             factory.makeProfileScreen(coordinator: self)
         }
     }
-
-    func openHome() {
-        path = NavigationPath()
+    
+    func navigate(to screen: Screen) {
+        switch screen {
+        case .home:
+            path = NavigationPath()
+        default:
+            path.append(screen)
+        }
     }
-
-    func openLogin() {
-        path.append(Screen.login)
-    }
-
-    func openRegister() {
-        path.append(Screen.register)
-    }
-
-    func openAnimeDetails(animeID: Int) {
-        path.append(Screen.animeDetails(animeID: animeID))
-    }
-
-    func openWatch(watchModel: WatchModel) {
-        path.append(Screen.watch(model: watchModel))
-    }
-
-    func openProfile() {
-        path.append(Screen.profile)
+    
+    func pop() {
+        if !path.isEmpty {
+            path.removeLast()
+        }
     }
 }

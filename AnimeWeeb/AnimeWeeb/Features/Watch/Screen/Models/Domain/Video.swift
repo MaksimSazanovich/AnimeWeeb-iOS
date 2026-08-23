@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Video {
+struct Video: Hashable {
     let dubberName: String
     let resolution: String
     let url: URL?

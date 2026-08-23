@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WatchModel {
+struct WatchModel: Hashable {
 
     let titleID: Int
     let title: String

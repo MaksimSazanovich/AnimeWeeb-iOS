@@ -44,18 +44,8 @@ final class ScreenFactory {
 
     func makeAppHeader(coordinator: Coordinator) -> some View {
         let viewModel = AppHeaderViewModel(urlOpener: appURLOpener, userService: userService)
-
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .home:
-                coordinator?.openHome()
-            case .login:
-                coordinator?.openLogin()
-            case .profile:
-                coordinator?.openProfile()
-            case .watch, .register, .animeDetails:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
 
         return AppHeaderView(viewModel: viewModel)
@@ -64,16 +54,8 @@ final class ScreenFactory {
     func makeHomeScreen(coordinator: Coordinator) -> some View {
 
         let viewModel = HomeViewModel(repository: self.homeRepository)
-        
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .animeDetails(let animeID):
-                coordinator?.openAnimeDetails(animeID: animeID)
-            case .watch(model: let watchModel):
-                coordinator?.openWatch(watchModel: watchModel)
-            default:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
 
         return HomeScreen(viewModel: viewModel)
@@ -82,14 +64,7 @@ final class ScreenFactory {
     func makeLoginScreen(coordinator: Coordinator) -> some View {
         let viewModel = LoginViewModel(authRepository: authRepository, userService: userService)
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .home:
-                coordinator?.openHome()
-            case .register:
-                coordinator?.openRegister()
-            default:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
 
         return LoginScreen(viewModel: viewModel)
@@ -98,14 +73,7 @@ final class ScreenFactory {
     func makeRegisterScreen(coordinator: Coordinator) -> some View {
         let viewModel = RegisterViewModel()
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .home:
-                coordinator?.openHome()
-            case .login:
-                coordinator?.openLogin()
-            default:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
 
         return RegisterScreen(viewModel: viewModel)
@@ -114,12 +82,7 @@ final class ScreenFactory {
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {
         let viewModel = AnimeDetailsViewModel(animeID: animeID, repository: animeDetailsRepository)
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .home:
-                coordinator?.openHome()
-            default:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
         return AnimeDetailsScreen(viewModel: viewModel)
     }
@@ -127,14 +90,7 @@ final class ScreenFactory {
     func makeWatchScreen(model: WatchModel, coordinator: Coordinator) -> some View {
         let viewModel = WatchViewModel(model: model, repository: watchRepository)
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .home:
-                coordinator?.openHome()
-            case .animeDetails(animeID: let id):
-                coordinator?.openAnimeDetails(animeID: id)
-            default:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
 
         return WatchScreen(viewModel: viewModel)
@@ -143,12 +99,7 @@ final class ScreenFactory {
     func makeProfileScreen(coordinator: Coordinator) -> some View {
         let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository)
         viewModel.onRoute = { [weak coordinator] destination in
-            switch destination {
-            case .home:
-                coordinator?.openHome()
-            default:
-                break
-            }
+            coordinator?.navigate(to: destination)
         }
         return ProfileScreen(viewModel: viewModel)
     }
