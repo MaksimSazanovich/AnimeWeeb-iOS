@@ -54,8 +54,8 @@ struct LoginScreen: View {
                             }
                             
                             // MARK: Error View
-                            if case .failed = viewModel.state {
-                                ErrorView(title: "У вас нет аккаунта, пожалуйста зарегистрируйтесь, чтобы войти")
+                            if case .failed(let error) = viewModel.state {
+                                ErrorView(title: error.localizedDescription)
                                     .lineLimit(2)
                             }
                             

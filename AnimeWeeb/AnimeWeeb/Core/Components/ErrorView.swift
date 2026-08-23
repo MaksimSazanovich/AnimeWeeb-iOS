@@ -33,6 +33,7 @@ struct ErrorView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)

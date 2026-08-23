@@ -15,8 +15,8 @@ final class AuthRepository: AuthRepositoryProtocol {
     private let userRepository: UserRepositoryProtocol
     
     private let keychain = Keychain(service: "MS.AnimeWeeb")
-            .accessibility(.whenUnlocked)
-
+        .accessibility(.whenUnlocked)
+    
     public init(networkService: NetworkServiceProtocol, googleService: GoogleService, userRepository: UserRepositoryProtocol) {
         self.networkService = networkService
         self.googleService = googleService
@@ -44,7 +44,7 @@ final class AuthRepository: AuthRepositoryProtocol {
         
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
-         
+        
         return dto.user.toDomain()
     }
     
@@ -82,7 +82,13 @@ final class AuthRepository: AuthRepositoryProtocol {
     }
     
     func fetchLoginRequestCode(email: String) async throws -> String {
-        let dto: LoginRequestCodeResponseDTO = try await networkService.request(AuthEndpoint.loginRequestCode(email: email))
+        let dto: LoginRequestCodeResponseDTO
+        do {
+            dto = try await networkService.request(AuthEndpoint.loginRequestCode(email: email))
+        } catch NetworkError.serverError(let statusCode) where statusCode == 404 {
+            throw AuthError.noAccount
+        }
+        
         return dto.message
     }
 }

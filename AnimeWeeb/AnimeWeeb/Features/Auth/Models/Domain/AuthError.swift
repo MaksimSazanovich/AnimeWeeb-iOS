@@ -13,6 +13,7 @@ enum AuthError: Error, LocalizedError {
     case cancelled
     case noRefreshToken
     case logoutFailed
+    case noAccount
     case unknown
 
     var errorDescription: String? {
@@ -27,6 +28,8 @@ enum AuthError: Error, LocalizedError {
             return "Refresh token протух."
         case .logoutFailed:
             return "Не удалось выйти из аккаунта."
+        case .noAccount:
+            return "У вас нет аккаунта, пожалуйста зарегистрируйтесь, чтобы войти"
         case .unknown:
             return "Произошла неизвестная ошибка при попытке входа."
         }
