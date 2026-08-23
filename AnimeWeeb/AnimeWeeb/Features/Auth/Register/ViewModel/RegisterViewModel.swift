@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 @Observable
 final class RegisterViewModel: AuthViewModelProtocol {
-    
+
     var state: ViewState = .idle
     var onRoute: ((Screen) -> Void)?
 

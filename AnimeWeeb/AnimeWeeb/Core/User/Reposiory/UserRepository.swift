@@ -13,12 +13,10 @@ final class UserRepository: UserRepositoryProtocol {
     public init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
-    
-    func fetchUser(accessToken: String) async throws -> User  {
+
+    func fetchUser(accessToken: String) async throws -> User {
         let dto: UserMeResponse = try await networkService.request(UserEndpoint.getMe(accessToken: accessToken))
-        
+
         return dto.getUser()
     }
 }
-
-

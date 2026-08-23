@@ -43,7 +43,7 @@ final class HomeViewModel {
     var newReleases: [NewReleasesAnimeModel] {
         model?.newReleases ?? []
     }
-    
+
     var onRoute: ((Screen) -> Void)?
 
     var selectedGenre: Genre = .all

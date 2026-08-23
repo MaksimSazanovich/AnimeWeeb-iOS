@@ -9,11 +9,11 @@ import GoogleSignInSwift
 import SwiftUI
 
 struct LoginScreen: View {
-    
+
     @Bindable var viewModel: LoginViewModel
-    
+
     var body: some View {
-        
+
         ScrollView {
             ZStack {
                 VStack {
@@ -21,44 +21,44 @@ struct LoginScreen: View {
                         Text("Войти")
                             .font(.system(size: 30, weight: .bold))
                             .foregroundStyle(.white)
-                        
+
                         VStack(spacing: 32) {
                             Text("Введите email, чтобы получить код")
                                 .font(.subheadline)
                                 .foregroundStyle(.subtitle)
-                            
+
                             // MARK: Google Button
                             GoogleSignInButton {
                                 viewModel.didTapLoginWithGoogle()
                             }
                             .disabled(viewModel.state == .loading)
-                            
+
                             ZStack {
                                 CustomDivider()
-                                
+
                                 Text("или через email")
                                     .font(.caption)
                                     .foregroundStyle(.genreText)
                                     .padding(.horizontal, 12)
                                     .background(Color.background)
                             }
-                            
+
                             VStack(spacing: 16) {
                                 // MARK: Email TextField
                                 EmailTextField(email: $viewModel.email)
-                                
+
                                 // MARK: GetCode Button
                                 GetCodeButton(state: $viewModel.state) {
                                     viewModel.didTapGetCodeButton()
                                 }
                             }
-                            
+
                             // MARK: Error View
                             if case .failed(let error) = viewModel.state {
                                 ErrorView(title: error.localizedDescription)
                                     .lineLimit(2)
                             }
-                            
+
                             // MARK: NoAccount Button
                             Button {
                                 viewModel.didTapSwitchAuthButton()
@@ -67,7 +67,7 @@ struct LoginScreen: View {
                                     .font(.system(size: 14))
                                     .foregroundStyle(.seasonBadgeText)
                             }
-                            
+
                         }
                     }
                 }
@@ -85,5 +85,5 @@ struct LoginScreen: View {
 }
 
 #Preview {
-    //LoginScreen(viewModel: LoginViewModel())
+    // LoginScreen(viewModel: LoginViewModel())
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct AnimeWeebApp: App {
 
     @State private var container = AppContainer()
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $container.coordinator.path) {

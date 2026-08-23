@@ -12,7 +12,7 @@ extension UIDevice {
     static var deviceID: String {
         current.identifierForVendor?.uuidString ?? UUID().uuidString
     }
-    
+
     static var deviceName: String {
         current.name
     }

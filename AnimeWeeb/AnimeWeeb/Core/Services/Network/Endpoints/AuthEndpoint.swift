@@ -12,13 +12,13 @@ public enum AuthEndpoint: Endpoint {
     case refresh(refreshToken: String, deviceID: String, deviceName: String)
     case logout(refreshToken: String, deviceID: String, deviceName: String)
     case loginRequestCode(email: String)
-    
+
     public var method: HTTPMethod {
         switch self {
         case .google, .refresh, .logout, .loginRequestCode: .post
         }
     }
-    
+
     public var path: String {
         switch self {
         case .google: return "auth/google"
@@ -27,23 +27,23 @@ public enum AuthEndpoint: Endpoint {
         case .loginRequestCode: return "auth/login/request-code"
         }
     }
-    
+
     public var headers: [String : String]? {
         nil
     }
-    
+
     public var queryItems: [URLQueryItem]? {
         nil
     }
-    
+
     public var body: (any Encodable)? {
         switch self {
         case .google(let idToken, let deviceID, let deviceName):
-            return GoogleAuthRequest(idToken: idToken, deviceId: deviceID, deviceName: deviceName)
+            return GoogleAuthRequest(idToken: idToken, deviceID: deviceID, deviceName: deviceName)
         case .refresh(let refreshToken, let deviceID, let deviceName):
-            return RefreshRequest(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
+            return RefreshRequest(refreshToken: refreshToken, deviceID: deviceID, deviceName: deviceName)
         case .logout(let refreshToken, let deviceID, let deviceName):
-            return LogoutRequest(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
+            return LogoutRequest(refreshToken: refreshToken, deviceID: deviceID, deviceName: deviceName)
         case .loginRequestCode(email: let email):
             return LoginCodeRequest(email: email)
         }

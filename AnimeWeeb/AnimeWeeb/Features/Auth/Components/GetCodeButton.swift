@@ -10,9 +10,9 @@ import SwiftUI
 struct GetCodeButton: View {
 
     @Binding var state: ViewState
-    
+
     var onAction: () -> Void
-    
+
     var body: some View {
         Button {
             onAction()
@@ -21,7 +21,7 @@ struct GetCodeButton: View {
                 if state == .loading {
                     ProgressView()
                 }
-                
+
                 Text("Получить код")
                     .font(.system(.body, weight: .semibold))
                     .foregroundStyle(.white)

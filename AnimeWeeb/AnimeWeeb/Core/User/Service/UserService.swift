@@ -21,7 +21,7 @@ final class UserService {
         self.user = user
         self.authState = .authenticated
     }
-    
+
     func logout() {
         self.user = nil
         self.authState = .guest

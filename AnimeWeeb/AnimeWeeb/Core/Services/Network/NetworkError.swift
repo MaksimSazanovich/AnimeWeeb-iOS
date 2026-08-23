@@ -14,7 +14,7 @@ public enum NetworkError: Error, LocalizedError {
     case emptyResponse
     case serverError(statusCode: Int)
     case decodingFailed
-    
+
     public var errorDescription: String? {
         switch self {
         case .invalidURL, .invalidBaseURL:

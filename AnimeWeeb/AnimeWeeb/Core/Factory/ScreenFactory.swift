@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class ScreenFactory {
-    
+
     private let homeRepository: HomeRepositoryProtocol
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
@@ -25,7 +25,7 @@ final class ScreenFactory {
          animeDetailsRepository: AnimeDetailsRepositoryProtocol,
          userRepository: UserRepositoryProtocol,
          authRepository: AuthRepositoryProtocol,
-         
+
          networkService: NetworkServiceProtocol,
          appURLOpener: AppURLOpener,
          userService: UserService,
@@ -35,7 +35,7 @@ final class ScreenFactory {
         self.animeDetailsRepository = animeDetailsRepository
         self.userRepository = userRepository
         self.authRepository = authRepository
-        
+
         self.networkService = networkService
         self.appURLOpener = appURLOpener
         self.userService = userService
@@ -103,7 +103,7 @@ final class ScreenFactory {
         }
         return ProfileScreen(viewModel: viewModel)
     }
-    
+
     func makeAppViewModel() -> AppViewModel {
         AppViewModel(authRepository: authRepository, userService: userService, googleService: googleService)
     }

@@ -5,7 +5,6 @@
 //  Created by Maksim Sazanovich
 //
 
-
 struct AuthResponse: Decodable {
     let accessToken: String
     let refreshToken: String

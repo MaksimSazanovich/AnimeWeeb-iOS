@@ -44,7 +44,7 @@ struct ErrorView: View {
                 .stroke(.errorStroke, lineWidth: 1)
         }
     }
-    
+
     init(title: String, buttonTitle: String? = nil, onRetry: (() -> Void)? = nil) {
         self.title = title
         self.buttonTitle = buttonTitle

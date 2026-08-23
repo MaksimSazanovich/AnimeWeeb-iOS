@@ -40,7 +40,7 @@ final class Coordinator {
             factory.makeProfileScreen(coordinator: self)
         }
     }
-    
+
     func navigate(to screen: Screen) {
         switch screen {
         case .home:
@@ -49,7 +49,7 @@ final class Coordinator {
             path.append(screen)
         }
     }
-    
+
     func pop() {
         if !path.isEmpty {
             path.removeLast()

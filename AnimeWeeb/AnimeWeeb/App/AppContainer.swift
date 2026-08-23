@@ -32,7 +32,7 @@ final class AppContainer {
         userService: UserService = UserService(),
         googleService: GoogleService = GoogleService(),
         appURLOpener: AppURLOpener = AppURLOpener(),
-        
+
         homeRepository: HomeRepositoryProtocol? = nil,
         watchRepository: WatchRepositoryProtocol? = nil,
         animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil,
@@ -66,7 +66,7 @@ final class AppContainer {
             animeDetailsRepository: animeRepo,
             userRepository: userRepo,
             authRepository: authRepo,
-            
+
             networkService: networkService,
             appURLOpener: appURLOpener,
             userService: userService,

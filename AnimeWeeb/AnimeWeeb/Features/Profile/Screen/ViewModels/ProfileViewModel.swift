@@ -13,10 +13,10 @@ final class ProfileViewModel {
 
     private let userService: UserService
     private let authRepository: AuthRepositoryProtocol
-    
+
     private(set) var watchHistory: [WatchHistoryItem]?
     private(set) var userAnimeList: [UserAnimeListItem]?
-    
+
     var onRoute: ((Screen) -> Void)?
 
     var user: User {
@@ -45,14 +45,14 @@ final class ProfileViewModel {
     func getUserAnimeList(for status: WatchStatus) -> [UserAnimeListItem] {
         userAnimeList?.filter { $0.status == status } ?? []
     }
-    
+
     func didTapLogout() async {
         do {
             _ = try await authRepository.fetchLogout()
             userService.logout()
             onRoute?(Screen.home)
         } catch {
-            
+
         }
     }
 }

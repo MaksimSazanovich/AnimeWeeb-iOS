@@ -11,24 +11,24 @@ import GoogleSignIn
 @MainActor
 @Observable
 final class LoginViewModel: AuthViewModelProtocol {
-    
+
     private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
-    
+
     var email: String = ""
     var state: ViewState = .idle
-    
+
     var isEmailValid: Bool {
         email.emailValidationError == nil
     }
-    
+
     var onRoute: ((Screen) -> Void)?
-    
+
     init(authRepository: AuthRepositoryProtocol, userService: UserService) {
         self.authRepository = authRepository
         self.userService = userService
     }
-    
+
     func didTapLoginWithGoogle() {
         Task {
             do {
@@ -43,13 +43,13 @@ final class LoginViewModel: AuthViewModelProtocol {
             }
         }
     }
-    
-    func didTapGetCodeButton()  {
+
+    func didTapGetCodeButton() {
         if let validationError = email.emailValidationError {
             state = .failed(validationError)
             return
         }
-        
+
         Task {
             do {
                 state = .loading
@@ -62,7 +62,7 @@ final class LoginViewModel: AuthViewModelProtocol {
             }
         }
     }
-    
+
     func didTapSwitchAuthButton() {
         onRoute?(Screen.register)
     }

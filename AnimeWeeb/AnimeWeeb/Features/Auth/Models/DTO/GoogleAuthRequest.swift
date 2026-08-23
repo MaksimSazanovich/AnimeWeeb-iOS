@@ -7,6 +7,12 @@
 
 struct GoogleAuthRequest: Encodable {
     let idToken: String
-    let deviceId: String
+    let deviceID: String
     let deviceName: String
+
+    enum CodingKeys: String, CodingKey {
+        case idToken
+        case deviceID = "deviceId"
+        case deviceName
+    }
 }

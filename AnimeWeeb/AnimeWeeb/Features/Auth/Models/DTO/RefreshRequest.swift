@@ -9,6 +9,12 @@ import Foundation
 
 struct RefreshRequest: Encodable {
     let refreshToken: String
-    let deviceId: String
+    let deviceID: String
     let deviceName: String
+
+    enum CodingKeys: String, CodingKey {
+        case refreshToken
+        case deviceID = "deviceId"
+        case deviceName
+    }
 }
