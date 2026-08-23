@@ -11,4 +11,5 @@ protocol AuthRepositoryProtocol {
     func fetchRefresh() async throws -> RefreshResponseDTO
     func autoLogin() async throws -> User
     func fetchLogout() async throws -> String
+    func fetchLoginRequestCode(email: String) async throws -> String
 }

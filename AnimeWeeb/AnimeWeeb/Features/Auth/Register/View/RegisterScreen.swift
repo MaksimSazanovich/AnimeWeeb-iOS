@@ -52,7 +52,7 @@ struct RegisterScreen: View {
                             EmailTextField(email: $email)
 
                             // MARK: GetCode Button
-                            GetCodeButton {
+                            GetCodeButton(state: $viewModel.state) {
                                 viewModel.didTapGetCodeButton()
                             }
                         }

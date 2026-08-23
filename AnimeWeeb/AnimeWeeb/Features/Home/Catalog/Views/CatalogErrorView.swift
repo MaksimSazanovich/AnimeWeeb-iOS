@@ -13,6 +13,7 @@ struct CatalogErrorView: View {
 
     var body: some View {
         ErrorView(title: "Не удалось загрузить каталог.", buttonTitle: "Повторить", onRetry: onRetry)
+            .lineLimit(1)
     }
 }
 

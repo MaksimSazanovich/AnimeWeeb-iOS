@@ -14,6 +14,9 @@ final class LoginViewModel: AuthViewModelProtocol {
     private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
     
+    var email: String = ""
+    var state: ViewState = .idle
+    
     var onRoute: ((Screen) -> Void)?
     
     init(authRepository: AuthRepositoryProtocol, userService: UserService) {
@@ -21,23 +24,36 @@ final class LoginViewModel: AuthViewModelProtocol {
         self.userService = userService
     }
     
-    func didTapLoginWithGoogle() async {
-        do {
-            let user = try await authRepository.fetchUserWithGoogle()
-            userService.update(user: user)
-            onRoute?(Screen.home)
-        } catch {
-            
+    func didTapLoginWithGoogle() {
+        Task {
+            do {
+                let user = try await authRepository.fetchUserWithGoogle()
+                userService.update(user: user)
+                state = .loaded
+                onRoute?(Screen.home)
+            } catch is CancellationError {
+                state = .idle
+            } catch {
+                state = .failed(error)
+            }
         }
     }
 
-    func didTapGetCodeButton() {
-        // TODO: GetCode logic
-        print("Get code")
+    func didTapGetCodeButton()  {
+        Task {
+            do {
+                state = .loading
+                _ = try await authRepository.fetchLoginRequestCode(email: email)
+                state = .loaded
+            } catch is CancellationError {
+                state = .idle
+            } catch {
+                state = .failed(error)
+            }
+        }
     }
 
     func didTapSwitchAuthButton() {
         onRoute?(Screen.register)
     }
-
 }

@@ -80,6 +80,11 @@ final class AuthRepository: AuthRepositoryProtocol {
         
         return dto.message
     }
+    
+    func fetchLoginRequestCode(email: String) async throws -> String {
+        let dto: LoginRequestCodeResponseDTO = try await networkService.request(AuthEndpoint.loginRequestCode(email: email))
+        return dto.message
+    }
 }
 
 

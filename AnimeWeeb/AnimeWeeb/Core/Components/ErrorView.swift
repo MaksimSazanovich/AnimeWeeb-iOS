@@ -9,27 +9,28 @@ import SwiftUI
 
 struct ErrorView: View {
     let title: String
-    let buttonTitle: String
+    var buttonTitle: String?
 
-    var onRetry: () -> Void
+    var onRetry: (() -> Void)?
 
     var body: some View {
         HStack {
             Text(title)
                 .font(.body)
                 .foregroundStyle(.errorText)
-                .lineLimit(1)
                 .minimumScaleFactor(0.75)
 
-            Button {
-                onRetry()
-            } label: {
-                Text(buttonTitle)
-                    .underline()
-                    .font(.body)
-                    .foregroundStyle(.errorText)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.75)
+            if let buttonTitle = buttonTitle, let onRetry = onRetry {
+                Button {
+                    onRetry()
+                } label: {
+                    Text(buttonTitle)
+                        .underline()
+                        .font(.body)
+                        .foregroundStyle(.errorText)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                }
             }
         }
         .padding()
@@ -41,5 +42,11 @@ struct ErrorView: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(.errorStroke, lineWidth: 1)
         }
+    }
+    
+    init(title: String, buttonTitle: String? = nil, onRetry: (() -> Void)? = nil) {
+        self.title = title
+        self.buttonTitle = buttonTitle
+        self.onRetry = onRetry
     }
 }

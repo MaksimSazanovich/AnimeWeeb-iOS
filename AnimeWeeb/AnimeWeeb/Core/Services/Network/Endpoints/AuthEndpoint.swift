@@ -11,10 +11,11 @@ public enum AuthEndpoint: Endpoint {
     case google(idToken: String, deviceID: String, deviceName: String)
     case refresh(refreshToken: String, deviceID: String, deviceName: String)
     case logout(refreshToken: String, deviceID: String, deviceName: String)
+    case loginRequestCode(email: String)
     
     public var method: HTTPMethod {
         switch self {
-        case .google, .refresh, .logout: .post
+        case .google, .refresh, .logout, .loginRequestCode: .post
         }
     }
     
@@ -23,6 +24,7 @@ public enum AuthEndpoint: Endpoint {
         case .google: return "auth/google"
         case .refresh: return "auth/refresh"
         case .logout: return "auth/logout"
+        case .loginRequestCode: return "auth/login/request-code"
         }
     }
     
@@ -42,6 +44,8 @@ public enum AuthEndpoint: Endpoint {
             return RefreshRequestDTO(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
         case .logout(let refreshToken, let deviceID, let deviceName):
             return LogoutRequestDTO(refreshToken: refreshToken, deviceId: deviceID, deviceName: deviceName)
+        case .loginRequestCode(email: let email):
+            return LoginRequestCodeRequestDTO(email: email)
         }
     }
 }

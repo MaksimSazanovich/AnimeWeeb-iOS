@@ -13,6 +13,7 @@ struct AnimeDetailsErrorView: View {
 
     var body: some View {
         ErrorView(title: "Тайтл не найдет или API недоступен.", buttonTitle: "В каталог", onRetry: onRetry)
+            .lineLimit(1)
     }
 }
 
