@@ -9,7 +9,7 @@ import Foundation
 
 protocol AuthViewModelProtocol {
 
-    var onRoute: (() -> Void)? { get set }
+    var onRoute: ((Screen) -> Void)? { get set }
 
     func didTapGetCodeButton()
     func didTapSwitchAuthButton()

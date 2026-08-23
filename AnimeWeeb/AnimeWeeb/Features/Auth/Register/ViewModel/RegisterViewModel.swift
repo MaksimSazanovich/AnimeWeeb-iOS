@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 @Observable
 final class RegisterViewModel: AuthViewModelProtocol {
-    var onRoute: (() -> Void)?
+    var onRoute: ((Screen) -> Void)?
 
     func didTapGetCodeButton() {
         // TODO: GetCode logic
@@ -18,7 +18,7 @@ final class RegisterViewModel: AuthViewModelProtocol {
     }
 
     func didTapSwitchAuthButton() {
-        onRoute?()
+        onRoute?(Screen.login)
     }
 
 }

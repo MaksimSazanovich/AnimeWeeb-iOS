@@ -37,7 +37,7 @@ final class Coordinator {
             factory.makeWatchScreen(model: model, coordinator: self)
 
         case .profile:
-            factory.makeProfileScreen()
+            factory.makeProfileScreen(coordinator: self)
         }
     }
 

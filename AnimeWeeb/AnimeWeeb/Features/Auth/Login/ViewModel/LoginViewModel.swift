@@ -14,17 +14,18 @@ final class LoginViewModel: AuthViewModelProtocol {
     private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
     
-    var onRoute: (() -> Void)?
+    var onRoute: ((Screen) -> Void)?
     
     init(authRepository: AuthRepositoryProtocol, userService: UserService) {
         self.authRepository = authRepository
         self.userService = userService
     }
     
-    func loginWithGoogle() async {
+    func didTapLoginWithGoogle() async {
         do {
             let user = try await authRepository.fetchUserWithGoogle()
             userService.update(user: user)
+            onRoute?(Screen.home)
         } catch {
             
         }
@@ -36,7 +37,7 @@ final class LoginViewModel: AuthViewModelProtocol {
     }
 
     func didTapSwitchAuthButton() {
-        onRoute?()
+        onRoute?(Screen.register)
     }
 
 }

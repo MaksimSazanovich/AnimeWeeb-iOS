@@ -19,7 +19,11 @@ struct ProfileScreen: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 32) {
                     // MARK: Profile Card
-                    ProfileCard(user: viewModel.user)
+                    ProfileCard(user: viewModel.user) {
+                        Task {
+                            await viewModel.didTapLogout()
+                        }
+                    }
 
                     CustomDivider()
 
@@ -47,7 +51,9 @@ struct ProfileScreen: View {
 #Preview {
     ProfileScreen(
         viewModel: ProfileViewModel(
-            userService: UserService(user: previewUser, state: .authenticated),
+            userService:
+                UserService(user: previewUser, state: .authenticated), authRepository: AuthRepository(networkService: NetworkService(), googleService: GoogleService(),
+                userRepository: UserRepository(networkService: NetworkService())),
             watchHistory: [previewWatchHistoryItem],
             userAnimeList: previewUserList
         )

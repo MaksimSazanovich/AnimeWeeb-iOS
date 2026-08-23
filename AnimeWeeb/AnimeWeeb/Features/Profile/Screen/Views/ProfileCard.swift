@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileCard: View {
 
     let user: User
+    var onLogout: () -> Void
 
     var body: some View {
         ZStack {
@@ -65,8 +66,7 @@ struct ProfileCard: View {
                 CustomDivider()
 
                 Button {
-                    // TODO: Logout logic
-                    print("Logout")
+                    onLogout()
                 } label: {
                     Label("Выйти", systemImage: "rectangle.portrait.and.arrow.right")
                         .foregroundStyle(.subtitle)

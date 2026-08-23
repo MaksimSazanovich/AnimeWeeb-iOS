@@ -44,12 +44,7 @@ final class AuthRepository: AuthRepositoryProtocol {
         
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
-        
-        print("\(dto.accessToken)\n")
-        print(dto.refreshToken)
-        print("deviceID: \(UIDevice.deviceID)")
-        print("deviceName: \(UIDevice.deviceName)")
-        
+         
         return dto.user.toDomain()
     }
     
@@ -67,11 +62,23 @@ final class AuthRepository: AuthRepositoryProtocol {
     }
     
     func autoLogin() async throws -> User {
-        let accessToken = try await fetchRefresh().accessToken
-        print(accessToken)
+        let dto: RefreshResponseDTO = try await fetchRefresh()
+        let accessToken = dto.accessToken
+        print(dto.refreshToken)
+        print("deviceID: \(UIDevice.deviceID)")
+        print("deviceName: \(UIDevice.deviceName)")
         let user = try await userRepository.fetchUser(accessToken: accessToken)
-        print(user.email)
         return user
+    }
+    
+    func fetchLogout() async throws -> String {
+        guard let refreshToken = try keychain.get(KeychainKey.refreshToken.rawValue) else {
+            throw AuthError.noRefreshToken
+        }
+        
+        let dto: LogoutResponseDTO = try await networkService.request(AuthEndpoint.logout(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        
+        return dto.message
     }
 }
 

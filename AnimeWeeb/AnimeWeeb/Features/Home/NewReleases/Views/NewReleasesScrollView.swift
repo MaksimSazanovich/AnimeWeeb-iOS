@@ -16,8 +16,8 @@ struct NewReleasesScrollView: View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 16) {
                 ForEach(animes) { anime in
-                    NewReleasesAnimeCard(model: anime) { episodeID in
-                        homeViewModel.onRouteToEpisode?(episodeID)
+                    NewReleasesAnimeCard(model: anime) { watchModel in
+                        homeViewModel.onRoute?(Screen.watch(model: watchModel))
                     }
                 }
             }

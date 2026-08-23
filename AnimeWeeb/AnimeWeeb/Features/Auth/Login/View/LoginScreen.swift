@@ -42,7 +42,7 @@ struct LoginScreen: View {
                             GoogleSignInButton {
                                 Task {
                                     do {
-                                        try await viewModel.loginWithGoogle()
+                                        try await viewModel.didTapLoginWithGoogle()
                                     } catch {
                                         
                                     }
