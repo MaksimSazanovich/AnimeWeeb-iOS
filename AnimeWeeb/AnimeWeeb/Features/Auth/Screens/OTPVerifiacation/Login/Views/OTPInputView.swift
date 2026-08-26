@@ -10,7 +10,7 @@ import SwiftUI
 struct OTPInputView: View {
     
     @Binding var code: String
-    private let codeLength = 6
+    let codeLength: Int
     @FocusState private var isFocused: Bool
     
     var body: some View {
@@ -60,5 +60,5 @@ struct OTPInputView: View {
 
 #Preview {
     @Previewable @State var code = "12345"
-    OTPInputView(code: $code)
+    OTPInputView(code: $code, codeLength: 6)
 }

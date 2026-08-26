@@ -30,8 +30,8 @@ final class Coordinator {
         case .register:
             factory.makeRegisterScreen(coordinator: self)
             
-        case .otpVerification:
-            factory.makeOTPVerificationScreen(coordinator: self)
+        case .otpVerification(let email):
+            factory.makeOTPVerificationScreen(email: email,coordinator: self)
             
         case .animeDetails(let animeID):
             factory.makeAnimeDetailsScreen(animeID: animeID, coordinator: self)

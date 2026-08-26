@@ -11,7 +11,7 @@ enum Screen: Hashable {
     case home
     case login
     case register
-    case otpVerification
+    case otpVerification(email: String)
     case animeDetails(animeID: Int)
     case watch(model: WatchModel)
     case profile

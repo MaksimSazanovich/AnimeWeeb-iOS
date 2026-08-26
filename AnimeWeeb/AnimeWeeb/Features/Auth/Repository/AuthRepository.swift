@@ -16,6 +16,9 @@ final class AuthRepository: AuthRepositoryProtocol {
 
     private let keychain = Keychain(service: "MS.AnimeWeeb")
         .accessibility(.whenUnlocked)
+    
+    private let deviceID = UIDevice.deviceID
+    private let deviceName = UIDevice.deviceName
 
     public init(networkService: NetworkServiceProtocol, googleService: GoogleService, userRepository: UserRepositoryProtocol) {
         self.networkService = networkService
@@ -26,7 +29,7 @@ final class AuthRepository: AuthRepositoryProtocol {
     func fetchUserWithGoogle() async throws -> User {
         let idToken = try await googleService.getGoogleIDToken()
 
-        let dto: AuthResponse = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: AuthResponse = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: self.deviceID, deviceName: self.deviceName))
 
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -40,7 +43,7 @@ final class AuthRepository: AuthRepositoryProtocol {
     }
 
     func fetchUserWithGoogle(idToken: String) async throws -> User {
-        let dto: AuthResponse = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: AuthResponse = try await networkService.request(AuthEndpoint.google(idToken: idToken, deviceID: self.deviceID, deviceName: self.deviceName))
 
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -53,7 +56,7 @@ final class AuthRepository: AuthRepositoryProtocol {
             throw AuthError.noRefreshToken
         }
 
-        let dto: RefreshResponse = try await networkService.request(AuthEndpoint.refresh(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: RefreshResponse = try await networkService.request(AuthEndpoint.refresh(refreshToken: refreshToken, deviceID: self.deviceID, deviceName: self.deviceName))
 
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -65,8 +68,8 @@ final class AuthRepository: AuthRepositoryProtocol {
         let dto: RefreshResponse = try await fetchRefresh()
         let accessToken = dto.accessToken
         print(dto.refreshToken)
-        print("deviceID: \(UIDevice.deviceID)")
-        print("deviceName: \(UIDevice.deviceName)")
+        print("deviceID: \(deviceID)")
+        print("deviceName: \(deviceName)")
         let user = try await userRepository.fetchUser(accessToken: accessToken)
         return user
     }
@@ -76,7 +79,7 @@ final class AuthRepository: AuthRepositoryProtocol {
             throw AuthError.noRefreshToken
         }
 
-        let dto: LogoutResponse = try await networkService.request(AuthEndpoint.logout(refreshToken: refreshToken, deviceID: UIDevice.deviceID, deviceName: UIDevice.deviceName))
+        let dto: LogoutResponse = try await networkService.request(AuthEndpoint.logout(refreshToken: refreshToken, deviceID: self.deviceID, deviceName: self.deviceName))
 
         return dto.message
     }
@@ -90,5 +93,19 @@ final class AuthRepository: AuthRepositoryProtocol {
         }
 
         return dto.message
+    }
+    
+    func fetchLoginConfirm(email: String, code: String) async throws -> User {
+        let dto: LoginConfirmResponse
+        do {
+            dto = try await networkService.request(AuthEndpoint.loginConfirm(email: email, code: code, deviceID: self.deviceID, deviceName: self.deviceName))
+        } catch {
+            throw AuthError.noCode
+        }
+        
+        try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
+        try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
+        
+        return dto.user.toDomain()
     }
 }

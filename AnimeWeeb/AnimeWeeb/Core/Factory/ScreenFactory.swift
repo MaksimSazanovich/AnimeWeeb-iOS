@@ -79,8 +79,12 @@ final class ScreenFactory {
         return RegisterScreen(viewModel: viewModel)
     }
     
-    func makeOTPVerificationScreen(coordinator: Coordinator) -> some View {
-        let viewModel = OTPVerificationViewModel()
+    func makeOTPVerificationScreen(email: String, coordinator: Coordinator) -> some View {
+        let viewModel = OTPVerificationViewModel(
+            email: email,
+            AuthRepository: authRepository,
+            userService: userService
+        )
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }

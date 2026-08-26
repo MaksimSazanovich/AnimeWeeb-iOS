@@ -50,36 +50,26 @@ struct OTPVerificationScreen: View {
                                     .font(.body)
                                     .foregroundStyle(.white)
                                 
-                                OTPInputView(code: $viewModel.code)
+                                OTPInputView(code: $viewModel.code, codeLength: viewModel.codeLength)
                             }
                             
-                            
-                            
-                            // MARK: Login Button
-                            Button {
-                                
-                            } label: {
-                                HStack {
-                                    Text("Войти")
-                                        .font(.system(.body, weight: .semibold))
-                                        .foregroundStyle(.white)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(.purpleBackground)
-                                )
+                            // MARK: Verify Button
+                            VerifyButton(state: $viewModel.state) {
+                                viewModel.didTapVerifyButton()
                             }
-                            
                             
                             // MARK: Change email Button
                             Button {
-                                viewModel.didTapCahngeEmail()
+                                viewModel.didTapChangeEmail()
                             } label: {
                                 Text("Изменить email")
                                     .font(.caption)
                                     .foregroundStyle(.genreText)
+                            }
+                            
+                            // MARK: Erro View
+                            if case .failed(let error) = viewModel.state {
+                                ErrorView(title: error.localizedDescription)
                             }
                             
                             // MARK: NoAccount Button
@@ -98,19 +88,25 @@ struct OTPVerificationScreen: View {
                 .padding(33)
                 .animeCardBackgroundModifier(cornerRadius: 16, fillOpacity: 0.5, strokeOpacity: 1)
             }
-            .padding()
+            .padding(32)
             .containerRelativeFrame(.vertical)
         }
         .scrollBounceBehavior(.basedOnSize)
         .background(Color.background.ignoresSafeArea())
         .dismissKeyboardOnTap()
-        .padding(.top, 100)
     }
 }
 
 #Preview {
-    let viewModel = OTPVerificationViewModel()
+    let viewModel = OTPVerificationViewModel(
+        email: "fd@fd",
+        AuthRepository: AuthRepository(
+            networkService: NetworkService(),
+            googleService: GoogleService(),
+            userRepository: UserRepository(networkService: NetworkService())
+        ),
+        userService: UserService()
+    )
     viewModel.code = "1235"
     return OTPVerificationScreen(viewModel: viewModel)
 }
-
