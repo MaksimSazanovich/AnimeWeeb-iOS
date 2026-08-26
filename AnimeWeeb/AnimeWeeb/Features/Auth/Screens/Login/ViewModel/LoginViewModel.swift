@@ -55,6 +55,7 @@ final class LoginViewModel: AuthViewModelProtocol {
                 state = .loading
                 _ = try await authRepository.fetchLoginRequestCode(email: email)
                 state = .loaded
+                onRoute?(Screen.otpVerification)
             } catch is CancellationError {
                 state = .idle
             } catch {
