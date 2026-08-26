@@ -13,6 +13,7 @@ public enum AuthEndpoint: Endpoint {
     case logout(refreshToken: String, deviceID: String, deviceName: String)
     case loginRequestCode(email: String)
     case loginConfirm(email: String, code: String, deviceID: String, deviceName: String)
+    case registerRequestCode(email: String)
 
     public var method: HTTPMethod {
         .post
@@ -25,6 +26,7 @@ public enum AuthEndpoint: Endpoint {
         case .logout: return "auth/logout"
         case .loginRequestCode: return "auth/login/request-code"
         case .loginConfirm: return "auth/login/confirm"
+        case .registerRequestCode: return "auth/register/request-code"
         }
     }
 
@@ -48,6 +50,8 @@ public enum AuthEndpoint: Endpoint {
             return LoginCodeRequest(email: email)
         case .loginConfirm(let email, let code, let deviceID, let deviceName):
             return LoginConfirmRequest(email: email, code: code, deviceID: deviceID, deviceName: deviceName)
+        case .registerRequestCode(let email):
+            return RegisterCodeRequest(email: email)
         }
     }
 }

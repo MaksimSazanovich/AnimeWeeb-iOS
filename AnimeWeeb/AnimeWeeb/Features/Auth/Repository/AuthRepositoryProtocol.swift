@@ -13,4 +13,5 @@ protocol AuthRepositoryProtocol {
     func fetchLogout() async throws -> String
     func fetchLoginRequestCode(email: String) async throws -> String
     func fetchLoginConfirm(email: String, code: String) async throws -> User
+    func fetchRegisterRequestCode(email: String) async throws -> String 
 }

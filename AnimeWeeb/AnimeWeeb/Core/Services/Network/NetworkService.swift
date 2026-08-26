@@ -26,7 +26,7 @@ public final class NetworkService: NetworkServiceProtocol {
         }
 
         guard (200...299).contains(httpresponse.statusCode) else {
-            throw NetworkError.serverError(statusCode: httpresponse.statusCode)
+            throw NetworkError.serverError(statusCode: httpresponse.statusCode, data: data)
         }
 
         do {

@@ -8,6 +8,20 @@
 import GoogleSignIn
 
 final class GoogleService {
+    
+    init() {
+        guard let clientID = Bundle.main.object(forInfoDictionaryKey: "GIDClientID") as? String, !clientID.isEmpty else {
+            fatalError("GIDClientID is missing in Info.plist")
+        }
+
+        guard let serverClientID = Bundle.main.object(forInfoDictionaryKey: "GIDServerClientID") as? String, !serverClientID.isEmpty else {
+            fatalError("GIDServerClientID is missing in Info.plist")
+        }
+
+        let configuration = GIDConfiguration(clientID: clientID, serverClientID: serverClientID)
+        GIDSignIn.sharedInstance.configuration = configuration
+    }
+    
     func handleOpenURL(_ url: URL) -> Bool {
         GIDSignIn.sharedInstance.handle(url)
     }

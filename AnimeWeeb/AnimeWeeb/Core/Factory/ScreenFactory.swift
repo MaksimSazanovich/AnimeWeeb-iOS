@@ -71,7 +71,7 @@ final class ScreenFactory {
     }
 
     func makeRegisterScreen(coordinator: Coordinator) -> some View {
-        let viewModel = RegisterViewModel()
+        let viewModel = RegisterViewModel(authRepository: authRepository, userService: userService)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }

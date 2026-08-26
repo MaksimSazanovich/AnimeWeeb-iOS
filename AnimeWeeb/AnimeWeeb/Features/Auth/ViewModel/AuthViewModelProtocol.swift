@@ -14,4 +14,5 @@ protocol AuthViewModelProtocol {
 
     func didTapGetCodeButton()
     func didTapSwitchAuthButton()
+    func didTapLoginWithGoogle()
 }

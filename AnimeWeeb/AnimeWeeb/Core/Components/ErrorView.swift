@@ -30,6 +30,7 @@ struct ErrorView: View {
                         .foregroundStyle(.errorText)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
+                        .multilineTextAlignment(.center)
                 }
             }
         }

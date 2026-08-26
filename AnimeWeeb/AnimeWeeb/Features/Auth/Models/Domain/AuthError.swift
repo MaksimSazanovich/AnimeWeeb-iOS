@@ -15,6 +15,7 @@ enum AuthError: Error, LocalizedError {
     case logoutFailed
     case noAccount
     case noCode
+    case accountAlreadyExists
     case unknown
 
     var errorDescription: String? {
@@ -33,8 +34,10 @@ enum AuthError: Error, LocalizedError {
             return "У вас нет аккаунта, пожалуйста зарегистрируйтесь, чтобы войти"
         case .noCode:
             return "Код неверный или уже истёк.\nЗапросите новый код и попробуйте ещё раз."
+        case .accountAlreadyExists:
+            return "Аккаунт с этой почтой уже существует. Пожалуйста, войдите."
         case .unknown:
-            return "Произошла неизвестная ошибка при попытке входа."
+            return "Произошла неизвестная ошибка."
         }
     }
 }

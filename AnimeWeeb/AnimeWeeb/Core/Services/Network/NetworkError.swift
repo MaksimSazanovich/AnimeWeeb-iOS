@@ -12,7 +12,7 @@ public enum NetworkError: Error, LocalizedError {
     case invalidBaseURL
     case invalidResponse
     case emptyResponse
-    case serverError(statusCode: Int)
+    case serverError(statusCode: Int, data: Data?)
     case decodingFailed
 
     public var errorDescription: String? {
@@ -23,7 +23,7 @@ public enum NetworkError: Error, LocalizedError {
             return "Некорректный ответ от сервера."
         case .emptyResponse:
             return "Сервер вернул пустой ответ."
-        case .serverError(let statusCode):
+        case .serverError(let statusCode, let data):
             return "Ошибка сервера (\(statusCode)). Попробуйте позже."
         case .decodingFailed:
             return "Не удалось обработать данные от сервера."
