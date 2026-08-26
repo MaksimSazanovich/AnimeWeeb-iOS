@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 @Observable
 final class OTPVerificationViewModel {
-    
+
     private var model: OTPVerificationModel {
         didSet {
             if model.isCodeComplete {
@@ -18,14 +18,14 @@ final class OTPVerificationViewModel {
             }
         }
     }
-    
+
     private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
-    
+
     var email: String {
         return model.email
     }
-    
+
     var code: String {
         get {
             model.code
@@ -34,29 +34,29 @@ final class OTPVerificationViewModel {
             model.code = newValue
         }
     }
-    
+
     var codeLength: Int {
         return model.codeLength
     }
-    
+
     var state: ViewState = .idle
-    
+
     var onRoute: ((Screen) -> Void)?
-    
-    init(email: String ,AuthRepository: AuthRepositoryProtocol, userService: UserService) {
+
+    init(email: String, authRepository: AuthRepositoryProtocol, userService: UserService) {
         self.model = OTPVerificationModel(email: email)
-        self.authRepository = AuthRepository
+        self.authRepository = authRepository
         self.userService = userService
     }
-    
+
     func didTapChangeEmail() {
         onRoute?(Screen.login)
     }
-    
+
     func didTapSwitchAuthButton() {
         onRoute?(Screen.register)
     }
-    
+
     func didTapVerifyButton() {
         Task {
             do {
@@ -71,7 +71,7 @@ final class OTPVerificationViewModel {
             }
         }
     }
-    
+
     private func clearCode() {
         code = ""
     }

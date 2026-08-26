@@ -16,7 +16,7 @@ final class AuthRepository: AuthRepositoryProtocol {
 
     private let keychain = Keychain(service: "MS.AnimeWeeb")
         .accessibility(.whenUnlocked)
-    
+
     private let deviceID = UIDevice.deviceID
     private let deviceName = UIDevice.deviceName
 
@@ -94,7 +94,7 @@ final class AuthRepository: AuthRepositoryProtocol {
 
         return dto.message
     }
-    
+
     func fetchLoginConfirm(email: String, code: String) async throws -> User {
         let dto: LoginConfirmResponse
         do {
@@ -102,10 +102,10 @@ final class AuthRepository: AuthRepositoryProtocol {
         } catch {
             throw AuthError.noCode
         }
-        
+
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
-        
+
         return dto.user.toDomain()
     }
 }

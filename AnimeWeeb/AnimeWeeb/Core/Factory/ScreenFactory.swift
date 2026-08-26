@@ -78,11 +78,11 @@ final class ScreenFactory {
 
         return RegisterScreen(viewModel: viewModel)
     }
-    
+
     func makeOTPVerificationScreen(email: String, coordinator: Coordinator) -> some View {
         let viewModel = OTPVerificationViewModel(
             email: email,
-            AuthRepository: authRepository,
+            authRepository: authRepository,
             userService: userService
         )
         viewModel.onRoute = { [weak coordinator] destination in
@@ -91,7 +91,6 @@ final class ScreenFactory {
 
         return OTPVerificationScreen(viewModel: viewModel)
     }
-
 
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {
         let viewModel = AnimeDetailsViewModel(animeID: animeID, repository: animeDetailsRepository)

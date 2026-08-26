@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct VerifyButton: View {
-    
+
     @Binding var state: ViewState
-    
+
     var onAction: () -> Void
-    
+
     var body: some View {
-        
+
         Button {
             onAction()
         } label: {
             HStack {
-                
+
                 if state == .loading {
                     ProgressView()
                 }
-                
+
                 Text("Войти")
                     .font(.system(.body, weight: .semibold))
                     .foregroundStyle(.white)

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct OTPInputView: View {
-    
+
     @Binding var code: String
     let codeLength: Int
     @FocusState private var isFocused: Bool
-    
+
     var body: some View {
         ZStack {
             TextField("", text: $code)
@@ -21,29 +21,29 @@ struct OTPInputView: View {
                 .focused($isFocused)
                 .opacity(0.001)
                 .frame(height: 50)
-                .onChange(of: code) { oldValue, newValue in
+                .onChange(of: code) { _, newValue in
                     if newValue.count > codeLength {
                         code = String(newValue.prefix(codeLength))
                     }
                 }
-            
+
             HStack(spacing: 4) {
                 ForEach(0..<codeLength, id: \.self) { index in
                     let char = code[safe: index]
                     let isFocused = index == code.count && isFocused
-                    
+
                     ZStack {
                         Color.clear
                             .animeCardBackgroundModifier(fillOpacity: 1)
                             .textFieldFocusModifier(isFocused)
-                        
+
                         if let char {
                             Text(String(char))
                                 .font(.system(.title, weight: .bold))
                                 .foregroundStyle(.white)
-                                
+
                         }
-                        
+
                     }
                     .frame(height: 55)
                 }
