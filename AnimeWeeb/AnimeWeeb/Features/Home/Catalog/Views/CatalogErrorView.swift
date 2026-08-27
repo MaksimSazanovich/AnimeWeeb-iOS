@@ -12,7 +12,7 @@ struct CatalogErrorView: View {
     var onRetry: () -> Void
 
     var body: some View {
-        ErrorView(title: "Не удалось загрузить каталог.", buttonTitle: "Повторить", onRetry: onRetry)
+        AWErrorView(title: "Не удалось загрузить каталог.", buttonTitle: "Повторить", onRetry: onRetry)
             .lineLimit(1)
     }
 }

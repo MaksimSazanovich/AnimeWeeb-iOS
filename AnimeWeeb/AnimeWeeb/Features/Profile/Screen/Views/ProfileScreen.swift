@@ -25,12 +25,12 @@ struct ProfileScreen: View {
                         }
                     }
 
-                    CustomDivider()
+                    AWDivider()
 
                     // MARK: Watch History
                     WatchHistoryView(watchHistory: viewModel.watchHistory ?? [])
 
-                    CustomDivider()
+                    AWDivider()
 
                     // MARK: User Anime Lists
                     UserAnimeListsView(selectedStatus: $selectedStatus, profileViewModel: viewModel) {

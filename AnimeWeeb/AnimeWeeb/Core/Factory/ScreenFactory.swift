@@ -79,7 +79,7 @@ final class ScreenFactory {
         return RegisterScreen(viewModel: viewModel)
     }
 
-    func makeOTPVerificationScreen(email: String, coordinator: Coordinator) -> some View {
+    func makeLoginConfirmScreen(email: String, coordinator: Coordinator) -> some View {
         let viewModel = LoginConfirmViewModel(
             email: email,
             authRepository: authRepository,
@@ -90,6 +90,19 @@ final class ScreenFactory {
         }
 
         return LoginConfirmScreen(viewModel: viewModel)
+    }
+    
+    func makeRegisterConfirmScreen(email: String, coordinator: Coordinator) -> some View {
+        let viewModel = RegisterConfirmViewModel(
+            email: email,
+            authRepository: authRepository,
+            userService: userService
+        )
+        viewModel.onRoute = { [weak coordinator] destination in
+            coordinator?.navigate(to: destination)
+        }
+
+        return RegisterConfirmScreen(viewModel: viewModel)
     }
 
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {

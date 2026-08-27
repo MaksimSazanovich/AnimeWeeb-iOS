@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VerifyButton: View {
 
+    let text: String
     @Binding var state: ViewState
 
     var onAction: () -> Void
@@ -24,7 +25,7 @@ struct VerifyButton: View {
                     ProgressView()
                 }
 
-                Text("Войти")
+                Text(text)
                     .font(.system(.body, weight: .semibold))
                     .foregroundStyle(.white)
             }
@@ -35,7 +36,7 @@ struct VerifyButton: View {
                     .fill(.purpleBackground)
             )
         }
-        .disabled(state == .loading)
-        .opacity(state == .loading ? 0.5 : 1)
+        .disabled(state != .idle)
+        .opacity(state == .idle ? 1 : 0.5)
     }
 }

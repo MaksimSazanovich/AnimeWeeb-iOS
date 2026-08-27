@@ -34,7 +34,7 @@ struct LoginScreen: View {
                             .disabled(viewModel.state == .loading)
 
                             ZStack {
-                                CustomDivider()
+                                AWDivider()
 
                                 Text("или через email")
                                     .font(.caption)
@@ -45,7 +45,7 @@ struct LoginScreen: View {
 
                             VStack(spacing: 16) {
                                 // MARK: Email TextField
-                                EmailTextField(email: $viewModel.email)
+                                AWTextField(text: $viewModel.email, placeholder: "Email")
 
                                 // MARK: GetCode Button
                                 GetCodeButton(state: $viewModel.state) {
@@ -55,7 +55,7 @@ struct LoginScreen: View {
 
                             // MARK: Error View
                             if case .failed(let error) = viewModel.state {
-                                ErrorView(title: error.localizedDescription)
+                                AWErrorView(title: error.localizedDescription)
                                     .lineLimit(2)
                             }
 

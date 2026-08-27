@@ -63,7 +63,7 @@ struct ProfileCard: View {
                     }
                 }
 
-                CustomDivider()
+                AWDivider()
 
                 Button {
                     onLogout()

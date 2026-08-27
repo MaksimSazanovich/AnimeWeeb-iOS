@@ -1,5 +1,5 @@
 //
-//  LoginConfirmViewModel.swift
+//  RegisterConfirmViewModel.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -10,16 +10,18 @@ import GoogleSignIn
 
 @MainActor
 @Observable
-final class LoginConfirmViewModel {
-
-    private var model: LoginConfirmModel {
+final class RegisterConfirmViewModel {
+    
+    private var model: RegisterConfirmModel {
         didSet {
-            if model.isCodeComplete {
-                didTapVerifyButton()
+            if model.isFormComplete {
+                state = .idle
+            } else {
+                state = .empty
             }
         }
     }
-
+    
     private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
 
@@ -39,23 +41,43 @@ final class LoginConfirmViewModel {
     var codeLength: Int {
         return model.codeLength
     }
+    
+    var nickname: String {
+        get {
+            model.nickname
+        }
+        set {
+            model.nickname = newValue
+        }
+    }
 
     var state: ViewState = .empty
 
     var onRoute: ((Screen) -> Void)?
 
     init(email: String, authRepository: AuthRepositoryProtocol, userService: UserService) {
-        self.model = LoginConfirmModel(email: email)
+        self.model = RegisterConfirmModel(email: email)
         self.authRepository = authRepository
         self.userService = userService
     }
-
-    func didTapChangeEmail() {
-        onRoute?(Screen.login)
+    
+    func didTapVerifyButton() {
+        Task {
+            do {
+                state = .loading
+                let user: User = try await authRepository.fetchLoginConfirm(email: email, code: code)
+                state = .loaded
+                userService.update(user: user)
+                onRoute?(Screen.home)
+            } catch {
+                clearCode()
+                state = .failed(error)
+            }
+        }
     }
-
+    
     func didTapSwitchAuthButton() {
-        onRoute?(Screen.register)
+        onRoute?(Screen.login)
     }
     
     func didTapLoginWithGoogle() {
@@ -73,23 +95,10 @@ final class LoginConfirmViewModel {
         }
     }
 
-    func didTapVerifyButton() {
-        state = .idle
-        
-        Task {
-            do {
-                state = .loading
-                let user: User = try await authRepository.fetchLoginConfirm(email: email, code: code)
-                state = .loaded
-                userService.update(user: user)
-                onRoute?(Screen.home)
-            } catch {
-                clearCode()
-                state = .failed(error)
-            }
-        }
+    func updateAvatar(avatar: Data) {
+        model.avatar = avatar
     }
-
+    
     private func clearCode() {
         code = ""
     }

@@ -1,5 +1,5 @@
 //
-//  EmailTextField.swift
+//  AWTextField.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct EmailTextField: View {
+struct AWTextField: View {
 
-    @Binding var email: String
+    @Binding var text: String
+    let placeholder: String
     @FocusState var isTextFieldFocused: Bool
 
     var body: some View {
         TextField(
             "",
-            text: $email,
-            prompt: Text("Email")
+            text: $text,
+            prompt: Text(placeholder)
                 .font(.body)
                 .foregroundStyle(.genreText)
         )

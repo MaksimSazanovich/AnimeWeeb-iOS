@@ -1,5 +1,5 @@
 //
-//  ErrorView.swift
+//  AWErrorView.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ErrorView: View {
+struct AWErrorView: View {
     let title: String
     var buttonTitle: String?
 

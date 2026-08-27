@@ -40,7 +40,7 @@ final class RegisterViewModel: AuthViewModelProtocol {
                 state = .loading
                 _ = try await authRepository.fetchRegisterRequestCode(email: email)
                 state = .loaded
-                onRoute?(Screen.otpVerification(email: email))
+                onRoute?(Screen.registerConfirm(email: email))
             } catch is CancellationError {
                 state = .idle
             } catch {

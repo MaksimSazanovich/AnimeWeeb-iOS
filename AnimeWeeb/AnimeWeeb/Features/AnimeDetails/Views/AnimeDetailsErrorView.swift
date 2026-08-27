@@ -12,7 +12,7 @@ struct AnimeDetailsErrorView: View {
     var onRetry: () -> Void
 
     var body: some View {
-        ErrorView(title: "Тайтл не найдет или API недоступен.", buttonTitle: "В каталог", onRetry: onRetry)
+        AWErrorView(title: "Тайтл не найдет или API недоступен.", buttonTitle: "В каталог", onRetry: onRetry)
             .lineLimit(1)
     }
 }
