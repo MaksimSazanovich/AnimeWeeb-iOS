@@ -1,5 +1,5 @@
 //
-//  OTPInputView.swift
+//  AuthConfirmInputView.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OTPInputView: View {
+struct AuthConfirmInputView: View {
 
     @Binding var code: String
     let codeLength: Int
@@ -60,5 +60,5 @@ struct OTPInputView: View {
 
 #Preview {
     @Previewable @State var code = "12345"
-    OTPInputView(code: $code, codeLength: 6)
+    AuthConfirmInputView(code: $code, codeLength: 6)
 }

@@ -1,5 +1,5 @@
 //
-//  OTPVerificationModel.swift
+//  LoginConfirmModel.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OTPVerificationModel {
+struct LoginConfirmModel {
     let email: String
     var code: String = ""
     let codeLength: Int = 6

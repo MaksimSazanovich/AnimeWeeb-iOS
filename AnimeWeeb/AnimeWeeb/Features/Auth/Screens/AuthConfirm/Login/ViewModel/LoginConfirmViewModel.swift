@@ -1,5 +1,5 @@
 //
-//  OTPVerificationViewModel.swift
+//  LoginConfirmViewModel.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -9,9 +9,9 @@ import Foundation
 
 @MainActor
 @Observable
-final class OTPVerificationViewModel {
+final class LoginConfirmViewModel {
 
-    private var model: OTPVerificationModel {
+    private var model: LoginConfirmModel {
         didSet {
             if model.isCodeComplete {
                 didTapVerifyButton()
@@ -44,7 +44,7 @@ final class OTPVerificationViewModel {
     var onRoute: ((Screen) -> Void)?
 
     init(email: String, authRepository: AuthRepositoryProtocol, userService: UserService) {
-        self.model = OTPVerificationModel(email: email)
+        self.model = LoginConfirmModel(email: email)
         self.authRepository = authRepository
         self.userService = userService
     }

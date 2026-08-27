@@ -80,7 +80,7 @@ final class ScreenFactory {
     }
 
     func makeOTPVerificationScreen(email: String, coordinator: Coordinator) -> some View {
-        let viewModel = OTPVerificationViewModel(
+        let viewModel = LoginConfirmViewModel(
             email: email,
             authRepository: authRepository,
             userService: userService
@@ -89,7 +89,7 @@ final class ScreenFactory {
             coordinator?.navigate(to: destination)
         }
 
-        return OTPVerificationScreen(viewModel: viewModel)
+        return LoginConfirmScreen(viewModel: viewModel)
     }
 
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {

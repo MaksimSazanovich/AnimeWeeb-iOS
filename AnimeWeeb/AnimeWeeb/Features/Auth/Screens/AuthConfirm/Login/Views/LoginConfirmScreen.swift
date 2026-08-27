@@ -1,5 +1,5 @@
 //
-//  OTPVerificationScreen.swift
+//  LoginConfirmScreen.swift
 //  AnimeWeeb
 //
 //  Created by Maksim Sazanovich
@@ -8,9 +8,9 @@
 import GoogleSignInSwift
 import SwiftUI
 
-struct OTPVerificationScreen: View {
+struct LoginConfirmScreen: View {
 
-    @Bindable var viewModel: OTPVerificationViewModel
+    @Bindable var viewModel: LoginConfirmViewModel
 
     var body: some View {
 
@@ -49,7 +49,7 @@ struct OTPVerificationScreen: View {
                                     .font(.body)
                                     .foregroundStyle(.white)
 
-                                OTPInputView(code: $viewModel.code, codeLength: viewModel.codeLength)
+                                AuthConfirmInputView(code: $viewModel.code, codeLength: viewModel.codeLength)
                             }
 
                             // MARK: Verify Button
@@ -97,7 +97,7 @@ struct OTPVerificationScreen: View {
 }
 
 #Preview {
-    let viewModel = OTPVerificationViewModel(
+    let viewModel = LoginConfirmViewModel(
         email: "fd@fd",
         authRepository: AuthRepository(
             networkService: NetworkService(),
@@ -107,5 +107,5 @@ struct OTPVerificationScreen: View {
         userService: UserService()
     )
     viewModel.code = "1235"
-    return OTPVerificationScreen(viewModel: viewModel)
+    return LoginConfirmScreen(viewModel: viewModel)
 }
