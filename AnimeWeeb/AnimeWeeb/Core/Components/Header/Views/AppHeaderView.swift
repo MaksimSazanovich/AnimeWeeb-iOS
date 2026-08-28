@@ -115,7 +115,7 @@ struct AppHeaderView: View {
                             // MARK: User Profile Card
                             if let user = viewModel.user {
                                 Button {
-                                    print("Profile Button pressed")
+                                    viewModel.didTapProfile()
                                 } label: {
                                     HStack {
                                         ProfileButton(avatarURL: user.avatarPath) {

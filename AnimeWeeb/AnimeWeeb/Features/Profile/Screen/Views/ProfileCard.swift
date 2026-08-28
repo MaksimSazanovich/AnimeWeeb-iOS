@@ -12,6 +12,7 @@ struct ProfileCard: View {
 
     let user: User
     var onLogout: () -> Void
+    var onEdit: () -> Void
 
     var body: some View {
         ZStack {
@@ -24,7 +25,7 @@ struct ProfileCard: View {
                             .scaledToFill()
                     }
                 }
-                .frame(width: 128, height: 128)
+                .frame(width: 126, height: 126)
                 .clipShape(.circle)
                 .overlay(
                     Circle()
@@ -79,8 +80,7 @@ struct ProfileCard: View {
             .overlay(alignment: .topTrailing) {
                 // MARK: Edit Button
                 Button {
-                    // TODO: Edit logic
-                    print("Edit")
+                    onEdit()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 7)

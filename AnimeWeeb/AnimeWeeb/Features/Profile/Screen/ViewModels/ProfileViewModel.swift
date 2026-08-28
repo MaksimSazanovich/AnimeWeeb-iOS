@@ -10,6 +10,8 @@ import Foundation
 @MainActor
 @Observable
 final class ProfileViewModel {
+    
+    private(set) var profileEditViewModel: ProfileEditViewModel
 
     private let userService: UserService
     private let authRepository: AuthRepositoryProtocol
@@ -26,10 +28,17 @@ final class ProfileViewModel {
     var authState: AuthState {
         userService.authState
     }
+    
+    var cardState: ProfileCardState = .idle
+    var state: ViewState = .empty
+    
+    
 
     init(userService: UserService, authRepository: AuthRepositoryProtocol) {
         self.userService = userService
         self.authRepository = authRepository
+        
+        self.profileEditViewModel = ProfileEditViewModel(model: ProfileEditModel(oldUser: userService.user ?? previewUser))
     }
 
     init(userService: UserService,
@@ -40,7 +49,10 @@ final class ProfileViewModel {
         self.authRepository = authRepository
         self.watchHistory = watchHistory
         self.userAnimeList = userAnimeList
+        
+        self.profileEditViewModel = ProfileEditViewModel(model: ProfileEditModel(oldUser: userService.user ?? previewUser))
     }
+    
 
     func getUserAnimeList(for status: WatchStatus) -> [UserAnimeListItem] {
         userAnimeList?.filter { $0.status == status } ?? []
@@ -55,4 +67,15 @@ final class ProfileViewModel {
 
         }
     }
+    
+    func didTapEdit() {
+        cardState = .edit
+    }
+    
+    func didTapCancelEdit() {
+        profileEditViewModel.clear()
+        cardState = .idle
+    }
+    
+    
 }

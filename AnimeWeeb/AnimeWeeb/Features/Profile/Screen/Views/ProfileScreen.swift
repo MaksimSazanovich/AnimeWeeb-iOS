@@ -18,13 +18,24 @@ struct ProfileScreen: View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 32) {
-                    // MARK: Profile Card
-                    ProfileCard(user: viewModel.user) {
-                        Task {
-                            await viewModel.didTapLogout()
+                    switch viewModel.cardState {
+                    case .idle:
+                        // MARK: Profile Card
+                        ProfileCard(user: viewModel.user) {
+                            Task {
+                                await viewModel.didTapLogout()
+                            }
+                        } onEdit: {
+                            viewModel.didTapEdit()
+                        }
+                        
+                    case .edit:
+                        // MARK: Profile Edit Card
+                        ProfileEditCard(user: viewModel.user, viewModel: viewModel.profileEditViewModel) {
+                            viewModel.didTapCancelEdit()
                         }
                     }
-
+                    
                     AWDivider()
 
                     // MARK: Watch History
