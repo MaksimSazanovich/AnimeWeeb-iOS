@@ -21,11 +21,11 @@ struct ProfileCard: View {
                     if let image = state.image {
                         image
                             .resizable()
-                            .scaledToFit()
-                            .clipShape(.circle)
+                            .scaledToFill()     
                     }
                 }
                 .frame(width: 128, height: 128)
+                .clipShape(.circle)
                 .overlay(
                     Circle()
                         .stroke(.purpleBackground.opacity(0.5), lineWidth: 1)

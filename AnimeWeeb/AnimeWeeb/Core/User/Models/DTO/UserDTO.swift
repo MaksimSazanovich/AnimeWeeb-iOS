@@ -36,7 +36,7 @@ extension UserDTO {
         } else {
             relativePath = path.hasPrefix("/") ? path : "/\(path)"
         }
-        print(baseURL + relativePath)
+        
         return URL(string: baseURL + relativePath)
     }
 }

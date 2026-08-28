@@ -50,6 +50,15 @@ final class RegisterConfirmViewModel {
             model.nickname = newValue
         }
     }
+    
+    var avatar: Data? {
+        get {
+            model.avatar
+        }
+        set {
+            model.avatar = newValue
+        }
+    }
 
     var state: ViewState = .empty
 
@@ -62,10 +71,11 @@ final class RegisterConfirmViewModel {
     }
     
     func didTapVerifyButton() {
+        guard let avatar = avatar else { return }
         Task {
             do {
                 state = .loading
-                let user: User = try await authRepository.fetchLoginConfirm(email: email, code: code)
+                let user: User = try await authRepository.fetchRegisterConfirm(email: email, code: code, nickname: nickname, avatar: avatar)
                 state = .loaded
                 userService.update(user: user)
                 onRoute?(Screen.home)
@@ -96,7 +106,7 @@ final class RegisterConfirmViewModel {
     }
 
     func updateAvatar(avatar: Data) {
-        model.avatar = avatar
+        self.avatar = avatar
     }
     
     private func clearCode() {

@@ -21,11 +21,11 @@ struct ProfileButton: View {
                 if let image = state.image {
                    image
                         .resizable()
-                        .scaledToFit()
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .scaledToFill()
                 }
             }
             .frame(width: 36, height: 36)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .fill(.profileButtonBackground))

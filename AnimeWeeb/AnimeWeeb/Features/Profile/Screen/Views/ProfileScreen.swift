@@ -40,6 +40,7 @@ struct ProfileScreen: View {
                 }
             }
             .frame(maxWidth: .infinity)
+            .padding(.top, 16)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
