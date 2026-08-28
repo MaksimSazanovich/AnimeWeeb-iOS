@@ -10,11 +10,12 @@ import Foundation
 @MainActor
 @Observable
 final class ProfileViewModel {
-    
+
     private(set) var profileEditViewModel: ProfileEditViewModel
 
     private let userService: UserService
     private let authRepository: AuthRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
 
     private(set) var watchHistory: [WatchHistoryItem]?
     private(set) var userAnimeList: [UserAnimeListItem]?
@@ -28,31 +29,45 @@ final class ProfileViewModel {
     var authState: AuthState {
         userService.authState
     }
-    
+
     var cardState: ProfileCardState = .idle
     var state: ViewState = .empty
-    
-    
 
-    init(userService: UserService, authRepository: AuthRepositoryProtocol) {
+    init(userService: UserService, authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.userService = userService
         self.authRepository = authRepository
-        
-        self.profileEditViewModel = ProfileEditViewModel(model: ProfileEditModel(oldUser: userService.user ?? previewUser))
+        self.userRepository = userRepository
+
+        self.profileEditViewModel = ProfileEditViewModel(
+            model: ProfileEditModel(oldUser: userService.user ?? previewUser),
+            userRepository: userRepository,
+            userService: userService
+        )
+
+        profileEditViewModel.onSaved = { [weak self] in
+            self?.cardState = .idle
+            print("idle card state")
+        }
     }
 
     init(userService: UserService,
          authRepository: AuthRepositoryProtocol,
+         userRepository: UserRepositoryProtocol,
          watchHistory: [WatchHistoryItem],
          userAnimeList: [UserAnimeListItem]) {
         self.userService = userService
         self.authRepository = authRepository
+        self.userRepository = userRepository
+
         self.watchHistory = watchHistory
         self.userAnimeList = userAnimeList
-        
-        self.profileEditViewModel = ProfileEditViewModel(model: ProfileEditModel(oldUser: userService.user ?? previewUser))
+
+        self.profileEditViewModel = ProfileEditViewModel(
+            model: ProfileEditModel(oldUser: userService.user ?? previewUser),
+            userRepository: userRepository,
+            userService: userService
+        )
     }
-    
 
     func getUserAnimeList(for status: WatchStatus) -> [UserAnimeListItem] {
         userAnimeList?.filter { $0.status == status } ?? []
@@ -67,15 +82,14 @@ final class ProfileViewModel {
 
         }
     }
-    
+
     func didTapEdit() {
         cardState = .edit
     }
-    
+
     func didTapCancelEdit() {
         profileEditViewModel.clear()
         cardState = .idle
     }
-    
-    
+
 }

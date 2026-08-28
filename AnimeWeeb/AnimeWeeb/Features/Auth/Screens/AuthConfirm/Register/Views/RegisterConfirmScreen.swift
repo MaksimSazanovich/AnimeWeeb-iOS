@@ -105,17 +105,3 @@ struct RegisterConfirmScreen: View {
         .background(Color.background)
     }
 }
-
-#Preview {
-    let viewModel = RegisterConfirmViewModel(
-        email: "fd@fd",
-        authRepository: AuthRepository(
-            networkService: NetworkService(),
-            googleService: GoogleService(),
-            userRepository: UserRepository(networkService: NetworkService())
-        ),
-        userService: UserService()
-    )
-    viewModel.code = "1235"
-    return RegisterConfirmScreen(viewModel: viewModel)
-}

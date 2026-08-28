@@ -24,7 +24,6 @@ struct AnimeWeebApp: App {
                 container.screenFactory.makeAppHeader(coordinator: container.coordinator)
             }
             .task {
-                print("GIDClientID:", Bundle.main.object(forInfoDictionaryKey: "GIDClientID") ?? "NIL")
                 await container.appViewModel.bootstrapApp()
             }
             .onOpenURL { url in

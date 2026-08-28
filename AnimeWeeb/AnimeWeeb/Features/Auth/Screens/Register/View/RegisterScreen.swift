@@ -80,13 +80,3 @@ struct RegisterScreen: View {
         .dismissKeyboardOnTap()
     }
 }
-
-#Preview {
-    RegisterScreen(viewModel: RegisterViewModel(
-        authRepository: AuthRepository(
-            networkService: NetworkService(),
-            googleService: GoogleService(),
-            userRepository: UserRepository(networkService: NetworkService())
-        ),
-        userService: UserService()))
-}

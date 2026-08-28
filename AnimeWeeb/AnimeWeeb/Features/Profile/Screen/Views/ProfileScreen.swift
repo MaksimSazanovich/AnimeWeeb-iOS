@@ -28,14 +28,14 @@ struct ProfileScreen: View {
                         } onEdit: {
                             viewModel.didTapEdit()
                         }
-                        
+
                     case .edit:
                         // MARK: Profile Edit Card
                         ProfileEditCard(user: viewModel.user, viewModel: viewModel.profileEditViewModel) {
                             viewModel.didTapCancelEdit()
                         }
                     }
-                    
+
                     AWDivider()
 
                     // MARK: Watch History
@@ -58,16 +58,4 @@ struct ProfileScreen: View {
         .padding(.horizontal)
         .background(Color.background)
     }
-}
-
-#Preview {
-    ProfileScreen(
-        viewModel: ProfileViewModel(
-            userService:
-                UserService(user: previewUser, state: .authenticated), authRepository: AuthRepository(networkService: NetworkService(), googleService: GoogleService(),
-                userRepository: UserRepository(networkService: NetworkService())),
-            watchHistory: [previewWatchHistoryItem],
-            userAnimeList: previewUserList
-        )
-    )
 }

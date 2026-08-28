@@ -5,6 +5,7 @@
 //  Created by Maksim Sazanovich
 //
 
+import KeychainAccess
 import SwiftUI
 
 final class ScreenFactory {
@@ -123,7 +124,7 @@ final class ScreenFactory {
     }
 
     func makeProfileScreen(coordinator: Coordinator) -> some View {
-        let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository)
+        let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository, userRepository: userRepository)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }

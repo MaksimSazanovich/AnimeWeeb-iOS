@@ -14,16 +14,16 @@ final class AuthRepository: AuthRepositoryProtocol {
     private let googleService: GoogleService
     private let userRepository: UserRepositoryProtocol
 
-    private let keychain = Keychain(service: "MS.AnimeWeeb")
-        .accessibility(.whenUnlocked)
+    private let keychain: Keychain
 
     private let deviceID = UIDevice.deviceID
     private let deviceName = UIDevice.deviceName
 
-    public init(networkService: NetworkServiceProtocol, googleService: GoogleService, userRepository: UserRepositoryProtocol) {
+    public init(networkService: NetworkServiceProtocol, googleService: GoogleService, userRepository: UserRepositoryProtocol, keychain: Keychain) {
         self.networkService = networkService
         self.googleService = googleService
         self.userRepository = userRepository
+        self.keychain = keychain
     }
 
     func fetchUserWithGoogle() async throws -> User {
@@ -33,11 +33,6 @@ final class AuthRepository: AuthRepositoryProtocol {
 
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
-
-        print("\(dto.accessToken)\n")
-        print(dto.refreshToken)
-        print("deviceID: \(UIDevice.deviceID)")
-        print("deviceName: \(UIDevice.deviceName)")
 
         return dto.user.toDomain()
     }
@@ -67,9 +62,12 @@ final class AuthRepository: AuthRepositoryProtocol {
     func autoLogin() async throws -> User {
         let dto: RefreshResponse = try await fetchRefresh()
         let accessToken = dto.accessToken
+
+        print("accessToken: \(dto.accessToken)\n")
         print(dto.refreshToken)
         print("deviceID: \(deviceID)")
         print("deviceName: \(deviceName)")
+
         let user = try await userRepository.fetchUser(accessToken: accessToken)
         return user
     }

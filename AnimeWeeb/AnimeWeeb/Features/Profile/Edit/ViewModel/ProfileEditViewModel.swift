@@ -10,7 +10,10 @@ import Foundation
 @MainActor
 @Observable
 final class ProfileEditViewModel {
-    
+
+    private let userRepository: UserRepositoryProtocol
+    private let userService: UserService
+
     private var model: ProfileEditModel {
         didSet {
             if model.hasChanges {
@@ -20,31 +23,49 @@ final class ProfileEditViewModel {
             }
         }
     }
-    
+
     var nickname: String {
         get {
-            if let newUserName = model.newUser?.name {
-                return newUserName
+            if model.newUser.name != model.oldUser.name {
+                return model.newUser.name
             } else {
                return  model.oldUser.name
             }
         }
         set {
-            model.newUser?.name = newValue
+            model.newUser.name = newValue
         }
     }
-    
+
     var state: ViewState = .empty
-    
-    init(model: ProfileEditModel) {
+
+    var onSaved: (() -> Void)?
+
+    init(model: ProfileEditModel, userRepository: UserRepositoryProtocol, userService: UserService) {
         self.model = model
+        self.userRepository = userRepository
+        self.userService = userService
     }
-    
+
     func updateAvatar(avatar: Data) {
         model.avatar = avatar
     }
-    
+
     func clear() {
         model.newUser = model.oldUser
+    }
+
+    func save() async {
+        Task {
+            do {
+                state = .loading
+                let user: User = try await userRepository.fetchUpdate(name: model.newUser.name, avatar: model.avatar)
+                state = .loaded
+                userService.update(user: user)
+                onSaved?()
+            } catch {
+                state = .failed(error)
+            }
+        }
     }
 }

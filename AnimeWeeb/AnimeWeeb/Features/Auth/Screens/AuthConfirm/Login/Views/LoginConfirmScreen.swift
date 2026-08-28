@@ -95,17 +95,3 @@ struct LoginConfirmScreen: View {
         .dismissKeyboardOnTap()
     }
 }
-
-#Preview {
-    let viewModel = LoginConfirmViewModel(
-        email: "fd@fd",
-        authRepository: AuthRepository(
-            networkService: NetworkService(),
-            googleService: GoogleService(),
-            userRepository: UserRepository(networkService: NetworkService())
-        ),
-        userService: UserService()
-    )
-    viewModel.code = "1235"
-    return LoginConfirmScreen(viewModel: viewModel)
-}

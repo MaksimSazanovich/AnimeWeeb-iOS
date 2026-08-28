@@ -5,6 +5,7 @@
 //  Created by Maksim Sazanovich
 //
 
+import KeychainAccess
 import Observation
 
 @Observable
@@ -14,6 +15,7 @@ final class AppContainer {
     let userService: UserService
     let googleService: GoogleService
     let appURLOpener: AppURLOpener
+    let keychain: Keychain
 
     // Repositories
     let userRepository: UserRepositoryProtocol
@@ -43,15 +45,17 @@ final class AppContainer {
         self.userService = userService
         self.googleService = googleService
         self.appURLOpener = appURLOpener
+        self.keychain = Keychain(service: "MS.AnimeWeeb").accessibility(.whenUnlocked)
 
-        let userRepo = userRepository ?? UserRepository(networkService: networkService)
+        let userRepo = userRepository ?? UserRepository(networkService: networkService, keychain: keychain)
         let homeRepo = homeRepository ?? HomeRepository(networkService: networkService)
         let watchRepo = watchRepository ?? WatchRepository(networkService: networkService)
         let animeRepo = animeDetailsRepository ?? AnimeDetailsRepository(networkService: networkService)
         let authRepo = authRepository ?? AuthRepository(
             networkService: networkService,
             googleService: googleService,
-            userRepository: userRepo
+            userRepository: userRepo,
+            keychain: keychain
         )
 
         self.userRepository = userRepo
