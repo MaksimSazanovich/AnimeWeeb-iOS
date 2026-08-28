@@ -11,7 +11,7 @@ struct RegisterConfirmModel {
     let email: String
     var code: String = ""
     let codeLength: Int = 6
-    
+
     var nickname: String = ""
     var avatar: Data?
 

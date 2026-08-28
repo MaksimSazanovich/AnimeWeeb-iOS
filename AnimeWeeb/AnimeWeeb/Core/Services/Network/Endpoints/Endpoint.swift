@@ -38,19 +38,19 @@ extension Endpoint {
        case .json(let encodable):
            request.httpBody = try JSONEncoder().encode(encodable)
            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-           
+
        case .multipart(let items):
            let boundary = "Boundary-\(UUID().uuidString)"
            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
            request.httpBody = makeMultipartBody(items: items, boundary: boundary)
-           
+
        case .plain:
            break
        }
 
         return request
     }
-    
+
     private func makeMultipartBody(items: [MultipartItem], boundary: String) -> Data {
             var bodyData = Data()
 

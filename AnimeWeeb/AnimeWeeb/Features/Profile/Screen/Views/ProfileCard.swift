@@ -21,7 +21,7 @@ struct ProfileCard: View {
                     if let image = state.image {
                         image
                             .resizable()
-                            .scaledToFill()     
+                            .scaledToFill()
                     }
                 }
                 .frame(width: 128, height: 128)

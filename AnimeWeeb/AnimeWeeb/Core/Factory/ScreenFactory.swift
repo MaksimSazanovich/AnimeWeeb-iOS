@@ -91,7 +91,7 @@ final class ScreenFactory {
 
         return LoginConfirmScreen(viewModel: viewModel)
     }
-    
+
     func makeRegisterConfirmScreen(email: String, coordinator: Coordinator) -> some View {
         let viewModel = RegisterConfirmViewModel(
             email: email,

@@ -15,11 +15,11 @@ public enum AuthEndpoint: Endpoint {
     case loginConfirm(email: String, code: String, deviceID: String, deviceName: String)
     case registerRequestCode(email: String)
     case registerConfirm(email: String, code: String, name: String, avatar: Data, deviceID: String, deviceName: String)
-    
+
     public var method: HTTPMethod {
         .post
     }
-    
+
     public var path: String {
         switch self {
         case .google: return "auth/google"
@@ -31,15 +31,15 @@ public enum AuthEndpoint: Endpoint {
         case .registerConfirm: return "auth/register/confirm"
         }
     }
-    
+
     public var headers: [String : String]? {
         nil
     }
-    
+
     public var queryItems: [URLQueryItem]? {
         nil
     }
-    
+
     public var body: RequestBody {
         switch self {
         case .google(let idToken, let deviceID, let deviceName):

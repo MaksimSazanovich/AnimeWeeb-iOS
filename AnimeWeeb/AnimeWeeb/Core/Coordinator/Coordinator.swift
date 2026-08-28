@@ -32,7 +32,7 @@ final class Coordinator {
 
         case .loginConfirm(let email):
             factory.makeLoginConfirmScreen(email: email,coordinator: self)
-            
+
         case .registerConfirm(let email):
             factory.makeRegisterConfirmScreen(email: email, coordinator: self)
 

@@ -11,7 +11,7 @@ import GoogleSignIn
 @MainActor
 @Observable
 final class RegisterConfirmViewModel {
-    
+
     private var model: RegisterConfirmModel {
         didSet {
             if model.isFormComplete {
@@ -21,7 +21,7 @@ final class RegisterConfirmViewModel {
             }
         }
     }
-    
+
     private let authRepository: AuthRepositoryProtocol
     private let userService: UserService
 
@@ -41,7 +41,7 @@ final class RegisterConfirmViewModel {
     var codeLength: Int {
         return model.codeLength
     }
-    
+
     var nickname: String {
         get {
             model.nickname
@@ -50,7 +50,7 @@ final class RegisterConfirmViewModel {
             model.nickname = newValue
         }
     }
-    
+
     var avatar: Data? {
         get {
             model.avatar
@@ -69,7 +69,7 @@ final class RegisterConfirmViewModel {
         self.authRepository = authRepository
         self.userService = userService
     }
-    
+
     func didTapVerifyButton() {
         guard let avatar = avatar else { return }
         Task {
@@ -85,11 +85,11 @@ final class RegisterConfirmViewModel {
             }
         }
     }
-    
+
     func didTapSwitchAuthButton() {
         onRoute?(Screen.login)
     }
-    
+
     func didTapLoginWithGoogle() {
         Task {
             do {
@@ -108,7 +108,7 @@ final class RegisterConfirmViewModel {
     func updateAvatar(avatar: Data) {
         self.avatar = avatar
     }
-    
+
     private func clearCode() {
         code = ""
     }

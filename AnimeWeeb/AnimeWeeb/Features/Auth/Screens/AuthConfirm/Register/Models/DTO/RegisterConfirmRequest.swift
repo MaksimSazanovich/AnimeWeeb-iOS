@@ -13,7 +13,7 @@ struct RegisterConfirmRequest: Encodable {
     let name: String
     let deviceID: String
     let deviceName: String
-    
+
     let avatarData: Data
 
     enum CodingKeys: String, CodingKey {

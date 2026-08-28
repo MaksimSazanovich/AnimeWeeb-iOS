@@ -57,7 +57,7 @@ final class LoginConfirmViewModel {
     func didTapSwitchAuthButton() {
         onRoute?(Screen.register)
     }
-    
+
     func didTapLoginWithGoogle() {
         Task {
             do {
@@ -75,7 +75,7 @@ final class LoginConfirmViewModel {
 
     func didTapVerifyButton() {
         state = .idle
-        
+
         Task {
             do {
                 state = .loading
