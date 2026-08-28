@@ -13,7 +13,7 @@ public protocol Endpoint {
     var path: String { get }
     var headers: [String: String]? { get }
     var queryItems: [URLQueryItem]? { get }
-    var body: Encodable? { get }
+    var body: RequestBody { get }
 }
 
 extension Endpoint {
@@ -34,11 +34,47 @@ extension Endpoint {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
 
-        if let body = body {
-            request.httpBody = try JSONEncoder().encode(body)
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
+       switch body {
+       case .json(let encodable):
+           request.httpBody = try JSONEncoder().encode(encodable)
+           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+           
+       case .multipart(let items):
+           let boundary = "Boundary-\(UUID().uuidString)"
+           request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+           request.httpBody = makeMultipartBody(items: items, boundary: boundary)
+           
+       case .plain:
+           break
+       }
 
         return request
+    }
+    
+    private func makeMultipartBody(items: [MultipartItem], boundary: String) -> Data {
+            var bodyData = Data()
+
+            for item in items {
+                bodyData.append("--\(boundary)\r\n")
+                if let fileName = item.fileName, let mimeType = item.mimeType {
+                    bodyData.append("Content-Disposition: form-data; name=\"\(item.name)\"; filename=\"\(fileName)\"\r\n")
+                    bodyData.append("Content-Type: \(mimeType)\r\n\r\n")
+                } else {
+                    bodyData.append("Content-Disposition: form-data; name=\"\(item.name)\"\r\n\r\n")
+                }
+                bodyData.append(item.data)
+                bodyData.append("\r\n")
+            }
+
+            bodyData.append("--\(boundary)--\r\n")
+            return bodyData
+        }
+}
+
+private extension Data {
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
     }
 }

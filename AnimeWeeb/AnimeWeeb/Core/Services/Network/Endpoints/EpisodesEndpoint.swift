@@ -30,8 +30,8 @@ public enum EpisodesEndpoint: Endpoint {
         return nil
     }
 
-    public var body: (any Encodable)? {
-        return nil
+    public var body: RequestBody {
+        return .plain
     }
 
 }

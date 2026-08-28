@@ -49,8 +49,8 @@ public enum AnimeEndpoint: Endpoint {
         }
     }
 
-    public var body: (any Encodable)? {
-        return nil
+    public var body: RequestBody {
+        return .plain
     }
 
 }

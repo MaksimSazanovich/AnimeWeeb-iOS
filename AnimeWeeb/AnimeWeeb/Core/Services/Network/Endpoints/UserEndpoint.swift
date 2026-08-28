@@ -30,10 +30,10 @@ public enum UserEndpoint: Endpoint {
         nil
     }
 
-    public var body: (any Encodable)? {
+    public var body: RequestBody {
         switch self {
         case .getMe(accessToken: let accessToken):
-            return UserRequest(accessToken: accessToken)
+            return .json(UserRequest(accessToken: accessToken))
         }
     }
 
