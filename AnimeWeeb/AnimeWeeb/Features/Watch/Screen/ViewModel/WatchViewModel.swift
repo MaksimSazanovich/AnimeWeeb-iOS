@@ -45,20 +45,27 @@ final class WatchViewModel {
 
         state = .loading
 
-        do {
-            model.episode = try await repository.fetchEpisode(id: model.episodeID)
+        switch model.playerProvider {
+        case .native(let episodeID):
+            do {
+                model.episode = try await repository.fetchEpisode(id: episodeID)
 
-            breadcrumbs.append(BreadcrumbItem(screen: .animeDetails(animeID: model.titleID), title: model.title))
-            breadcrumbs.append(BreadcrumbItem(screen: .watch(model: model), title: "Эпизод \(episode)"))
+                breadcrumbs.append(BreadcrumbItem(screen: .animeDetails(animeID: model.titleID), title: model.title))
+                breadcrumbs.append(BreadcrumbItem(screen: .watch(model: model), title: "Эпизод \(episode)"))
 
-            if model.episode == nil {
-                state = .failed(NetworkError.emptyResponse)
-            } else {
-                state = .loaded
+                if model.episode == nil {
+                    state = .failed(NetworkError.emptyResponse)
+                } else {
+                    state = .loaded
+                }
+            } catch {
+                state = .failed(error)
             }
-        } catch {
-            state = .failed(error)
+        case .kodik(let titleID, let seasonNumber, let episodeNumber):
+            // TODO: kodik
+            break
         }
+
     }
 
     func breadcrumbItemDidTap(_ item: BreadcrumbItem) {

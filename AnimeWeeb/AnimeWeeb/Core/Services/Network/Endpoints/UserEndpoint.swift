@@ -10,10 +10,12 @@ import Foundation
 public enum UserEndpoint: Endpoint {
     case getMe(accessToken: String)
     case update(accessToken: String, name: String?, avatar: Data?)
+    case getWatchHistory(accessToken: String)
 
     public var method: HTTPMethod {
         switch self {
         case .getMe, .update: .post
+        case .getWatchHistory: .get
         }
     }
 
@@ -21,12 +23,15 @@ public enum UserEndpoint: Endpoint {
         switch self {
         case .getMe: return "user/me"
         case .update: return "user/update"
+        case .getWatchHistory: return "user/watch-history"
         }
     }
 
     public var headers: [String : String]? {
         switch self {
         case .update(let accessToken, _, _):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .getWatchHistory(let accessToken):
             return ["Authorization": "Bearer \(accessToken)"]
         default:
             return nil
@@ -50,6 +55,8 @@ public enum UserEndpoint: Endpoint {
                 items.append(.file(name: "Avatar", data: avatar, fileName: "avatar.jpg", mimeType: "image/jpeg"))
             }
             return .multipart(items)
+        default:
+            return .plain
         }
     }
 

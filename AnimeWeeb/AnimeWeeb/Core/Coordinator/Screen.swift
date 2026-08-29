@@ -27,7 +27,7 @@ extension Screen {
         case .loginConfirm: return "loginConfirm"
         case .registerConfirm: return "registerConfirm"
         case .animeDetails(animeID: let id): return "animeDetails_\(id)"
-        case .watch(model: let model): return "watch_\(model.episodeID)"
+        case .watch(model: let model): return "watch_\(model.playerProvider.player)"
         case .profile: return "profile"
         }
     }

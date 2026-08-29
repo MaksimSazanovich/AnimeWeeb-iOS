@@ -28,9 +28,19 @@ final class UserRepository: UserRepositoryProtocol {
         guard let accessToken = try keychain.get(KeychainKey.accessToken.rawValue) else {
             throw AuthError.cancelled
         }
-        print(name ?? "nil", accessToken.isEmpty)
+
         let dto: UserUpdateResponse = try await networkService.request(UserEndpoint.update(accessToken: accessToken, name: name, avatar: avatar))
-        print(dto)
+
         return dto.user.toDomain()
+    }
+
+    func fetchGetUserHistory() async throws -> [WatchHistoryItem] {
+        guard let accessToken = try keychain.get(KeychainKey.accessToken.rawValue) else {
+            throw AuthError.cancelled
+        }
+
+        let dto: WatchHistoryResponse = try await networkService.request(UserEndpoint.getWatchHistory(accessToken: accessToken))
+
+        return dto.toDomain()
     }
 }

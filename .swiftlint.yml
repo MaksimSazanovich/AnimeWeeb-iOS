@@ -32,6 +32,7 @@ identifier_name:
     - id
     - i
     - j
+    - to
 
 cyclomatic_complexity:
   warning: 10

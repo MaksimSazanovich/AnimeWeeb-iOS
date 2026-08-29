@@ -18,11 +18,12 @@ struct TitleDTO: Codable {
     let createdAt: String
     let genres: [GenreDTO]
     let dubbers: [Data] // TODO: Add type
+    let seasons: [SeasonDTO]?
 
     enum CodingKeys: String, CodingKey {
         case id, nameRu, nameEn, nameJp, altNamesRu, altNamesEn, description
         case posterURL = "posterUrl"
-        case rating, status, createdAt, genres, dubbers
+        case rating, status, createdAt, genres, dubbers, seasons
     }
 }
 
@@ -33,6 +34,7 @@ extension TitleDTO {
             imageURL: URL(string: posterURL),
             title: nameRu,
             description: description,
+            seasons: seasons?.compactMap { $0.toDomain() } ?? [],
             genres: genres.compactMap { $0.toDomain() },
             nameRu: nameRu,
             nameEn: nameEn,

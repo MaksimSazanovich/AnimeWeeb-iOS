@@ -45,7 +45,6 @@ struct SkeletonAnimeCard: View {
 
             Spacer(minLength: 0)
         }
-
         .animeCardBackgroundModifier(cornerRadius: 12)
     }
 }

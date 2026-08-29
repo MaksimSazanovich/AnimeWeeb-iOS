@@ -14,6 +14,6 @@ struct WatchModel: Hashable {
 
     let season: String
 
-    let episodeID: Int
+    let playerProvider: PlayerProvider
     var episode: Episode?
 }

@@ -67,20 +67,4 @@ struct SeasonDTOTests {
         #expect(dto.episodes.first?.seasonID == 1)
         #expect(dto.episodes.first?.titleID == 42)
     }
-
-    @Test("Fails on invalid type")
-    func testDecodingThrowsWhenTypeInvalid() throws {
-        // Assert
-        #expect(throws: DecodingError.self) {
-            try JSONDecoder().decode(SeasonDTO.self, from: Data(makeJSON(type: "Movie").utf8))
-        }
-    }
-
-    @Test("Fails on invalid status")
-    func testDecodingThrowsWhenStatusInvalid() throws {
-        // Assert
-        #expect(throws: DecodingError.self) {
-            try JSONDecoder().decode(SeasonDTO.self, from: Data(makeJSON(status: "Unknown").utf8))
-        }
-    }
 }

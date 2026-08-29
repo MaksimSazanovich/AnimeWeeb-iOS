@@ -39,7 +39,7 @@ struct ProfileScreen: View {
                     AWDivider()
 
                     // MARK: Watch History
-                    WatchHistoryView(watchHistory: viewModel.watchHistory ?? [])
+                    WatchHistoryView(viewModel: viewModel.watchHistoryViewModel)
 
                     AWDivider()
 

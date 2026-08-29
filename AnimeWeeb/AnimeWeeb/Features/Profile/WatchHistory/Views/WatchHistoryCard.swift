@@ -6,10 +6,11 @@
 //
 
 import NukeUI
+import Shimmer
 import SwiftUI
 
 struct WatchHistoryCard: View {
-    let model: WatchHistoryItem
+    let model: WatchHistoryCardModel
 
     var onAction: () -> Void
 
@@ -42,12 +43,14 @@ struct WatchHistoryCard: View {
                             .foregroundStyle(.genreText)
                     }
 
-                    Text("\(model.stoppedAtSeconds)")
+                    Text("\(model.stoppedAtSeconds.timecode)")
                         .font(.system(.caption, weight: .semibold))
                         .foregroundStyle(.genreText)
                         .offset(y: -6)
                 }
                 .padding(.vertical)
+
+                Spacer()
 
                 VStack {
                     Spacer()
@@ -67,8 +70,18 @@ struct WatchHistoryCard: View {
             }
             .padding()
             .frame(height: 128)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .animeCardBackgroundModifier(cornerRadius: 16, fillOpacity: 0.3, strokeOpacity: 1)
+        }
+    }
+}
 
+#Preview {
+    LazyVStack {
+        ForEach(previewWatchHistory) { model in
+            WatchHistoryCard(model: model) {
+
+            }
         }
     }
 }

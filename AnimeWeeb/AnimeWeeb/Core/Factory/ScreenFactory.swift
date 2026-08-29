@@ -124,7 +124,8 @@ final class ScreenFactory {
     }
 
     func makeProfileScreen(coordinator: Coordinator) -> some View {
-        let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository, userRepository: userRepository)
+        let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository, userRepository: userRepository, animeDetailsRepository: animeDetailsRepository)
+
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }

@@ -7,15 +7,11 @@
 
 import Foundation
 
-struct WatchHistoryItem: Identifiable {
-    var id: Int { episodeID }
-
-    let title: String
-    let imageURL: URL?
+struct WatchHistoryItem {
     let season: Int
     let episode: Int
     let stoppedAtSeconds: Int
 
     let titleID: Int
-    let episodeID: Int
+    let playerProvider: PlayerProvider
 }

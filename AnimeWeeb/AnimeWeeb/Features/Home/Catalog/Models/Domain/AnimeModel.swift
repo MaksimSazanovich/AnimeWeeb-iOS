@@ -13,6 +13,7 @@ struct AnimeModel: Identifiable, Hashable {
     let imageURL: URL?
     let title: String
     let description: String?
+    let seasons: [Season]
     let genres: [Genre]
 
     let nameRu, nameEn, nameJp: String

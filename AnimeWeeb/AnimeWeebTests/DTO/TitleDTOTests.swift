@@ -28,7 +28,7 @@ struct TitleDTOTests {
             status: .ongoing,
             createdAt: "2026-06-12T12:13:11.0999497",
             genres: genreIDs.map { GenreDTO(id: $0, nameRu: "Genre", nameEn: "Genre") },
-            dubbers: [])
+            dubbers: [], seasons: [])
     }
 
     @Test("Valid DTO")

@@ -61,7 +61,8 @@ struct LatestEpisodeDTOTests {
                 status: .ongoing,
                 createdAt: "2026-06-12T12:13:11.0999497",
                 genres: [],
-                dubbers: []
+                dubbers: [],
+                seasons: []
             ),
             seasonObj: seasonObj ?? makeSeasonDTO(),
             episodeObj: EpisodeDTO(
