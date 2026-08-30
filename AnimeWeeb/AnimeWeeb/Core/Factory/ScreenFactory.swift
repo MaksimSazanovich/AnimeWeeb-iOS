@@ -110,7 +110,7 @@ final class ScreenFactory {
     }
 
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {
-        let viewModel = AnimeDetailsViewModel(animeID: animeID, repository: animeDetailsRepository)
+        let viewModel = AnimeDetailsViewModel(animeID: animeID, animeDetailsRepository: animeDetailsRepository, userListsRepository: userListsRepository)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }

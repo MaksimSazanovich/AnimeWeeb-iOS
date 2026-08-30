@@ -8,30 +8,34 @@
 import SwiftUI
 
 struct WatchStatusPicker: View {
-    @Binding var selectedStatus: WatchStatus?
+    @Bindable var viewModel: WatchStatusPickerViewModel
     
     var body: some View {
         HStack {
             Menu {
                 ForEach(WatchStatus.allCases, id: \.self) { status in
                     Button(status.name) {
-                        selectedStatus = status
+                        viewModel.selectedStatus = status
                     }
                 }
                 
-                if selectedStatus != nil {
+                if viewModel.selectedStatus != nil {
                     Button(role: .destructive) {
-                        selectedStatus = nil
+                        viewModel.selectedStatus = nil
                     } label: {
                         Text("Удалить из списка")
                     }
                 }
             } label: {
                 HStack(spacing: 8) {
-                    Image(systemName: "bookmark")
-                        .font(.system(size: 16))
+                    if viewModel.state == .idle{
+                        Image(systemName: "bookmark")
+                            .font(.system(size: 16))
+                    } else if viewModel.state == .loading {
+                        ProgressView()
+                    }
                     
-                    Text(selectedStatus?.name ?? "Добавить в список")
+                    Text(viewModel.selectedStatus?.name ?? "Добавить в список")
                         .font(.system(size: 16, weight: .medium))
                 }
                 .fixedSize(horizontal: true, vertical: false)
@@ -46,9 +50,17 @@ struct WatchStatusPicker: View {
                         .stroke(.menuButtonStroke, lineWidth: 2)
                 )
             }
-            .animation(.easeOut(duration: 0.2), value: selectedStatus)
-            
+            .animation(.easeOut(duration: 0.2), value: viewModel.selectedStatus)
+            .disabled(viewModel.state != .idle)
+            .opacity(viewModel.state != .idle ? 0.5 : 1)
             Spacer()
+        }
+        .onChange(of: viewModel.selectedStatus) { oldValue, newValue in
+            if oldValue != newValue {
+                Task {
+                    await viewModel.postStatus()
+                }
+            }
         }
     }
 }

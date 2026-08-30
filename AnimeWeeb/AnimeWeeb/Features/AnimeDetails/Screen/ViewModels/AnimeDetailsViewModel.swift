@@ -11,15 +11,23 @@ import Foundation
 @Observable
 final class AnimeDetailsViewModel {
     private var model: AnimeModel?
-    private let repository: AnimeDetailsRepositoryProtocol
+    private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
+    private let userListsRepository: UserListsRepositoryProtocol
+    
+    private(set) var watchStatusPickerViewModel: WatchStatusPickerViewModel
 
     let animeID: Int
-    var selectedStatus: WatchStatus?
+    
     private(set) var state: ViewState = .idle
 
-    init(animeID: Int, repository: AnimeDetailsRepositoryProtocol) {
+    init(animeID: Int,
+         animeDetailsRepository: AnimeDetailsRepositoryProtocol,
+         userListsRepository: UserListsRepositoryProtocol) {
         self.animeID = animeID
-        self.repository = repository
+        self.animeDetailsRepository = animeDetailsRepository
+        self.userListsRepository = userListsRepository
+        
+        self.watchStatusPickerViewModel = WatchStatusPickerViewModel(userListsRepository: userListsRepository, animeID: animeID)
     }
 
     var imageURL: URL? {
@@ -46,7 +54,7 @@ final class AnimeDetailsViewModel {
         state = .loading
 
         do {
-            model = try await repository.fetchAnimeDetails(id: animeID)
+            model = try await animeDetailsRepository.fetchAnimeDetails(id: animeID)
 
             if model == nil {
                 state = .failed(NetworkError.emptyResponse)

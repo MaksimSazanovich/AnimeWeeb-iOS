@@ -6,7 +6,7 @@
 //
 
 import NukeUI
-import SwiftUI
+import SwiftUI 
 import TagCloud
 
 struct AnimeDetailsContentView: View {
@@ -51,7 +51,7 @@ struct AnimeDetailsContentView: View {
                     
                     // MARK: Status Picker
                     HStack{
-                        WatchStatusPicker(selectedStatus: $viewModel.selectedStatus)
+                        WatchStatusPicker(viewModel: viewModel.watchStatusPickerViewModel)
                         Spacer()
                     }
                     

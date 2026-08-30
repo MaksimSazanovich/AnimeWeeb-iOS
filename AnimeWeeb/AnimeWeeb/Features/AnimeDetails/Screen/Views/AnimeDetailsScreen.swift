@@ -37,6 +37,3 @@ struct AnimeDetailsScreen: View {
     }
 }
 
-#Preview {
-    AnimeDetailsScreen(viewModel: AnimeDetailsViewModel(animeID: previewAnimeModel.id, repository: AnimeDetailsRepository(networkService: NetworkService())))
-}
