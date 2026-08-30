@@ -36,4 +36,3 @@ struct AnimeDetailsScreen: View {
         }
     }
 }
-

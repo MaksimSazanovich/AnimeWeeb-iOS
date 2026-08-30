@@ -10,21 +10,21 @@ import Foundation
 public enum UserListsEndpoint: Endpoint {
     case getMy(accessToken: String)
     case postUserList(accessToken: String, titleID: Int, listType: Int)
-    
+
     public var method: HTTPMethod {
         switch self {
         case .getMy: .get
         case .postUserList: .post
         }
     }
-    
+
     public var path: String {
         switch self {
         case .getMy: return "user-lists/my"
         case .postUserList: return "user-lists"
         }
     }
-    
+
     public var headers: [String : String]? {
         switch self {
         case .getMy(let accessToken):
@@ -33,11 +33,11 @@ public enum UserListsEndpoint: Endpoint {
             return ["Authorization": "Bearer \(accessToken)"]
         }
     }
-    
+
     public var queryItems: [URLQueryItem]? {
         nil
     }
-    
+
     public var body: RequestBody {
         switch self {
         case .getMy:

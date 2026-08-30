@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WatchStatusPicker: View {
     @Bindable var viewModel: WatchStatusPickerViewModel
-    
+
     var body: some View {
         HStack {
             Menu {
@@ -18,7 +18,7 @@ struct WatchStatusPicker: View {
                         viewModel.selectedStatus = status
                     }
                 }
-                
+
                 if viewModel.selectedStatus != nil {
                     Button(role: .destructive) {
                         viewModel.selectedStatus = nil
@@ -28,18 +28,18 @@ struct WatchStatusPicker: View {
                 }
             } label: {
                 HStack(spacing: 8) {
-                    if viewModel.state == .idle{
+                    if viewModel.state == .idle {
                         Image(systemName: "bookmark")
                             .font(.system(size: 16))
                     } else if viewModel.state == .loading {
                         ProgressView()
                     }
-                    
+
                     Text(viewModel.selectedStatus?.name ?? "Добавить в список")
                         .font(.system(size: 16, weight: .medium))
                 }
                 .fixedSize(horizontal: true, vertical: false)
-                
+
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)

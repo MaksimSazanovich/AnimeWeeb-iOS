@@ -13,11 +13,11 @@ final class AnimeDetailsViewModel {
     private var model: AnimeModel?
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
     private let userListsRepository: UserListsRepositoryProtocol
-    
+
     private(set) var watchStatusPickerViewModel: WatchStatusPickerViewModel
 
     let animeID: Int
-    
+
     private(set) var state: ViewState = .idle
 
     init(animeID: Int,
@@ -26,7 +26,7 @@ final class AnimeDetailsViewModel {
         self.animeID = animeID
         self.animeDetailsRepository = animeDetailsRepository
         self.userListsRepository = userListsRepository
-        
+
         self.watchStatusPickerViewModel = WatchStatusPickerViewModel(userListsRepository: userListsRepository, animeID: animeID)
     }
 

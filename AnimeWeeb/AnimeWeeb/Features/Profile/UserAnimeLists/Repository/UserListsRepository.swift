@@ -26,16 +26,16 @@ final class UserListsRepository: UserListsRepositoryProtocol {
 
         return dto.toDomain()
     }
-    
+
     func fetchPostUserList(titleID: Int, listType: Int) async throws -> String {
         guard let accessToken = try keychain.get(KeychainKey.accessToken.rawValue) else {
             throw AuthError.cancelled
         }
-        
+
         let dto: UserListResponse = try await networkService.request(UserListsEndpoint.postUserList(accessToken: accessToken, titleID: titleID, listType: listType))
-        
+
         print(dto.message)
-        
+
         return dto.message
     }
 }
