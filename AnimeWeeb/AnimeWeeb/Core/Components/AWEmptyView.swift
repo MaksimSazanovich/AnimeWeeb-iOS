@@ -37,7 +37,14 @@ struct AWEmptyView: View {
         .frame(maxWidth: .infinity)
         .padding()
         .padding(.vertical)
-        .animeCardBackgroundModifier()
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.viewBackground.opacity(0.4))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(.stroke.opacity(0.9), style: StrokeStyle(lineWidth: 2, dash: [4, 4]))
+        )
     }
 
     init(title: String, buttonTitle: String? = nil, onAction: (() -> Void)? = nil) {

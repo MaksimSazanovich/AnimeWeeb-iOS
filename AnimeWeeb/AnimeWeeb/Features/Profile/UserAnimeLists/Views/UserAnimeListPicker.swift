@@ -9,18 +9,17 @@ import SwiftUI
 
 struct UserAnimeListPicker: View {
 
-    @Binding var selectedStatus: WatchStatus
-    let profileViewModel: ProfileViewModel
+    var viewModel: UserAnimeListsViewModel
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(WatchStatus.allCases) { status in
-                    let isSelected = selectedStatus == status
-                    let animeList = profileViewModel.getUserAnimeList(for: status)
+                    let isSelected = viewModel.selectedStatus == status
+                    let animeList = viewModel.getUserAnimeList(for: status)
 
                     HStack {
-                        Text(status.rawValue)
+                        Text(status.name)
 
                         Text("\(animeList.count)")
                             .padding(.horizontal, 10)
@@ -41,7 +40,7 @@ struct UserAnimeListPicker: View {
                             .fill(isSelected ? .purpleBackground : .profileButtonBackground)
                     )
                     .onTapGesture {
-                        selectedStatus = status
+                        viewModel.didTapSelectStatus(status: status)
                     }
 
                 }

@@ -13,13 +13,13 @@ final class ProfileViewModel {
 
     private(set) var profileEditViewModel: ProfileEditViewModel
     private(set) var watchHistoryViewModel: WatchHistoryViewModel
+    private(set) var userAnimeListsViewModel: UserAnimeListsViewModel
 
     private let userService: UserService
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
-
-    private(set) var userAnimeList: [UserAnimeListItem]?
+    private let userListsRepository: UserListsRepositoryProtocol
 
     var onRoute: ((Screen) -> Void)?
 
@@ -34,36 +34,41 @@ final class ProfileViewModel {
     var cardState: ProfileCardState = .idle
     var state: ViewState = .empty
 
-    init(userService: UserService,
-         authRepository: AuthRepositoryProtocol,
-         userRepository: UserRepositoryProtocol,
-         animeDetailsRepository: AnimeDetailsRepositoryProtocol) {
+    init(
+        userService: UserService,
+        authRepository: AuthRepositoryProtocol,
+        userRepository: UserRepositoryProtocol,
+        animeDetailsRepository: AnimeDetailsRepositoryProtocol,
+        userListsRepository: UserListsRepositoryProtocol) {
 
-        self.userService = userService
-        self.authRepository = authRepository
-        self.userRepository = userRepository
-        self.animeDetailsRepository = animeDetailsRepository
+            self.userService = userService
+            self.authRepository = authRepository
+            self.userRepository = userRepository
+            self.animeDetailsRepository = animeDetailsRepository
+            self.userListsRepository = userListsRepository
 
-        self.profileEditViewModel = ProfileEditViewModel(
-            model: ProfileEditModel(oldUser: userService.user ?? previewUser),
-            userRepository: userRepository,
-            userService: userService
-        )
+            self.profileEditViewModel = ProfileEditViewModel(
+                model: ProfileEditModel(oldUser: userService.user ?? previewUser),
+                userRepository: userRepository,
+                userService: userService
+            )
 
-        self.watchHistoryViewModel = WatchHistoryViewModel(userRepository: userRepository, animeDetailsRepository: animeDetailsRepository)
+            self.watchHistoryViewModel = WatchHistoryViewModel(userRepository: userRepository, animeDetailsRepository: animeDetailsRepository)
 
-        profileEditViewModel.onSaved = { [weak self] in
-            self?.cardState = .idle
+            self.userAnimeListsViewModel = UserAnimeListsViewModel(userListsRepository: userListsRepository)
+
+            profileEditViewModel.onSaved = { [weak self] in
+                self?.cardState = .idle
+            }
+
+            watchHistoryViewModel.onRoute = { [weak self] screen in
+                self?.onRoute?(screen)
+            }
+
+            userAnimeListsViewModel.onCardTap = { [weak self] animeID in
+                self?.onRoute?(Screen.animeDetails(animeID: animeID))
+            }
         }
-
-        watchHistoryViewModel.onRoute = { [weak self] screen in
-            self?.onRoute?(screen)
-        }
-    }
-
-    func getUserAnimeList(for status: WatchStatus) -> [UserAnimeListItem] {
-        userAnimeList?.filter { $0.status == status } ?? []
-    }
 
     func didTapLogout() async {
         do {

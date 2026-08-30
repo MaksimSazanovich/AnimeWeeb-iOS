@@ -9,10 +9,7 @@ import SwiftUI
 
 struct UserAnimeListsView: View {
 
-    @Binding var selectedStatus: WatchStatus
-    let profileViewModel: ProfileViewModel
-
-    var onCardTap: () -> Void
+    let viewModel: UserAnimeListsViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
@@ -21,18 +18,37 @@ struct UserAnimeListsView: View {
                 .foregroundStyle(.largeTitle)
 
             // MARK: Anime List Picker
-            UserAnimeListPicker(selectedStatus: $selectedStatus, profileViewModel: profileViewModel)
+            UserAnimeListPicker(viewModel: viewModel)
 
             // MARK: User Anime List
-            VStack(spacing: 16) {
-                ForEach(profileViewModel.getUserAnimeList(for: selectedStatus)) { model in
-                    UserAnimeListCard(model: model) {
-                        onCardTap()
+            switch viewModel.state {
+            case .idle, .loading:
+                ProgressView()
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+            case .failed(let error):
+                AWErrorView(title: error.localizedDescription)
+
+            case .loaded, .empty:
+                let currentList = viewModel.getUserAnimeList(for: viewModel.selectedStatus)
+
+                if currentList.isEmpty {
+                    AWEmptyView(title: "В этом списке ещё нет тайтлов.")
+                } else {
+                    VStack(spacing: 16) {
+                        ForEach(currentList) { model in
+                            UserAnimeListCard(model: model) {
+                                viewModel.onCardTap?(model.titleID)
+                            }
+                        }
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity)
+        .task {
+            await viewModel.getLists()
+        }
     }
 }

@@ -15,6 +15,7 @@ final class ScreenFactory {
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private let authRepository: AuthRepositoryProtocol
+    private let userListsRepository: UserListsRepositoryProtocol
 
     private let networkService: NetworkServiceProtocol
     private let appURLOpener: AppURLOpener
@@ -26,6 +27,7 @@ final class ScreenFactory {
          animeDetailsRepository: AnimeDetailsRepositoryProtocol,
          userRepository: UserRepositoryProtocol,
          authRepository: AuthRepositoryProtocol,
+         userListsRepository: UserListsRepositoryProtocol,
 
          networkService: NetworkServiceProtocol,
          appURLOpener: AppURLOpener,
@@ -36,6 +38,7 @@ final class ScreenFactory {
         self.animeDetailsRepository = animeDetailsRepository
         self.userRepository = userRepository
         self.authRepository = authRepository
+        self.userListsRepository = userListsRepository
 
         self.networkService = networkService
         self.appURLOpener = appURLOpener
@@ -124,7 +127,7 @@ final class ScreenFactory {
     }
 
     func makeProfileScreen(coordinator: Coordinator) -> some View {
-        let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository, userRepository: userRepository, animeDetailsRepository: animeDetailsRepository)
+        let viewModel = ProfileViewModel(userService: userService, authRepository: authRepository, userRepository: userRepository, animeDetailsRepository: animeDetailsRepository, userListsRepository: userListsRepository)
 
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)

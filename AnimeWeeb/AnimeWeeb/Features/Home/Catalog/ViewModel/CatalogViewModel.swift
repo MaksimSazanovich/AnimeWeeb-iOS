@@ -26,7 +26,6 @@ final class CatalogViewModel {
         guard state != .loading else { return }
 
         if let (loadedCount, totalCount) = canLoadMore?() {
-            print("loadedCount: \(loadedCount), totalCount: \(totalCount)")
             guard loadedCount < totalCount else { return }
         }
 

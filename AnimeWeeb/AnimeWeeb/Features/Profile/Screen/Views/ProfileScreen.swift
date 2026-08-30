@@ -12,8 +12,6 @@ struct ProfileScreen: View {
 
     let viewModel: ProfileViewModel
 
-    @State var selectedStatus: WatchStatus = .watching
-
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -44,10 +42,7 @@ struct ProfileScreen: View {
                     AWDivider()
 
                     // MARK: User Anime Lists
-                    UserAnimeListsView(selectedStatus: $selectedStatus, profileViewModel: viewModel) {
-                        // TODO: Navigate to anime
-                        print("Navigate to anime")
-                    }
+                    UserAnimeListsView(viewModel: viewModel.userAnimeListsViewModel)
                 }
             }
             .frame(maxWidth: .infinity)

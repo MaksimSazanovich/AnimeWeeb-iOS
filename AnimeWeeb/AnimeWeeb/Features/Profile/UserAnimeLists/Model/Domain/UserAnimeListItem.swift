@@ -15,3 +15,5 @@ struct UserAnimeListItem: Identifiable {
     let title: String
     var status: WatchStatus
 }
+
+typealias UserAnimeListsModel = [UserAnimeListItem]

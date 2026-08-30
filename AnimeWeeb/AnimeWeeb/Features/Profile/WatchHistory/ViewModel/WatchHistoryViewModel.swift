@@ -35,7 +35,7 @@ final class WatchHistoryViewModel {
 
         do {
             historyItems = try await userRepository.fetchGetUserHistory()
-            print(historyItems.count)
+
             if historyItems.isEmpty {
                 state = .empty
                 return
@@ -60,7 +60,7 @@ final class WatchHistoryViewModel {
                 guard let anime = details[item.titleID] else { return nil }
 
                 let seasonName = anime.seasons.first(where: { $0.seasonNumber == item.season })?.seasonName
-                print(seasonName)
+
                 return WatchHistoryCardModel(
                     title: anime.title,
                     imageURL: anime.imageURL,

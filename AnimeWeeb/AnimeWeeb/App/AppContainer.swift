@@ -23,6 +23,7 @@ final class AppContainer {
     let watchRepository: WatchRepositoryProtocol
     let animeDetailsRepository: AnimeDetailsRepositoryProtocol
     let authRepository: AuthRepositoryProtocol
+    let userListsRepository: UserListsRepositoryProtocol
 
     // Core Architecture
     let screenFactory: ScreenFactory
@@ -39,7 +40,8 @@ final class AppContainer {
         watchRepository: WatchRepositoryProtocol? = nil,
         animeDetailsRepository: AnimeDetailsRepositoryProtocol? = nil,
         userRepository: UserRepositoryProtocol? = nil,
-        authRepository: AuthRepositoryProtocol? = nil
+        authRepository: AuthRepositoryProtocol? = nil,
+        userListsRepository: UserListsRepositoryProtocol? = nil
     ) {
         self.networkService = networkService
         self.userService = userService
@@ -57,12 +59,17 @@ final class AppContainer {
             userRepository: userRepo,
             keychain: keychain
         )
+        let userListsRepo = userListsRepository ?? UserListsRepository(
+            networkService: networkService,
+            keychain: keychain
+        )
 
         self.userRepository = userRepo
         self.homeRepository = homeRepo
         self.watchRepository = watchRepo
         self.animeDetailsRepository = animeRepo
         self.authRepository = authRepo
+        self.userListsRepository = userListsRepo
 
         let factory = ScreenFactory(
             homeRepository: homeRepo,
@@ -70,6 +77,7 @@ final class AppContainer {
             animeDetailsRepository: animeRepo,
             userRepository: userRepo,
             authRepository: authRepo,
+            userListsRepository: userListsRepo,
 
             networkService: networkService,
             appURLOpener: appURLOpener,
