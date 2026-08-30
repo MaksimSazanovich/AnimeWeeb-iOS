@@ -10,9 +10,9 @@ import SwiftUI
 import TagCloud
 
 struct AnimeDetailsContentView: View {
-
-    let viewModel: AnimeDetailsViewModel
-
+    
+    @Bindable var viewModel: AnimeDetailsViewModel
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
@@ -29,13 +29,13 @@ struct AnimeDetailsContentView: View {
                 }
                 .animeCardBackgroundModifier(cornerRadius: 12, strokeOpacity: 1)
                 .padding(.horizontal)
-
+                
                 VStack(alignment: .leading, spacing: 12) {
                     // MARK: Title
                     Text(viewModel.title)
                         .font(.system(size: 30, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
-
+                    
                     // MARK: Tag Cloud
                     TagCloudView(data: viewModel.genres) { genre in
                         Text(genre.title.uppercased())
@@ -48,9 +48,15 @@ struct AnimeDetailsContentView: View {
                                     .fill(.stroke.opacity(0.8))
                             )
                     }
-
+                    
+                    // MARK: Status Picker
+                    HStack{
+                        WatchStatusPicker(selectedStatus: $viewModel.selectedStatus)
+                        Spacer()
+                    }
+                    
                     // MARK: Description
-                    Text(viewModel.despription)
+                    Text(viewModel.description)
                         .font(.system(.body))
                         .foregroundStyle(.subtitle)
                 }
@@ -61,3 +67,6 @@ struct AnimeDetailsContentView: View {
         }
     }
 }
+
+
+

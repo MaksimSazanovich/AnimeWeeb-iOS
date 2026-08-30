@@ -14,6 +14,7 @@ final class AnimeDetailsViewModel {
     private let repository: AnimeDetailsRepositoryProtocol
 
     let animeID: Int
+    var selectedStatus: WatchStatus?
     private(set) var state: ViewState = .idle
 
     init(animeID: Int, repository: AnimeDetailsRepositoryProtocol) {
@@ -33,7 +34,7 @@ final class AnimeDetailsViewModel {
         return model?.genres ?? []
     }
 
-    var despription: String {
+    var description: String {
         return model?.description ?? "Нет описания"
     }
 

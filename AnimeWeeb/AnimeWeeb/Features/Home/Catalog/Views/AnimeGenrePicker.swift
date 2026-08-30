@@ -28,7 +28,6 @@ struct AnimeGenrePicker: View {
             .tint(Color.mainTitle)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
-            // .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal)
             .background(
                 RoundedRectangle(cornerRadius: 12)
