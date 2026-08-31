@@ -45,6 +45,10 @@ final class AnimeDetailsViewModel {
     var description: String {
         return model?.description ?? "Нет описания"
     }
+    
+    var seasons: [Season] {
+        return model?.seasons ?? []
+    }
 
     var onRoute: ((Screen) -> Void)?
 

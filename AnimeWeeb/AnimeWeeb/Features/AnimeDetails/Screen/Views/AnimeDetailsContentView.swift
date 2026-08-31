@@ -59,6 +59,8 @@ struct AnimeDetailsContentView: View {
                     Text(viewModel.description)
                         .font(.system(.body))
                         .foregroundStyle(.subtitle)
+                    
+                    EpisodesCard(seasons: viewModel.seasons)
                 }
             }
             .frame(maxWidth: .infinity)

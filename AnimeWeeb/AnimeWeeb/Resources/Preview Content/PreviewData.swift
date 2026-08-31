@@ -186,3 +186,180 @@ let previewWatchHistory: [WatchHistoryCardModel] = [
         playerProvider: .native(episodeID: 2641)
     )
 ]
+
+let previewSeasons: [Season] = [
+    Season(
+        id: 1126,
+        titleID: 1075,
+        name: "Ванпанчмен",
+        seasonName: "1-сезон",
+        seasonNumber: 1,
+        sortOrder: 1,
+        type: "TV",
+        episodesCount: 12,
+        releaseDate: "С 5 октября 2015 г. по 21 декабря 2015 г.",
+        status: "Finished",
+        // swiftlint:disable:next line_length
+        description: "Вы устали от запоминания суператак и бесконечных доспехов, но душа просит адреналина и драк? Тогда эта новая экшен-комедия от студии Madhouse для вас!Главный герой не размахивает мечом, не выкрикивает боевой клич и вообще не отличается ничем, особенно героическим. Всё в этом молодом человеке по имени Сайтама так и вопит: «заурядный» — и его лысая голова, и его хилое телосложение. Однако у этого среднестатистического по всем параметрам парня совсем не среднестатистические проблемы... Потому что на самом деле он — супергерой, жаждущий битвы с суперкрутыми противниками. Загвоздка в том, что, отыскав наконец перспективного кандидата на роль главного врага, Сайтама выносит его с одного удара. Сможет ли Сайтама заиметь себе могучего злодея, который смог бы достойно противостоять ему? Следите за Ванпанчменом в его уморительных приключениях, пока среди многочисленных плохих парней он, несмотря ни на что, будет пытаться найти «своего»!",
+        episodes: [
+            Episode(
+                seasonID: 1126,
+                episode: 1,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/1/1080/4c5ec6d26457611fef4853bfa7053746.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    ),
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "720P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/1/720/4c5ec6d26457611fef4853bfa7053746.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    ),
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "480P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/1/480/17bf178a174d4c9e8b5f09739ed0f381.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            ),
+            Episode(
+                seasonID: 1126,
+                episode: 2,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/2/1080/5d6fc7d37568722fef5964cfb8164857.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    ),
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "720P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/2/720/5d6fc7d37568722fef5964cfb8164857.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            ),
+            Episode(
+                seasonID: 1126,
+                episode: 3,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/3/1080/6e7ad8e48679833fef6075dc99275968.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    ),
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "720P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/3/720/6e7ad8e48679833fef6075dc99275968.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            )
+        ],
+        shikimoriID: "z30276"
+    ),
+    Season(
+        id: 1127,
+        titleID: 1075,
+        name: "Ванпанчмен: Путь к становлению героем",
+        seasonName: "OVA 1",
+        seasonNumber: 1,
+        sortOrder: 2,
+        type: "OVA",
+        episodesCount: 1,
+        releaseDate: "4 дек. 2015 г.",
+        status: "Finished",
+        // swiftlint:disable:next line_length
+        description: "Дополнительный эпизод, идущий в комплекте с десятым томом манги.В начале своего тернистого пути к становлению полноценным героем Сайтаме приходилось нелегко: после каждой стычки, даже с самым слабым монстром, его спортивный, на тот момент геройский, костюм рвался, причиняя знакомому портному всё больше хлопот. Ну а как иначе? Не всем дано владеть миллионами, вот и Сайтама дорожил костюмом, ведь на новый денег всё равно не было.И всё было хорошо ровно до того момента, пока к портному не пришли несколько страшных якудза, вымогая оплатить огромные проценты по кредиту, иначе его собственная лавка должна будет перейти во владение организации «Кредит Ня-Ня».Так как Сайтама был одним из немногих клиентов, которого к тому же портной обслуживает бесплатно, он решает помочь и разузнать, что это за организация.",
+        episodes: [
+            Episode(
+                seasonID: 1127,
+                episode: 1,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/8763/1/1080/92bf8d059729a7d670c14a955a535742.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    ),
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "720P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/8763/1/720/92bf8d059729a7d670c14a955a535742.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            )
+        ],
+        shikimoriID: "z31704"
+    ),
+    Season(
+        id: 1128,
+        titleID: 1075,
+        name: "Ванпанчмен: Спецвыпуски",
+        seasonName: "TV Спецвыпуск-1",
+        seasonNumber: 1,
+        sortOrder: 3,
+        type: "TV Спецвыпуск",
+        episodesCount: 6,
+        releaseDate: "С 24 декабря 2015 г. по 27 мая 2016 г.",
+        status: "Finished",
+        // swiftlint:disable:next line_length
+        description: "Спецвыпуски, включённые в Blu-ray и DVD издания аниме-сериала «Ванпанчмен».Первый эпизод поведает зрителям историю о том, как Генос пытался узнать секрет силы Сайтамы после нападения Женщины-Комара.Во втором эпизоде Генос выполняет поручение Сайтамы и попадает в неприятности.Третий эпизод — история о том, чем занимался Соник после встречи с Сайтамой.В четвёртом эпизоде Бэнг пытается заманить Сайтаму и Геноса в своё додзё.В пятом спецвыпуске описывается знакомство с Адской Метелью. Очередное приключение Геноса.Шестой эпизод — расследование загадочного убийства на горячих источниках.",
+        episodes: [
+            Episode(
+                seasonID: 1128,
+                episode: 1,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/8764/1/1080/1a2b3c4d5e6f7g8h9i0j.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    ),
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "720P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/8764/1/720/1a2b3c4d5e6f7g8h9i0j.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            ),
+            Episode(
+                seasonID: 1128,
+                episode: 2,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/8764/2/1080/2b3c4d5e6f7g8h9i0j1a.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            )
+        ],
+        shikimoriID: "y31772"
+    ),
+    Season(
+        id: 1130,
+        titleID: 1075,
+        name: "Ванпанчмен 3",
+        seasonName: "3-сезон",
+        seasonNumber: 3,
+        sortOrder: 5,
+        type: "TV",
+        episodesCount: 13,
+        releaseDate: "С 12 октября 2025 г. по 28 декабря 2025 г.",
+        status: "Finished",
+        description: "Нет описания",
+        episodes: [
+            Episode(
+                seasonID: 1130,
+                episode: 1,
+                videos: [
+                    Video(
+                        dubberName: "AniLibria",
+                        resolution: "1080P",
+                        url: URL(string: "https://cache.libria.fun/videos/media/ts/9900/1/1080/3c4d5e6f7g8h9i0j1a2b.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+                    )
+                ]
+            )
+        ],
+        shikimoriID: "52807"
+    )
+]
