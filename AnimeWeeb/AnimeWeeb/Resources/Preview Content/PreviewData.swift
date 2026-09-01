@@ -111,7 +111,7 @@ let previewAnimeModels: [AnimeModel] = (0..<5).flatMap { _ in [
         nameRu: "Если бы моя жена стала младшеклассницей",
         nameEn: "TsumaSho",
         nameJp: "妻、小学生になる。",
-
+        
         altNamesRu: [],
         altNamesEn: []
     )
@@ -122,7 +122,7 @@ let previewUserAvatarURL = URL(string: "https://lh3.googleusercontent.com/a/ACg8
 let previewUser = User(id: 1, email: "test@gmail.com", name: "User", avatarPath: previewUserAvatarURL, level: 1)
 
 let previewWatchModel = WatchModel(
-    titleID: 2,
+    animeID: 2,
     title: "Добро пожаловать в класс превосходства",
     season: "Добро пожаловать в класс превосходства 4: Второй год — Первый семестр",
     playerProvider: .native(episodeID: 2706)
@@ -203,8 +203,10 @@ let previewSeasons: [Season] = [
         description: "Вы устали от запоминания суператак и бесконечных доспехов, но душа просит адреналина и драк? Тогда эта новая экшен-комедия от студии Madhouse для вас!Главный герой не размахивает мечом, не выкрикивает боевой клич и вообще не отличается ничем, особенно героическим. Всё в этом молодом человеке по имени Сайтама так и вопит: «заурядный» — и его лысая голова, и его хилое телосложение. Однако у этого среднестатистического по всем параметрам парня совсем не среднестатистические проблемы... Потому что на самом деле он — супергерой, жаждущий битвы с суперкрутыми противниками. Загвоздка в том, что, отыскав наконец перспективного кандидата на роль главного врага, Сайтама выносит его с одного удара. Сможет ли Сайтама заиметь себе могучего злодея, который смог бы достойно противостоять ему? Следите за Ванпанчменом в его уморительных приключениях, пока среди многочисленных плохих парней он, несмотря ни на что, будет пытаться найти «своего»!",
         episodes: [
             Episode(
+                id: 1,
                 seasonID: 1126,
-                episode: 1,
+                animeID: 1102,
+                number: 1,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -224,8 +226,10 @@ let previewSeasons: [Season] = [
                 ]
             ),
             Episode(
+                id: 2,
                 seasonID: 1126,
-                episode: 2,
+                animeID: 1102,
+                number: 20,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -240,8 +244,10 @@ let previewSeasons: [Season] = [
                 ]
             ),
             Episode(
+                id: 3,
                 seasonID: 1126,
-                episode: 3,
+                animeID: 1102,
+                number: 300,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -273,8 +279,10 @@ let previewSeasons: [Season] = [
         description: "Дополнительный эпизод, идущий в комплекте с десятым томом манги.В начале своего тернистого пути к становлению полноценным героем Сайтаме приходилось нелегко: после каждой стычки, даже с самым слабым монстром, его спортивный, на тот момент геройский, костюм рвался, причиняя знакомому портному всё больше хлопот. Ну а как иначе? Не всем дано владеть миллионами, вот и Сайтама дорожил костюмом, ведь на новый денег всё равно не было.И всё было хорошо ровно до того момента, пока к портному не пришли несколько страшных якудза, вымогая оплатить огромные проценты по кредиту, иначе его собственная лавка должна будет перейти во владение организации «Кредит Ня-Ня».Так как Сайтама был одним из немногих клиентов, которого к тому же портной обслуживает бесплатно, он решает помочь и разузнать, что это за организация.",
         episodes: [
             Episode(
+                id: 1,
                 seasonID: 1127,
-                episode: 1,
+                animeID: 1102,
+                number: 1,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -306,8 +314,10 @@ let previewSeasons: [Season] = [
         description: "Спецвыпуски, включённые в Blu-ray и DVD издания аниме-сериала «Ванпанчмен».Первый эпизод поведает зрителям историю о том, как Генос пытался узнать секрет силы Сайтамы после нападения Женщины-Комара.Во втором эпизоде Генос выполняет поручение Сайтамы и попадает в неприятности.Третий эпизод — история о том, чем занимался Соник после встречи с Сайтамой.В четвёртом эпизоде Бэнг пытается заманить Сайтаму и Геноса в своё додзё.В пятом спецвыпуске описывается знакомство с Адской Метелью. Очередное приключение Геноса.Шестой эпизод — расследование загадочного убийства на горячих источниках.",
         episodes: [
             Episode(
+                id: 1,
                 seasonID: 1128,
-                episode: 1,
+                animeID: 1102,
+                number: 1,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -322,8 +332,10 @@ let previewSeasons: [Season] = [
                 ]
             ),
             Episode(
+                id: 1,
                 seasonID: 1128,
-                episode: 2,
+                animeID: 1102,
+                number: 2,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -349,8 +361,10 @@ let previewSeasons: [Season] = [
         description: "Нет описания",
         episodes: [
             Episode(
+                id: 2,
                 seasonID: 1130,
-                episode: 1,
+                animeID: 1102,
+                number: 1,
                 videos: [
                     Video(
                         dubberName: "AniLibria",
@@ -363,3 +377,18 @@ let previewSeasons: [Season] = [
         shikimoriID: "52807"
     )
 ]
+
+let previewEpisode: Episode = Episode(
+    id: 2,
+    seasonID: 1130,
+    animeID: 1102,
+    number: 1,
+    videos: [
+        Video(
+            dubberName: "AniLibria",
+            resolution: "1080P",
+            url: URL(string: "https://cache.libria.fun/videos/media/ts/9900/1/1080/3c4d5e6f7g8h9i0j1a2b.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
+        )
+    ]
+)
+

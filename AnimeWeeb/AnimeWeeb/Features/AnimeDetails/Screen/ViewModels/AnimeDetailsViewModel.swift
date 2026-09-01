@@ -49,6 +49,10 @@ final class AnimeDetailsViewModel {
     var seasons: [Season] {
         return model?.seasons ?? []
     }
+    
+    var totalEpisodes: Int {
+        return model?.seasons.reduce(0) {$0 + $1.episodesCount } ?? -1
+    }
 
     var onRoute: ((Screen) -> Void)?
 
@@ -65,8 +69,13 @@ final class AnimeDetailsViewModel {
             } else {
                 state = .loaded
             }
+            print(model?.seasons.first?.episodesCount ?? -1)
         } catch {
             state = .failed(error)
         }
+    }
+    
+    func didSelectEpisode(episode: Episode, season: Season) {
+        onRoute?(Screen.watch(model: WatchModel(animeID: animeID, title: title, season: season.name, playerProvider: .native(episodeID: episode.id), seasons: seasons)))
     }
 }

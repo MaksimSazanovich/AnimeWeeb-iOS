@@ -11,6 +11,9 @@ struct SeasonExpanableView: View {
     
     let season: Season
     @State var isExpanded: Bool = false
+    let selectedEpisode: Episode?
+    
+    var onSelectEpisode: (Episode, Season) -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -43,7 +46,9 @@ struct SeasonExpanableView: View {
             if isExpanded {
                 VStack(alignment: .leading) {
                     ForEach(season.episodes, id: \.self) { episode in
-                        EpisodeRowView(episode: episode)
+                        EpisodeRowView(episode: episode, isSelected: episode == selectedEpisode) {
+                            onSelectEpisode(episode, season)
+                        }
                     }
                 }
             }

@@ -9,8 +9,11 @@ import SwiftUI
 
 struct EpisodesCard: View {
     
-    @State var episodesCount: Int = 10
+    @State var episodesCount: Int
     let seasons: [Season]
+    let selectedEpisode: Episode?
+    
+    var onSelectEpisode: (Episode, Season) -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -29,7 +32,9 @@ struct EpisodesCard: View {
             
             VStack(alignment: .leading) {
                 ForEach(seasons, id: \.self) { season in
-                    SeasonExpanableView(season: season, isExpanded: season == seasons.first)
+                    SeasonExpanableView(season: season, isExpanded: season == seasons.first, selectedEpisode: selectedEpisode) { episode, season in
+                        onSelectEpisode(episode, season)
+                    }
                 }
             }
         }
@@ -41,14 +46,10 @@ struct EpisodesCard: View {
 
 #Preview {
     VStack {
-        EpisodesCard(seasons: previewSeasons)
+        EpisodesCard(episodesCount: 10, seasons: previewSeasons, selectedEpisode: previewSeasons.first?.episodes.first) {_, _ in}
         
         Spacer()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.background)
 }
-
-
-
-

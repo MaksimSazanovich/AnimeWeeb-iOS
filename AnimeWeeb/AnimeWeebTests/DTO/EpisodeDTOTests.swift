@@ -52,7 +52,7 @@ struct EpisodeDTOTests {
 
         // Assert
         #expect(result.seasonID == 2)
-        #expect(result.episode == 10)
+        #expect(result.number == 10)
         #expect(result.videos.count == 1)
         #expect(result.videos.first?.dubberName == "AniDUB")
     }
@@ -117,7 +117,7 @@ struct EpisodeDTOTests {
 
         // Assert
         #expect(result.seasonID == 2)
-        #expect(result.episode == 10)
+        #expect(result.number == 10)
         #expect(result.videos.count == 1)
         #expect(result.videos.first?.dubberName == "AniDUB")
     }

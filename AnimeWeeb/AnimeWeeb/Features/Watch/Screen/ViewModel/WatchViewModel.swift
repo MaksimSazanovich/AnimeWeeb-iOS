@@ -12,7 +12,8 @@ import Foundation
 final class WatchViewModel {
 
     var model: WatchModel
-    private let repository: WatchRepositoryProtocol
+    private let watchRepository: WatchRepositoryProtocol
+    private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
 
     private(set) var breadcrumbs: [BreadcrumbItem] = [
         BreadcrumbItem(screen: .home, title: "Каталог")
@@ -27,16 +28,22 @@ final class WatchViewModel {
     var season: String {
         model.season
     }
-
-    var episode: Int {
-        model.episode?.episode ?? 0
+    var episode: Episode {
+        model.episode ?? previewEpisode
+    }
+    
+    var seasons: [Season] {
+        model.seasons ?? []
     }
 
     var onRoute: ((Screen) -> Void)?
 
-    init(model: WatchModel, repository: WatchRepositoryProtocol) {
+    init(model: WatchModel,
+         repository: WatchRepositoryProtocol,
+         animeDetailsRepository: AnimeDetailsRepositoryProtocol) {
         self.model = model
-        self.repository = repository
+        self.watchRepository = repository
+        self.animeDetailsRepository = animeDetailsRepository
     }
 
     func loadEpisode() async {
@@ -48,10 +55,16 @@ final class WatchViewModel {
         switch model.playerProvider {
         case .native(let episodeID):
             do {
-                model.episode = try await repository.fetchEpisode(id: episodeID)
+                async let episodeTask =  watchRepository.fetchEpisode(id: episodeID)
+                async let detailsTask = animeDetailsRepository.fetchAnimeDetails(id: model.animeID)
+                
+                let (fetchedEpisode, fetchedDetails) = try await (episodeTask, detailsTask)
+                
+                model.episode = fetchedEpisode
+                model.seasons = fetchedDetails.seasons
 
-                breadcrumbs.append(BreadcrumbItem(screen: .animeDetails(animeID: model.titleID), title: model.title))
-                breadcrumbs.append(BreadcrumbItem(screen: .watch(model: model), title: "Эпизод \(episode)"))
+                breadcrumbs.append(BreadcrumbItem(screen: .animeDetails(animeID: model.animeID), title: model.title))
+                breadcrumbs.append(BreadcrumbItem(screen: .watch(model: model), title: "Эпизод \(episode.number)"))
 
                 if model.episode == nil {
                     state = .failed(NetworkError.emptyResponse)
@@ -70,5 +83,9 @@ final class WatchViewModel {
 
     func breadcrumbItemDidTap(_ item: BreadcrumbItem) {
         onRoute?(item.screen)
+    }
+    
+    func didSelectEpisode(episode: Episode, season: Season) {
+        onRoute?(Screen.watch(model: WatchModel(animeID: episode.animeID, title: title, season: season.name, playerProvider: .native(episodeID: episode.id), seasons: seasons)))
     }
 }

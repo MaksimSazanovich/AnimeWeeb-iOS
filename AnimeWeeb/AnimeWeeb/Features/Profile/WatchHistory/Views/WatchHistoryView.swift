@@ -33,7 +33,7 @@ struct WatchHistoryView: View {
                             WatchHistoryCard(model: model) {
                                 viewModel.onRoute?(Screen.watch(
                                     model: WatchModel(
-                                    titleID: model.titleID,
+                                    animeID: model.titleID,
                                     title: model.title,
                                     season: model.seasonName,
                                     playerProvider: model.playerProvider

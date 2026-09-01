@@ -24,6 +24,6 @@ struct EpisodeDTO: Codable {
 
 extension EpisodeDTO {
     func toDomain() -> Episode {
-        Episode(seasonID: seasonID, episode: numberInSeason, videos: videos.map { $0.toDomain() })
+        Episode(id: id, seasonID: seasonID, animeID: titleID, number: numberInSeason, videos: videos.map { $0.toDomain() })
     }
 }

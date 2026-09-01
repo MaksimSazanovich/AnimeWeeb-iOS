@@ -118,7 +118,9 @@ final class ScreenFactory {
     }
 
     func makeWatchScreen(model: WatchModel, coordinator: Coordinator) -> some View {
-        let viewModel = WatchViewModel(model: model, repository: watchRepository)
+        let viewModel = WatchViewModel(model: model,
+                                       repository: watchRepository,
+                                       animeDetailsRepository: animeDetailsRepository)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
