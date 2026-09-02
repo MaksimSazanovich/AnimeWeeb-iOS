@@ -210,17 +210,17 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/1/1080/4c5ec6d26457611fef4853bfa7053746.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     ),
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "720P",
+                        quality: .q720p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/1/720/4c5ec6d26457611fef4853bfa7053746.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     ),
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "480P",
+                        quality: .q480p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/1/480/17bf178a174d4c9e8b5f09739ed0f381.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -233,12 +233,12 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/2/1080/5d6fc7d37568722fef5964cfb8164857.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     ),
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "720P",
+                        quality: .q720p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/2/720/5d6fc7d37568722fef5964cfb8164857.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -251,12 +251,12 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/3/1080/6e7ad8e48679833fef6075dc99275968.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     ),
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "720P",
+                        quality: .q720p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/1210/3/720/6e7ad8e48679833fef6075dc99275968.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -286,12 +286,12 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/8763/1/1080/92bf8d059729a7d670c14a955a535742.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     ),
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "720P",
+                        quality: .q720p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/8763/1/720/92bf8d059729a7d670c14a955a535742.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -321,12 +321,12 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/8764/1/1080/1a2b3c4d5e6f7g8h9i0j.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     ),
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "720P",
+                        quality: .q720p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/8764/1/720/1a2b3c4d5e6f7g8h9i0j.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -339,7 +339,7 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/8764/2/1080/2b3c4d5e6f7g8h9i0j1a.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -368,7 +368,7 @@ let previewSeasons: [Season] = [
                 videos: [
                     Video(
                         dubberName: "AniLibria",
-                        resolution: "1080P",
+                        quality: .q1080p,
                         url: URL(string: "https://cache.libria.fun/videos/media/ts/9900/1/1080/3c4d5e6f7g8h9i0j1a2b.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
                     )
                 ]
@@ -386,7 +386,7 @@ let previewEpisode: Episode = Episode(
     videos: [
         Video(
             dubberName: "AniLibria",
-            resolution: "1080P",
+            quality: .q1080p,
             url: URL(string: "https://cache.libria.fun/videos/media/ts/9900/1/1080/3c4d5e6f7g8h9i0j1a2b.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1")
         )
     ]

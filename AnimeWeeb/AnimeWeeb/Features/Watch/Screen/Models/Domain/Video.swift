@@ -9,6 +9,6 @@ import Foundation
 
 struct Video: Hashable {
     let dubberName: String
-    let resolution: String
+    let quality: QualityType
     let url: URL?
 }

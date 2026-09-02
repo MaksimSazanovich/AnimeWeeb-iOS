@@ -35,6 +35,11 @@ final class WatchViewModel {
     var seasons: [Season] {
         model.seasons ?? []
     }
+    
+    var quaities: [QualityType] = []
+    
+    var selectedPlayer: PlayerType = .animeWeeb
+    var selectedQuality: QualityType = .q360p
 
     var onRoute: ((Screen) -> Void)?
 
@@ -62,7 +67,11 @@ final class WatchViewModel {
                 
                 model.episode = fetchedEpisode
                 model.seasons = fetchedDetails.seasons
-
+                if let firstVideo = fetchedEpisode.videos.first {
+                    selectedQuality = firstVideo.quality
+                }
+                quaities = fetchedEpisode.videos.map {$0.quality}
+                
                 breadcrumbs.append(BreadcrumbItem(screen: .animeDetails(animeID: model.animeID), title: model.title))
                 breadcrumbs.append(BreadcrumbItem(screen: .watch(model: model), title: "Эпизод \(episode.number)"))
 

@@ -9,8 +9,7 @@ import SwiftUI
 
 struct WatchScreen: View {
 
-    let viewModel: WatchViewModel
-    @State var selectedPlayer: PlayerType = .animeWeeb
+    @Bindable var viewModel: WatchViewModel
 
     var body: some View {
         ZStack {
@@ -36,86 +35,65 @@ struct WatchScreen: View {
                                     .foregroundStyle(.subtitle)
                             }
                         }
+                        
+                        if viewModel.selectedPlayer == .animeWeeb {
+                            VStack(alignment: .leading, spacing: 16.5) {
+                                // MARK: Dabber
+                                HStack(spacing: 24) {
+                                    VStack(alignment: .leading) {
+                                        Text("ОЗВУЧКА")
+                                            .font(.system(.caption, weight: .medium))
+                                            .foregroundStyle(.genreText)
 
-                        VStack(alignment: .leading, spacing: 16.5) {
-                            // MARK: Dabber
-                            HStack(spacing: 24) {
-                                VStack(alignment: .leading) {
-                                    Text("ОЗВУЧКА")
-                                        .font(.system(.caption, weight: .medium))
-                                        .foregroundStyle(.genreText)
-
-                                    Text("RU")
-                                        .font(.system(.subheadline, weight: .medium))
-                                        .foregroundStyle(.white)
-                                        .padding(.horizontal, 12)
-                                        .padding(.vertical, 6)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.purpleBackground)
-                                        )
-                                }
-
-                                Rectangle()
-                                    .fill(.stroke)
-                                    .frame(width: 1)
-                                    .padding(.vertical)
-
-                                VStack(alignment: .leading) {
-                                    Text("ВАРИАНТ")
-                                        .font(.system(.caption, weight: .medium))
-                                        .foregroundStyle(.genreText)
-
-                                    Text("AniLibria")
-                                        .font(.system(.subheadline, weight: .medium))
-                                        .foregroundStyle(Color.background)
-                                        .padding(.horizontal, 12)
-                                        .padding(.vertical, 6)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.mainTitle)
-                                        )
-                                }
-
-                                Rectangle()
-                                    .fill(.stroke)
-                                    .frame(width: 1)
-                                    .padding(.vertical)
-                            }
-
-                            // MARK: Quality Picker
-                            VStack(alignment: .leading) {
-                                Text("КАЧЕСТВО")
-                                    .font(.system(.caption, weight: .medium))
-                                    .foregroundStyle(.genreText)
-
-                                HStack(spacing: 8) {
-                                    ForEach([1080, 720, 480], id: \.self) { size in
-                                        Button {
-
-                                        } label: {
-                                            Text("\(size)P")
-                                                .font(.system(.subheadline, weight: .medium))
-                                                .foregroundStyle(Color.background)
-                                                .padding(.horizontal, 12)
-                                                .padding(.vertical, 6)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 8)
-                                                        .fill(.mainTitle)
-                                                )
-                                        }
-
+                                        Text("RU")
+                                            .font(.system(.subheadline, weight: .medium))
+                                            .foregroundStyle(.white)
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 6)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(.purpleBackground)
+                                            )
                                     }
 
-                                }
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                        .animeCardBackgroundModifier(cornerRadius: 12, fillOpacity: 0.5, strokeOpacity: 0.5)
+                                    Rectangle()
+                                        .fill(.stroke)
+                                        .frame(width: 1)
+                                        .padding(.vertical)
 
+                                    VStack(alignment: .leading) {
+                                        Text("ВАРИАНТ")
+                                            .font(.system(.caption, weight: .medium))
+                                            .foregroundStyle(.genreText)
+
+                                        Text("AniLibria")
+                                            .font(.system(.subheadline, weight: .medium))
+                                            .foregroundStyle(Color.background)
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 6)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .fill(.mainTitle)
+                                            )
+                                    }
+
+                                    Rectangle()
+                                        .fill(.stroke)
+                                        .frame(width: 1)
+                                        .padding(.vertical)
+                                }
+
+                                // MARK: Quality Picker
+                                QualityPicker(selectedQuality: $viewModel.selectedQuality, qualities: viewModel.quaities)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .animeCardBackgroundModifier(cornerRadius: 12, fillOpacity: 0.5, strokeOpacity: 0.5)
+
+                        }
+                        
                         // MARK: Player Segmented Picker
-                        Picker("Плеер", selection: $selectedPlayer) {
+                        Picker("Плеер", selection: $viewModel.selectedPlayer) {
                             Text("Наш плеер").tag(PlayerType.animeWeeb)
                             Text("Kodik").tag(PlayerType.kodik)
                         }
