@@ -90,11 +90,15 @@ final class WatchViewModel {
 
     }
 
-    func breadcrumbItemDidTap(_ item: BreadcrumbItem) {
+    func didTapBreadcrumbItem(_ item: BreadcrumbItem) {
         onRoute?(item.screen)
     }
     
     func didSelectEpisode(episode: Episode, season: Season) {
         onRoute?(Screen.watch(model: WatchModel(animeID: episode.animeID, title: title, season: season.name, playerProvider: .native(episodeID: episode.id), seasons: seasons)))
+    }
+    
+    func didTapCatalog() {
+        onRoute?(Screen.home)
     }
 }

@@ -14,15 +14,19 @@ struct WatchScreen: View {
     var body: some View {
         ZStack {
             switch viewModel.state {
-            case .idle, .empty, .loading:
-                AWEmptyView(title: "hz")
+            case .idle, .loading:
+                SkeletonWatchHistory()
+            case .empty:
+                AWEmptyView(title: "Серия не доступна, попробуйте позже", buttonTitle: "В каталог") {
+                    viewModel.didTapCatalog()
+                }
             case .loaded:
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 30) {
                             // MARK: Breadcrumbs
                             BreadcrumbsView(items: viewModel.breadcrumbs) { item in
-                                viewModel.breadcrumbItemDidTap(item)
+                                viewModel.didTapBreadcrumbItem(item)
                             }
 
                             VStack(alignment: .leading, spacing: 10) {
