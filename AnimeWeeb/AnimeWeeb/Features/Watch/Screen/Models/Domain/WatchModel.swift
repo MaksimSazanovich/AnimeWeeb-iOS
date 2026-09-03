@@ -17,4 +17,5 @@ struct WatchModel: Hashable {
     let playerProvider: PlayerProvider
     var episode: Episode?
     var seasons: [Season]?
+    var timecode: Double?
 }

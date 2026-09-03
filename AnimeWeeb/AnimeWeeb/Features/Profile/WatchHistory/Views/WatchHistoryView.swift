@@ -36,7 +36,7 @@ struct WatchHistoryView: View {
                                     animeID: model.titleID,
                                     title: model.title,
                                     season: model.seasonName,
-                                    playerProvider: model.playerProvider
+                                    playerProvider: model.playerProvider, timecode: Double(model.stoppedAtSeconds)
                                 )))
                             }
                         }

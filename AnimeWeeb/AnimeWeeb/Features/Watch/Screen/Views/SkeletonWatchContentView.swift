@@ -49,7 +49,6 @@ struct SkeletonWatchContentView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.top, 50)
             .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
