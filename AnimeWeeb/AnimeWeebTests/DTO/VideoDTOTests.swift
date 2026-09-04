@@ -12,7 +12,7 @@ import Testing
 struct VideoDTOTests {
 
     func makeDTO(url: String = "https://cache.libria.fun/videos/media/ts/824/1/720/9bbf5a695f1c4528a6ba014dd0dc2564.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1") -> VideoDTO {
-        return VideoDTO(id: 5941, dubberID: 1, dubberName: "AniLibria", dubberLanguage: "ru", videoFormatID: 1, videoFormat: "m3u8", resolution: "m3u8", url: url)
+        return VideoDTO(id: 5941, dubberID: 1, dubberName: "AniLibria", dubberLanguage: "ru", videoFormatID: 1, videoFormat: "m3u8", resolution: "720P", url: url)
     }
 
     @Test("Valid DTO")
@@ -25,7 +25,7 @@ struct VideoDTOTests {
 
         // Assert
         #expect(result.dubberName == "AniLibria")
-        #expect(result.resolution == "m3u8")
+        #expect(result.quality == .q720p)
         #expect(result.url == URL(string: "https://cache.libria.fun/videos/media/ts/824/1/720/9bbf5a695f1c4528a6ba014dd0dc2564.m3u8?countryIso=NL&isAuthorized=0&isWithVideoAds=1&isWithVideoAdsAlways=1"))
     }
 
@@ -47,7 +47,7 @@ struct VideoDTOTests {
             "dubberLanguage": "ru",
             "videoFormatId": 1,
             "videoFormat": "m3u8",
-            "resolution": "m3u8",
+            "resolution": "720P",
             "url": "https://example.com/video.m3u8"
         }
         """
@@ -75,7 +75,7 @@ struct VideoDTOTests {
 
         // Assert
         #expect(result.dubberName == "AniLibria")
-        #expect(result.resolution == "m3u8")
+        #expect(result.quality == .q720p)
         #expect(result.url == URL(string: "https://example.com/video.m3u8"))
     }
 

@@ -12,7 +12,7 @@ struct WatchHistoryRequest: Encodable {
     let seasonNumber: Int
     let episodeNumber: Int
     let stoppedAtSeconds: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case titleID = "titleId"
         case episodeID = "episodeId"

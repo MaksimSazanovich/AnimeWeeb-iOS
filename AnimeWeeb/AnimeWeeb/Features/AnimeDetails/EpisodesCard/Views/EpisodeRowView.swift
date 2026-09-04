@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct EpisodeRowView: View {
-    
+
     let episode: Episode
     @State var isSelected: Bool
     var onSelect: () -> Void
-    
+
     var body: some View {
         Button {
             onSelect()
@@ -22,12 +22,12 @@ struct EpisodeRowView: View {
                     RoundedRectangle(cornerRadius: 6)
                         .fill(isSelected ? .focusedStroke.opacity(0.9) : .stroke)
                         .frame(width: 28, height: 28)
-                    
+
                     Text("\(episode.number)")
                         .font(.system(.caption, weight: .semibold))
                         .foregroundStyle(isSelected ? .white : .subtitle)
                 }
-                
+
                 Text("Эпизод \(episode.number)")
                     .font(.system(.body, weight: .medium))
                     .foregroundStyle(.menuIcon)
@@ -44,6 +44,6 @@ struct EpisodeRowView: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(isSelected ? .focusedStroke : .clear, lineWidth: 1)
         }
-        
+
     }
 }

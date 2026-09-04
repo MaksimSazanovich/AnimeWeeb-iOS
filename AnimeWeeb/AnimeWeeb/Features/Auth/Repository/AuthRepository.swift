@@ -51,7 +51,11 @@ final class AuthRepository: AuthRepositoryProtocol {
             throw AuthError.noRefreshToken
         }
 
-        let dto: RefreshResponse = try await networkService.request(AuthEndpoint.refresh(refreshToken: refreshToken, deviceID: self.deviceID, deviceName: self.deviceName))
+        let dto: RefreshResponse = try await networkService.request(
+            AuthEndpoint.refresh(refreshToken: refreshToken,
+                                 deviceID: self.deviceID,
+                                 deviceName: self.deviceName)
+        )
 
         try keychain.set(dto.accessToken, key: KeychainKey.accessToken.rawValue)
         try keychain.set(dto.refreshToken, key: KeychainKey.refreshToken.rawValue)
@@ -86,7 +90,7 @@ final class AuthRepository: AuthRepositoryProtocol {
         let dto: LoginCodeResponse
         do {
             dto = try await networkService.request(AuthEndpoint.loginRequestCode(email: email))
-        } catch NetworkError.serverError(let statusCode, let data) where statusCode == 404 {
+        } catch NetworkError.serverError(let statusCode, _) where statusCode == 404 {
             throw AuthError.noAccount
         }
 

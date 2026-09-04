@@ -18,31 +18,31 @@ struct SkeletonWatchContentView: View {
                         RoundedRectangle(cornerRadius: 7, style: .continuous)
                             .skeletonColor()
                             .frame(maxWidth: .infinity, minHeight: 24)
-                        
+
                         RoundedRectangle(cornerRadius: 7, style: .continuous)
                             .skeletonColor()
                             .frame(maxWidth: .infinity, minHeight: 24)
                             .padding(.trailing, 30)
                     }
-                    
+
                     VStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 7, style: .continuous)
                             .skeletonColor()
                             .frame(maxWidth: .infinity, minHeight: 36)
-                        
+
                         RoundedRectangle(cornerRadius: 7, style: .continuous)
                             .skeletonColor()
                             .frame(maxWidth: 90, minHeight: 20)
                     }
-                    
+
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .skeletonColor()
                         .frame(maxWidth: .infinity, minHeight: 150)
-                    
+
                     RoundedRectangle(cornerRadius: 16, style: .continuous)
                         .skeletonColor()
                         .frame(maxWidth: 180, minHeight: 32)
-                    
+
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .skeletonColor()
                         .frame(maxWidth: .infinity, minHeight: 215)
@@ -55,7 +55,6 @@ struct SkeletonWatchContentView: View {
         .shimmering()
     }
 }
-
 
 #Preview {
     SkeletonWatchContentView()

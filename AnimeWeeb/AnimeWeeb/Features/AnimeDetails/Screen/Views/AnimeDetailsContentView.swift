@@ -59,7 +59,7 @@ struct AnimeDetailsContentView: View {
                     Text(viewModel.description)
                         .font(.system(.body))
                         .foregroundStyle(.subtitle)
-                    
+
                     // MARK: Episode Card
                     EpisodesCard(episodesCount: viewModel.totalEpisodes, seasons: viewModel.seasons, selectedEpisode: nil) { episode, season in
                         viewModel.didSelectEpisode(episode: episode, season: season)

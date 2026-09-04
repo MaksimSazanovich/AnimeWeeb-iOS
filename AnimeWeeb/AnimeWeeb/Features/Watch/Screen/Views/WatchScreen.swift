@@ -25,7 +25,7 @@ struct WatchScreen: View {
             case .failed(let error):
                 AWErrorView(title: error.localizedDescription)
             }
-            
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.top, 50)

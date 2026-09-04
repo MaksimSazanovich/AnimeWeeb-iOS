@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct WatchContentView: View {
-    
+
     @Bindable var viewModel: WatchViewModel
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -19,24 +19,24 @@ struct WatchContentView: View {
                     BreadcrumbsView(items: viewModel.breadcrumbs) { item in
                         viewModel.didTapBreadcrumbItem(item)
                     }
-                    
+
                     VStack(alignment: .leading, spacing: 10) {
                         // MARK: Season Title
                         Text(viewModel.season)
                             .font(.system(.title, weight: .semibold))
                             .foregroundStyle(.white)
-                        
+
                         // MARK: Episode Title
                         Text("Эпизод \(viewModel.episode.number)")
                             .font(.body)
                             .foregroundStyle(.subtitle)
                     }
                 }
-                
+
                 if viewModel.selectedPlayer == .animeWeeb {
                     playerSettings
                 }
-                
+
                 // MARK: Player Segmented Picker
                 Picker("Плеер", selection: $viewModel.selectedPlayer) {
                     Text("Наш плеер").tag(PlayerType.animeWeeb)
@@ -47,16 +47,16 @@ struct WatchContentView: View {
                 .animeCardBackgroundModifier(cornerRadius: 16, fillOpacity: 0.5, strokeOpacity: 1)
                 .onAppear {
                     UISegmentedControl.appearance().selectedSegmentTintColor = .purpleBackground
-                    
+
                     UISegmentedControl.appearance().setTitleTextAttributes([
                         .foregroundColor: UIColor.subtitle
                     ], for: .normal)
-                    
+
                     UISegmentedControl.appearance().setTitleTextAttributes([
                         .foregroundColor: UIColor.mainTitle
                     ], for: .selected)
                 }
-                
+
                 VStack(spacing: 12) {
                     if let url = viewModel.url {
                         AWVideoPlayer(url: url, startTime: viewModel.timeCode, onTimeUpdate: { currentTime in
@@ -82,10 +82,10 @@ struct WatchContentView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .strokeBorder(.stroke, lineWidth: 1)
                             )
-                            
+
                             // MARK: Button
                             Button {
-                                
+
                             } label: {
                                 Text("Продолжить просмотр")
                                     .font(.system(.body, weight: .semibold))
@@ -101,10 +101,9 @@ struct WatchContentView: View {
                         .padding(.horizontal, 25)
                         .padding(.vertical, 13)
                     }
-                       
+
                 }
-                
-                
+
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.background)
@@ -113,7 +112,7 @@ struct WatchContentView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .strokeBorder(.stroke.opacity(0.5), lineWidth: 1)
                 )
-                
+
                 // MARK: Episode Card
                 EpisodesCard(episodesCount: 12, seasons: viewModel.seasons, selectedEpisode: viewModel.episode) { episode, season in
                     viewModel.didSelectEpisode(episode: episode, season: season)
@@ -138,7 +137,7 @@ extension WatchContentView {
                     Text("ОЗВУЧКА")
                         .font(.system(.caption, weight: .medium))
                         .foregroundStyle(.genreText)
-                    
+
                     Text("RU")
                         .font(.system(.subheadline, weight: .medium))
                         .foregroundStyle(.white)
@@ -149,17 +148,17 @@ extension WatchContentView {
                                 .fill(.purpleBackground)
                         )
                 }
-                
+
                 Rectangle()
                     .fill(.stroke)
                     .frame(width: 1)
                     .padding(.vertical)
-                
+
                 VStack(alignment: .leading) {
                     Text("ВАРИАНТ")
                         .font(.system(.caption, weight: .medium))
                         .foregroundStyle(.genreText)
-                    
+
                     Text("AniLibria")
                         .font(.system(.subheadline, weight: .medium))
                         .foregroundStyle(Color.background)
@@ -170,13 +169,13 @@ extension WatchContentView {
                                 .fill(.mainTitle)
                         )
                 }
-                
+
                 Rectangle()
                     .fill(.stroke)
                     .frame(width: 1)
                     .padding(.vertical)
             }
-            
+
             // MARK: Quality Picker
             QualityPicker(selectedQuality: $viewModel.selectedQuality, qualities: viewModel.qualities)
         }

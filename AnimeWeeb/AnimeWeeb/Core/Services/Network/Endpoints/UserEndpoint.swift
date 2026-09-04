@@ -59,8 +59,19 @@ enum UserEndpoint: Endpoint {
                 items.append(.file(name: "Avatar", data: avatar, fileName: "avatar.jpg", mimeType: "image/jpeg"))
             }
             return .multipart(items)
-        case .postWatchHistory(_, titleID: let titleID, episodeID: let episodeID, source: let source, seasonNumber: let seasonNumber, episodeNumber: let episodeNumber, stoppedAtSeconds: let stoppedAtSeconds):
-            return .json(WatchHistoryRequest(titleID: titleID, episodeID: episodeID, source: source, seasonNumber: seasonNumber, episodeNumber: episodeNumber, stoppedAtSeconds: stoppedAtSeconds))
+        case .postWatchHistory(_, titleID: let titleID,
+                               episodeID: let episodeID,
+                               source: let source,
+                               seasonNumber: let seasonNumber,
+                               episodeNumber: let episodeNumber,
+                               stoppedAtSeconds: let stoppedAtSeconds
+        ):
+            return .json(WatchHistoryRequest(titleID: titleID,
+                                             episodeID: episodeID,
+                                             source: source,
+                                             seasonNumber: seasonNumber,
+                                             episodeNumber: episodeNumber,
+                                             stoppedAtSeconds: stoppedAtSeconds))
         default:
             return .plain
         }

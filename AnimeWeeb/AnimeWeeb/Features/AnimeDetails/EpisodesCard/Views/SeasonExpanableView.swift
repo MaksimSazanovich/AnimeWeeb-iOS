@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SeasonExpanableView: View {
-    
+
     let season: Season
     @State var isExpanded: Bool = false
     let selectedEpisode: Episode?
-    
+
     var onSelectEpisode: (Episode, Season) -> Void
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Button {
@@ -27,9 +27,9 @@ struct SeasonExpanableView: View {
                         .font(.system(.body, weight: .medium))
                         .multilineTextAlignment(.leading)
                         .foregroundStyle(.menuIcon)
-                    
+
                     Spacer()
-                    
+
                     Image(systemName: "chevron.down")
                         .font(.system(.body, weight: .semibold))
                         .foregroundStyle(.genreText)
@@ -42,7 +42,7 @@ struct SeasonExpanableView: View {
                 )
             }
             .buttonStyle(.plain)
-            
+
             if isExpanded {
                 VStack(alignment: .leading) {
                     ForEach(season.episodes, id: \.self) { episode in

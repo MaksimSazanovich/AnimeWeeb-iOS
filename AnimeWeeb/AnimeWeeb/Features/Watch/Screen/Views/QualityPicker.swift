@@ -10,7 +10,7 @@ import SwiftUI
 struct QualityPicker: View {
     @Binding var selectedQuality: QualityType
     let qualities: [QualityType]
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("КАЧЕСТВО")
@@ -20,7 +20,7 @@ struct QualityPicker: View {
             HStack(spacing: 8) {
                 ForEach(qualities, id: \.self) { quality in
                     let isSelected = selectedQuality == quality
-                    
+
                     Button {
                         selectedQuality = quality
                     } label: {

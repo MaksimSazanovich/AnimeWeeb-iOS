@@ -45,11 +45,11 @@ final class AnimeDetailsViewModel {
     var description: String {
         return model?.description ?? "Нет описания"
     }
-    
+
     var seasons: [Season] {
         return model?.seasons ?? []
     }
-    
+
     var totalEpisodes: Int {
         return model?.seasons.reduce(0) {$0 + $1.episodesCount } ?? -1
     }
@@ -74,7 +74,7 @@ final class AnimeDetailsViewModel {
             state = .failed(error)
         }
     }
-    
+
     func didSelectEpisode(episode: Episode, season: Season) {
         onRoute?(Screen.watch(model: WatchModel(animeID: animeID, title: title, season: season.name, playerProvider: .native(episodeID: episode.id), seasons: seasons)))
     }
