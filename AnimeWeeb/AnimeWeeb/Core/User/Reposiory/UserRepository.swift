@@ -43,4 +43,14 @@ final class UserRepository: UserRepositoryProtocol {
 
         return dto.toDomain()
     }
+    
+    func fetchPostUserHistory(titleID: Int, episodeID: Int, source: String, seasonNumber: Int, episodeNumber: Int, stoppedAtSeconds: Int) async throws -> String {
+        guard let accessToken = try keychain.get(KeychainKey.accessToken.rawValue) else {
+            throw AuthError.cancelled
+        }
+        
+        let dto: WatchHistoryPostResponse = try await networkService.request(UserEndpoint.postWatchHistory(accessToken: accessToken, titleID: titleID, episodeID: episodeID, source: source, seasonNumber: seasonNumber, episodeNumber: episodeNumber, stoppedAtSeconds: stoppedAtSeconds))
+        
+        return dto.message
+    }
 }

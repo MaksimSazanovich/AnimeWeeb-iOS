@@ -14,6 +14,7 @@ final class WatchViewModel {
     var model: WatchModel
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
     
     private(set) var breadcrumbs: [BreadcrumbItem] = [
         BreadcrumbItem(screen: .home, title: "Каталог")
@@ -46,19 +47,21 @@ final class WatchViewModel {
     }
     
     var timeCode: Double {
-        let timeCode = model.timecode ?? 0
-        print(timeCode)
-        return timeCode
+        model.timecode ?? 0
     }
+    
+    var seasonNumber: Int?
     
     var onRoute: ((Screen) -> Void)?
     
     init(model: WatchModel,
          repository: WatchRepositoryProtocol,
-         animeDetailsRepository: AnimeDetailsRepositoryProtocol) {
+         animeDetailsRepository: AnimeDetailsRepositoryProtocol,
+         userRepository: UserRepositoryProtocol) {
         self.model = model
         self.watchRepository = repository
         self.animeDetailsRepository = animeDetailsRepository
+        self.userRepository = userRepository
     }
     
     func loadEpisode() async {
@@ -77,6 +80,11 @@ final class WatchViewModel {
                 
                 model.episode = fetchedEpisode
                 model.seasons = fetchedDetails.seasons
+                
+                if let seasons = model.seasons {
+                    seasonNumber = seasons.first(where: { $0.seasonName == season })?.seasonNumber
+                }
+                
                 if let firstVideo = fetchedEpisode.videos.first {
                     selectedQuality = firstVideo.quality
                 }
@@ -110,5 +118,19 @@ final class WatchViewModel {
     
     func didTapCatalog() {
         onRoute?(Screen.home)
+    }
+    
+    func saveWatchHistory() async {
+        guard timeCode >= 5 else { return }
+
+        do {
+            let _ = try await userRepository.fetchPostUserHistory(titleID: model.animeID, episodeID: episode.id, source: "idk", seasonNumber: seasonNumber ?? 1, episodeNumber: episode.number, stoppedAtSeconds: Int(model.timecode ?? 0))
+        } catch {
+            
+        }
+    }
+    
+    func updateCurrentTimecode(_ timecode: Double) {
+        model.timecode = timecode
     }
 }

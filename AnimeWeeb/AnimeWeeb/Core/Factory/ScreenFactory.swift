@@ -9,26 +9,26 @@ import KeychainAccess
 import SwiftUI
 
 final class ScreenFactory {
-
+    
     private let homeRepository: HomeRepositoryProtocol
     private let watchRepository: WatchRepositoryProtocol
     private let animeDetailsRepository: AnimeDetailsRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private let authRepository: AuthRepositoryProtocol
     private let userListsRepository: UserListsRepositoryProtocol
-
+    
     private let networkService: NetworkServiceProtocol
     private let appURLOpener: AppURLOpener
     private let userService: UserService
     private let googleService: GoogleService
-
+    
     init(homeRepository: HomeRepositoryProtocol,
          watchRepository: WatchRepositoryProtocol,
          animeDetailsRepository: AnimeDetailsRepositoryProtocol,
          userRepository: UserRepositoryProtocol,
          authRepository: AuthRepositoryProtocol,
          userListsRepository: UserListsRepositoryProtocol,
-
+         
          networkService: NetworkServiceProtocol,
          appURLOpener: AppURLOpener,
          userService: UserService,
@@ -39,50 +39,50 @@ final class ScreenFactory {
         self.userRepository = userRepository
         self.authRepository = authRepository
         self.userListsRepository = userListsRepository
-
+        
         self.networkService = networkService
         self.appURLOpener = appURLOpener
         self.userService = userService
         self.googleService = googleService
     }
-
+    
     func makeAppHeader(coordinator: Coordinator) -> some View {
         let viewModel = AppHeaderViewModel(urlOpener: appURLOpener, userService: userService)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return AppHeaderView(viewModel: viewModel)
     }
-
+    
     func makeHomeScreen(coordinator: Coordinator) -> some View {
-
+        
         let viewModel = HomeViewModel(repository: self.homeRepository)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return HomeScreen(viewModel: viewModel)
     }
-
+    
     func makeLoginScreen(coordinator: Coordinator) -> some View {
         let viewModel = LoginViewModel(authRepository: authRepository, userService: userService)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return LoginScreen(viewModel: viewModel)
     }
-
+    
     func makeRegisterScreen(coordinator: Coordinator) -> some View {
         let viewModel = RegisterViewModel(authRepository: authRepository, userService: userService)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return RegisterScreen(viewModel: viewModel)
     }
-
+    
     func makeLoginConfirmScreen(email: String, coordinator: Coordinator) -> some View {
         let viewModel = LoginConfirmViewModel(
             email: email,
@@ -92,10 +92,10 @@ final class ScreenFactory {
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return LoginConfirmScreen(viewModel: viewModel)
     }
-
+    
     func makeRegisterConfirmScreen(email: String, coordinator: Coordinator) -> some View {
         let viewModel = RegisterConfirmViewModel(
             email: email,
@@ -105,10 +105,10 @@ final class ScreenFactory {
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return RegisterConfirmScreen(viewModel: viewModel)
     }
-
+    
     func makeAnimeDetailsScreen(animeID: Int, coordinator: Coordinator) -> some View {
         let viewModel = AnimeDetailsViewModel(animeID: animeID, animeDetailsRepository: animeDetailsRepository, userListsRepository: userListsRepository)
         viewModel.onRoute = { [weak coordinator] destination in
@@ -116,18 +116,19 @@ final class ScreenFactory {
         }
         return AnimeDetailsScreen(viewModel: viewModel)
     }
-
+    
     func makeWatchScreen(model: WatchModel, coordinator: Coordinator) -> some View {
         let viewModel = WatchViewModel(model: model,
                                        repository: watchRepository,
-                                       animeDetailsRepository: animeDetailsRepository)
+                                       animeDetailsRepository: animeDetailsRepository,
+                                       userRepository: userRepository)
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
-
+        
         return WatchScreen(viewModel: viewModel)
     }
-
+    
     func makeProfileScreen(coordinator: Coordinator) -> some View {
         let viewModel = ProfileViewModel(
             userService: userService,
@@ -135,13 +136,13 @@ final class ScreenFactory {
             userRepository: userRepository,
             animeDetailsRepository: animeDetailsRepository,
             userListsRepository: userListsRepository)
-
+        
         viewModel.onRoute = { [weak coordinator] destination in
             coordinator?.navigate(to: destination)
         }
         return ProfileScreen(viewModel: viewModel)
     }
-
+    
     func makeAppViewModel() -> AppViewModel {
         AppViewModel(authRepository: authRepository, userService: userService, googleService: googleService)
     }

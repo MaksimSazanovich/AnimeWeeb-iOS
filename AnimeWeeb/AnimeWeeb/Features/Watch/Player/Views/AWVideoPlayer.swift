@@ -12,6 +12,11 @@ struct AWVideoPlayer: UIViewControllerRepresentable {
     
     let url: URL
     var startTime: Double = 0
+    var onTimeUpdate: ((Double) -> Void)? = nil
+    
+    func makeCoordinator() -> PlayerTimeObserver {
+        PlayerTimeObserver(self)
+    }
     
     func makeUIViewController(context: Context) -> some AVPlayerViewController {
         let controller = AVPlayerViewController()
@@ -26,6 +31,8 @@ struct AWVideoPlayer: UIViewControllerRepresentable {
         controller.player = player
         controller.showsPlaybackControls = true
         controller.videoGravity = .resizeAspect
+        
+        context.coordinator.setupTimeObserver(for: player)
         
         player.play()
         

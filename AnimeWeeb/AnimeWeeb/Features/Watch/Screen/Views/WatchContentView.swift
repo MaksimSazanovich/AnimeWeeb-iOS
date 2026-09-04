@@ -59,7 +59,9 @@ struct WatchContentView: View {
                 
                 VStack(spacing: 12) {
                     if let url = viewModel.url {
-                        AWVideoPlayer(url: url, startTime: viewModel.timeCode)
+                        AWVideoPlayer(url: url, startTime: viewModel.timeCode, onTimeUpdate: { currentTime in
+                            viewModel.updateCurrentTimecode(currentTime)
+                        })
                             .frame(maxWidth: .infinity)
                             .aspectRatio(16/9, contentMode: .fit)
                             .id(viewModel.episode.id)
@@ -118,6 +120,11 @@ struct WatchContentView: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .onDisappear {
+            Task(priority: .utility) {
+                await viewModel.saveWatchHistory()
+            }
         }
     }
 }

@@ -7,14 +7,15 @@
 
 import Foundation
 
-public enum UserEndpoint: Endpoint {
+enum UserEndpoint: Endpoint {
     case getMe(accessToken: String)
     case update(accessToken: String, name: String?, avatar: Data?)
     case getWatchHistory(accessToken: String)
+    case postWatchHistory(accessToken: String, titleID: Int, episodeID: Int, source: String, seasonNumber: Int, episodeNumber: Int, stoppedAtSeconds: Int)
 
     public var method: HTTPMethod {
         switch self {
-        case .getMe, .update: .post
+        case .getMe, .update, .postWatchHistory: .post
         case .getWatchHistory: .get
         }
     }
@@ -24,6 +25,7 @@ public enum UserEndpoint: Endpoint {
         case .getMe: return "user/me"
         case .update: return "user/update"
         case .getWatchHistory: return "user/watch-history"
+        case .postWatchHistory: return "user/watch-history"
         }
     }
 
@@ -32,6 +34,8 @@ public enum UserEndpoint: Endpoint {
         case .update(let accessToken, _, _):
             return ["Authorization": "Bearer \(accessToken)"]
         case .getWatchHistory(let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .postWatchHistory(let accessToken, _, _, _, _, _, _):
             return ["Authorization": "Bearer \(accessToken)"]
         default:
             return nil
@@ -55,6 +59,8 @@ public enum UserEndpoint: Endpoint {
                 items.append(.file(name: "Avatar", data: avatar, fileName: "avatar.jpg", mimeType: "image/jpeg"))
             }
             return .multipart(items)
+        case .postWatchHistory(_, titleID: let titleID, episodeID: let episodeID, source: let source, seasonNumber: let seasonNumber, episodeNumber: let episodeNumber, stoppedAtSeconds: let stoppedAtSeconds):
+            return .json(WatchHistoryRequest(titleID: titleID, episodeID: episodeID, source: source, seasonNumber: seasonNumber, episodeNumber: episodeNumber, stoppedAtSeconds: stoppedAtSeconds))
         default:
             return .plain
         }
