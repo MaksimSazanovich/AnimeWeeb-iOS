@@ -1,16 +1,16 @@
 # AnimeWeeb 🌸
 
 <div align="center">
-  <img src="https://img.shields.io/badge/iOS-15.0+-black?logo=apple" alt="iOS 15.0+">
-  <img src="https://img.shields.io/badge/Swift-5.x%20%2F%206-FA7343?logo=swift&logoColor=white" alt="Swift 5.x / 6">
+  <img src="https://img.shields.io/badge/iOS-17.6+-black?logo=apple" alt="iOS 17.6+">
+  <img src="https://img.shields.io/badge/Swift-6-FA7343?logo=swift&logoColor=white" alt="Swift 6">
   <img src="https://img.shields.io/badge/SwiftUI-blue" alt="SwiftUI">
-  <img src="https://img.shields.io/badge/Architecture-MVVM%20%2B%20Repository-lightgrey" alt="MVVM + Repository">
+  <img src="https://img.shields.io/badge/Architecture-MVVM--C-lightgrey" alt="MVVM-C">
   <img src="https://img.shields.io/badge/Auth-Google%20Sign--In-orange" alt="Google Sign-In">
-  <img src="https://img.shields.io/badge/Testing-XCTest-red" alt="XCTest">
+  <img src="https://img.shields.io/badge/Testing-Swift%20Testing-red?logo=swift&logoColor=white" alt="Swift Testing">
 </div>
 
 <p align="center">
-  <strong>Современное мобильное iOS-приложение для просмотра аниме, управления персональными списками и стриминга видео</strong>
+  <strong>Современное cтриминговое клиент-серверное iOS-приложение для просмотра медиаконтента (аниме)</strong>
 </p>
 
 | Главная (Home) | Детали (Details) | Плеер (Watch) |
@@ -140,6 +140,14 @@ cd AnimeWeeb-iOS
 4. Нажмите `⌘R` для сборки и запуска на симуляторе или реальном устройстве.
 
 > **Важно:** Убедитесь, что конфигурационные файлы (например, `GoogleService-Info.plist` или `.xcconfig` с секретами) добавлены в проект для корректной работы авторизации и сети.
+
+---
+
+## Лицензия
+
+Проект распространяется по [PolyForm Noncommercial License 1.0.0](LICENSE).
+
+Код можно изучать, запускать, изменять и использовать для некоммерческих целей. Коммерческое использование, коммерческие производные проекты и включение кода в коммерческие продукты требуют отдельного письменного разрешения правообладателя.
 
 ---
 
