@@ -34,8 +34,6 @@ final class UserListsRepository: UserListsRepositoryProtocol {
 
         let dto: UserListResponse = try await networkService.request(UserListsEndpoint.postUserList(accessToken: accessToken, titleID: titleID, listType: listType))
 
-        print(dto.message)
-
         return dto.message
     }
 }

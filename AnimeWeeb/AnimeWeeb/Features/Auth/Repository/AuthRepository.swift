@@ -67,11 +67,6 @@ final class AuthRepository: AuthRepositoryProtocol {
         let dto: RefreshResponse = try await fetchRefresh()
         let accessToken = dto.accessToken
 
-        print("accessToken: \(dto.accessToken)\n")
-        print(dto.refreshToken)
-        print("deviceID: \(deviceID)")
-        print("deviceName: \(deviceName)")
-
         let user = try await userRepository.fetchUser(accessToken: accessToken)
         return user
     }
@@ -80,6 +75,10 @@ final class AuthRepository: AuthRepositoryProtocol {
         guard let refreshToken = try keychain.get(KeychainKey.refreshToken.rawValue) else {
             throw AuthError.noRefreshToken
         }
+        
+        try keychain.remove(KeychainKey.accessToken.rawValue)
+        try keychain.remove(KeychainKey.refreshToken.rawValue)
+        googleService.logout()
 
         let dto: LogoutResponse = try await networkService.request(AuthEndpoint.logout(refreshToken: refreshToken, deviceID: self.deviceID, deviceName: self.deviceName))
 

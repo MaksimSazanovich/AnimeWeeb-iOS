@@ -69,7 +69,6 @@ final class AnimeDetailsViewModel {
             } else {
                 state = .loaded
             }
-            print(model?.seasons.first?.episodesCount ?? -1)
         } catch {
             state = .failed(error)
         }

@@ -22,6 +22,7 @@ final class ProfileViewModel {
     private let userListsRepository: UserListsRepositoryProtocol
 
     var onRoute: ((Screen) -> Void)?
+    var isLogoutAlertPresented = false
 
     var user: User {
         userService.user ?? previewUser
@@ -73,11 +74,17 @@ final class ProfileViewModel {
     func didTapLogout() async {
         do {
             _ = try await authRepository.fetchLogout()
+           
             userService.logout()
             onRoute?(Screen.home)
         } catch {
-
+            isLogoutAlertPresented = true
         }
+    }
+    
+    func didTapLogoutAlertConfirm() {
+        userService.logout()
+        onRoute?(Screen.home)
     }
 
     func didTapEdit() {

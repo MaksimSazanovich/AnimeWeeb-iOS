@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileScreen: View {
 
-    let viewModel: ProfileViewModel
+    @Bindable var viewModel: ProfileViewModel
 
     var body: some View {
         ZStack {
@@ -19,7 +19,7 @@ struct ProfileScreen: View {
                     switch viewModel.cardState {
                     case .idle:
                         // MARK: Profile Card
-                        ProfileCard(user: viewModel.user) {
+                        ProfileCard(user: viewModel.user, viewModel: viewModel) {
                             Task {
                                 await viewModel.didTapLogout()
                             }

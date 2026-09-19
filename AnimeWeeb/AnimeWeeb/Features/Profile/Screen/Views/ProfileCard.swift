@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileCard: View {
 
     let user: User
+    @Bindable var viewModel: ProfileViewModel
     var onLogout: () -> Void
     var onEdit: () -> Void
 
@@ -72,7 +73,16 @@ struct ProfileCard: View {
                     Label("Выйти", systemImage: "rectangle.portrait.and.arrow.right")
                         .foregroundStyle(.subtitle)
                 }
-
+                .alert(isPresented: $viewModel.isLogoutAlertPresented) {
+                    Alert(
+                        title: Text("Не удалось выйти"),
+                        message: Text("Проверьте подключение к интернету и повторите попытку"),
+                        dismissButton: .default(
+                            Text("ОК"),
+                            action: { viewModel.didTapLogoutAlertConfirm() }
+                        )
+                    )
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(33)

@@ -35,7 +35,6 @@ public class AppHeaderViewModel {
 
     func didTapMenu() {
         isMenuOpen.toggle()
-        print(userService.authState)
     }
 
     func didTapHome() {
