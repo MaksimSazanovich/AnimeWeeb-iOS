@@ -8,8 +8,8 @@
 import Foundation
 
 public enum UserListsEndpoint: Endpoint {
-    case getMy(accessToken: String)
-    case postUserList(accessToken: String, titleID: Int, listType: Int)
+    case getMy
+    case postUserList(titleID: Int, listType: Int)
 
     public var method: HTTPMethod {
         switch self {
@@ -26,12 +26,7 @@ public enum UserListsEndpoint: Endpoint {
     }
 
     public var headers: [String : String]? {
-        switch self {
-        case .getMy(let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .postUserList(let accessToken, let titleID, let listType):
-            return ["Authorization": "Bearer \(accessToken)"]
-        }
+        return nil
     }
 
     public var queryItems: [URLQueryItem]? {
@@ -42,8 +37,12 @@ public enum UserListsEndpoint: Endpoint {
         switch self {
         case .getMy:
             .plain
-        case .postUserList(_, let titleID, let listType):
+        case .postUserList(let titleID, let listType):
             .json(UserListRequest(titleID: titleID, listType: listType))
         }
+    }
+    
+    public var requiresAuth: Bool {
+        return true
     }
 }

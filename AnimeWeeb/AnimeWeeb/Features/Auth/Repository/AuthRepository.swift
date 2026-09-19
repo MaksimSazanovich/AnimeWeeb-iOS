@@ -9,7 +9,7 @@ import Foundation
 import KeychainAccess
 import UIKit
 
-final class AuthRepository: AuthRepositoryProtocol {
+final class AuthRepository: AuthRepositoryProtocol, AuthTokenProvider {
     private let networkService: NetworkServiceProtocol
     private let googleService: GoogleService
     private let userRepository: UserRepositoryProtocol
@@ -145,4 +145,16 @@ final class AuthRepository: AuthRepositoryProtocol {
         return dto.user.toDomain()
     }
 
+    func getAccessToken() -> String? {
+        try? keychain.get(KeychainKey.accessToken.rawValue)
+    }
+    
+    func refreshToken() async throws -> String {
+        return try await fetchRefresh().accessToken
+    }
+    
+    func clearTokens() {
+        try? keychain.remove(KeychainKey.accessToken.rawValue)
+        try? keychain.remove(KeychainKey.refreshToken.rawValue)
+    }
 }

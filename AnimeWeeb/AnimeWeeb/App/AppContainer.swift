@@ -11,7 +11,7 @@ import Observation
 @Observable
 final class AppContainer {
     // Services
-    let networkService: NetworkServiceProtocol
+    var networkService: NetworkServiceProtocol
     let userService: UserService
     let googleService: GoogleService
     let appURLOpener: AppURLOpener
@@ -59,10 +59,8 @@ final class AppContainer {
             userRepository: userRepo,
             keychain: keychain
         )
-        let userListsRepo = userListsRepository ?? UserListsRepository(
-            networkService: networkService,
-            keychain: keychain
-        )
+       
+        let userListsRepo = userListsRepository ?? UserListsRepository(networkService: networkService)
 
         self.userRepository = userRepo
         self.homeRepository = homeRepo
@@ -92,5 +90,6 @@ final class AppContainer {
             userService: userService,
             googleService: googleService
         )
+        self.networkService.tokenProvider = authRepo as? AuthTokenProvider
     }
 }

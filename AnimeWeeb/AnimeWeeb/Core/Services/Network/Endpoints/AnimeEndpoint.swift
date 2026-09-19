@@ -53,4 +53,7 @@ public enum AnimeEndpoint: Endpoint {
         return .plain
     }
 
+    public var requiresAuth: Bool {
+        return false
+    }
 }

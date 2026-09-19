@@ -14,6 +14,7 @@ public protocol Endpoint {
     var headers: [String: String]? { get }
     var queryItems: [URLQueryItem]? { get }
     var body: RequestBody { get }
+    var requiresAuth: Bool { get }
 }
 
 extension Endpoint {
