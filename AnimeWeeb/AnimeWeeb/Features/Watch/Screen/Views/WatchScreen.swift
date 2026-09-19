@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WatchScreen: View {
 
-    @Bindable var viewModel: WatchViewModel
+    @State var viewModel: WatchViewModel
 
     var body: some View {
         ZStack {

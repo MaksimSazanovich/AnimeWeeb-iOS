@@ -75,7 +75,7 @@ final class AuthRepository: AuthRepositoryProtocol, AuthTokenProvider {
         guard let refreshToken = try keychain.get(KeychainKey.refreshToken.rawValue) else {
             throw AuthError.noRefreshToken
         }
-        
+
         try keychain.remove(KeychainKey.accessToken.rawValue)
         try keychain.remove(KeychainKey.refreshToken.rawValue)
         googleService.logout()
@@ -148,11 +148,11 @@ final class AuthRepository: AuthRepositoryProtocol, AuthTokenProvider {
     func getAccessToken() -> String? {
         try? keychain.get(KeychainKey.accessToken.rawValue)
     }
-    
+
     func refreshToken() async throws -> String {
         return try await fetchRefresh().accessToken
     }
-    
+
     func clearTokens() {
         try? keychain.remove(KeychainKey.accessToken.rawValue)
         try? keychain.remove(KeychainKey.refreshToken.rawValue)

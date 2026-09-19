@@ -65,7 +65,7 @@ public enum AuthEndpoint: Endpoint {
             ])
         }
     }
-    
+
     public var requiresAuth: Bool {
         return false
     }

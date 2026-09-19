@@ -74,14 +74,14 @@ final class ProfileViewModel {
     func didTapLogout() async {
         do {
             _ = try await authRepository.fetchLogout()
-           
+
             userService.logout()
             onRoute?(Screen.home)
         } catch {
             isLogoutAlertPresented = true
         }
     }
-    
+
     func didTapLogoutAlertConfirm() {
         userService.logout()
         onRoute?(Screen.home)

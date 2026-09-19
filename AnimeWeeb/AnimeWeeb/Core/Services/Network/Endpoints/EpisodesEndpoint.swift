@@ -33,7 +33,7 @@ public enum EpisodesEndpoint: Endpoint {
     public var body: RequestBody {
         return .plain
     }
-    
+
     public var requiresAuth: Bool {
         return false
     }

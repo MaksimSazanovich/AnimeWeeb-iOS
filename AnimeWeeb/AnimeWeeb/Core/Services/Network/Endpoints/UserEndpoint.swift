@@ -12,14 +12,14 @@ enum UserEndpoint: Endpoint {
     case update(name: String?, avatar: Data?)
     case getWatchHistory
     case postWatchHistory(titleID: Int, episodeID: Int, source: String, seasonNumber: Int, episodeNumber: Int, stoppedAtSeconds: Int)
-    
+
     public var method: HTTPMethod {
         switch self {
         case .getMe, .update, .postWatchHistory: .post
         case .getWatchHistory: .get
         }
     }
-    
+
     public var path: String {
         switch self {
         case .getMe: return "user/me"
@@ -28,15 +28,15 @@ enum UserEndpoint: Endpoint {
         case .postWatchHistory: return "user/watch-history"
         }
     }
-    
+
     public var headers: [String : String]? {
         return nil
     }
-    
+
     public var queryItems: [URLQueryItem]? {
         nil
     }
-    
+
     public var body: RequestBody {
         switch self {
         case .getMe(accessToken: let accessToken):
@@ -67,7 +67,7 @@ enum UserEndpoint: Endpoint {
             return .plain
         }
     }
-    
+
     public var requiresAuth: Bool {
         switch self {
         case .update, .getWatchHistory, .postWatchHistory:

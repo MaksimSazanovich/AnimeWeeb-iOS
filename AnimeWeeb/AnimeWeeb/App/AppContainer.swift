@@ -59,7 +59,7 @@ final class AppContainer {
             userRepository: userRepo,
             keychain: keychain
         )
-       
+
         let userListsRepo = userListsRepository ?? UserListsRepository(networkService: networkService)
 
         self.userRepository = userRepo

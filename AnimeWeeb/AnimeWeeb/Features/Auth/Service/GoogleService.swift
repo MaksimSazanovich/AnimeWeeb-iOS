@@ -50,7 +50,7 @@ final class GoogleService {
 
         return idToken
     }
-    
+
     func logout() {
         GIDSignIn.sharedInstance.signOut()
     }

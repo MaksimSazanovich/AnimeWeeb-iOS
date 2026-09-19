@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileScreen: View {
 
-    @Bindable var viewModel: ProfileViewModel
+    @State var viewModel: ProfileViewModel
 
     var body: some View {
         ZStack {

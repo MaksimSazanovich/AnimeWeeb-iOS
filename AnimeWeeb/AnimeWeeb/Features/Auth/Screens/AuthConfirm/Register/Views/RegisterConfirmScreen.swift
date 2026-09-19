@@ -9,7 +9,7 @@ import GoogleSignInSwift
 import SwiftUI
 
 struct RegisterConfirmScreen: View {
-    @Bindable var viewModel: RegisterConfirmViewModel
+    @State var viewModel: RegisterConfirmViewModel
 
     var body: some View {
 

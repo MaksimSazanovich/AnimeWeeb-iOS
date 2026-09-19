@@ -41,7 +41,7 @@ public enum UserListsEndpoint: Endpoint {
             .json(UserListRequest(titleID: titleID, listType: listType))
         }
     }
-    
+
     public var requiresAuth: Bool {
         return true
     }

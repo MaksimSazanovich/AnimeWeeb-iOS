@@ -8,10 +8,10 @@
 import Foundation
 
 public final class NetworkService: NetworkServiceProtocol {
-    
+
     private let session: URLSession
     private let decoder: JSONDecoder
-    
+
     public weak var tokenProvider: AuthTokenProvider?
 
     init(session: URLSession = .shared, decoder: JSONDecoder = .init()) {
@@ -21,11 +21,11 @@ public final class NetworkService: NetworkServiceProtocol {
 
     public func request<T: Decodable>(_ endpoint: Endpoint, isRetry: Bool = false) async throws -> T {
         var request = try endpoint.makeURLRequest()
-        
+
         if endpoint.requiresAuth, let token = tokenProvider?.getAccessToken() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        
+
         let (data, response) = try await session.data(for: request)
 
         guard let httpresponse = response as? HTTPURLResponse else {
@@ -42,7 +42,7 @@ public final class NetworkService: NetworkServiceProtocol {
                     throw NetworkError.serverError(statusCode: httpresponse.statusCode, data: data)
                 }
             }
-            
+
             throw NetworkError.serverError(statusCode: httpresponse.statusCode, data: data)
         }
 

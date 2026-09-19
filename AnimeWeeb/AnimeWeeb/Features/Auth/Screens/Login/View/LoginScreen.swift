@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginScreen: View {
 
-    @Bindable var viewModel: LoginViewModel
+    @State var viewModel: LoginViewModel
 
     var body: some View {
 
